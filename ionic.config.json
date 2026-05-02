@@ -1,0 +1,7 @@
+{
+  "name": "EventInApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
