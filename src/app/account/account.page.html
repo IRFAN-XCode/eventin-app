@@ -1,0 +1,91 @@
+<div
+  class="bg-[#16e2eb] pt-12 pb-2 px-4 rounded-b-[30px] shadow-sm text-center flex items-center text-white relative z-10">
+  <ion-title>Akun</ion-title>
+</div>
+
+<ion-content [fullscreen]="true">
+  <div class="flex items-center mt-8 mb-8 px-6">
+    <div class="w-20 h-20 bg-gray-200 rounded-full mr-4 flex-shrink-0"></div>
+    <div>
+      <h2 class="text-lg font-bold text-gray-900 m-0">Irfan Fathurrohman</h2>
+      <p class="text-sm text-gray-600 m-0 mt-1">irfan@gmail.com</p>
+    </div>
+  </div>
+
+  <div class="px-6 flex flex-col">
+
+    <div routerLink="/my-profile"
+      class="flex items-center justify-between py-4 border-b border-gray-300 active:bg-gray-50 transition-colors">
+      <div class="flex items-center text-gray-800">
+        <ion-icon name="person-outline" class="text-xl mr-4"></ion-icon>
+        <span class="font-semibold text-sm">Lihat Profile</span>
+      </div>
+      <ion-icon name="chevron-forward-outline" class="text-gray-400"></ion-icon>
+    </div>
+
+    <div routerLink="/new-password"
+      class="flex items-center justify-between py-4 border-b border-gray-300 active:bg-gray-50 transition-colors">
+      <div class="flex items-center text-gray-800">
+        <ion-icon name="key-outline" class="text-xl mr-4"></ion-icon>
+        <span class="font-semibold text-sm">Ganti Kata Sandi</span>
+      </div>
+      <ion-icon name="chevron-forward-outline" class="text-gray-400"></ion-icon>
+    </div>
+
+    <div routerLink="/terms-and-conditions"
+      class="flex items-center justify-between py-4 border-b border-gray-300 active:bg-gray-50 transition-colors">
+      <div class="flex items-center text-gray-800">
+        <ion-icon name="document-text-outline" class="text-xl mr-4"></ion-icon>
+        <span class="font-semibold text-sm">Syarat & ketentuan</span>
+      </div>
+      <ion-icon name="chevron-forward-outline" class="text-gray-400"></ion-icon>
+    </div>
+
+    <div routerLink="/faq"
+      class="flex items-center justify-between py-4 border-b border-gray-300 active:bg-gray-50 transition-colors">
+      <div class="flex items-center text-gray-800">
+        <ion-icon name="chatbubble-outline" class="text-xl mr-4"></ion-icon>
+        <span class="font-semibold text-sm">FAQ</span>
+      </div>
+      <ion-icon name="chevron-forward-outline" class="text-gray-400"></ion-icon>
+    </div>
+
+    <div routerLink="/privacy-policy"
+      class="flex items-center justify-between py-4 border-b border-gray-300 active:bg-gray-50 transition-colors">
+      <div class="flex items-center text-gray-800">
+        <ion-icon name="shield-half-outline" class="text-xl mr-4"></ion-icon>
+        <span class="font-semibold text-sm">Kebijakan Privasi</span>
+      </div>
+      <ion-icon name="chevron-forward-outline" class="text-gray-400"></ion-icon>
+    </div>
+
+    <div routerLink="/my-certificates"
+      class="flex items-center justify-between py-4 border-b border-gray-300 active:bg-gray-50 transition-colors">
+      <div class="flex items-center text-gray-800">
+        <ion-icon name="ribbon-outline" class="text-xl mr-4"></ion-icon>
+        <span class="font-semibold text-sm">Sertifikat Saya</span>
+      </div>
+      <ion-icon name="chevron-forward-outline" class="text-gray-400"></ion-icon>
+    </div>
+
+    <div routerLink="/login-organizer"
+      class="flex items-center justify-between py-4 border-b border-gray-300 active:bg-gray-50 transition-colors">
+      <div class="flex items-center text-gray-800">
+        <ion-icon name="calendar-outline" class="text-xl mr-4"></ion-icon>
+        <span class="font-semibold text-sm">Event Saya</span>
+      </div>
+      <ion-icon name="chevron-forward-outline" class="text-gray-400"></ion-icon>
+    </div>
+
+    <div routerLink="/login"
+      class="flex items-center justify-between py-4 border-b border-gray-300 active:bg-red-50 transition-colors">
+      <div class="flex items-center text-red-500">
+        <ion-icon name="log-out-outline" class="text-xl mr-4"></ion-icon>
+        <span class="font-bold text-sm">Keluar</span>
+      </div>
+    </div>
+
+  </div>
+</ion-content>
+
+<app-tabs></app-tabs>

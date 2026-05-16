@@ -1,0 +1,129 @@
+<!-- <div
+  class="bg-[#16e2eb] pt-12 pb-2 px-4 rounded-b-[30px] shadow-sm text-center flex items-center text-white relative z-10">
+  <ion-title>Explore</ion-title>
+</div>
+
+<ion-content [fullscreen]="true">
+
+  <div class="p-3">
+
+    <div class="px-4 py-2">
+
+      <div class="flex items-center justify-between mb-6">
+        <button
+          class="flex items-center justify-center border border-[#0099D6] text-[#0099D6] rounded-lg px-4 py-2.5 active:bg-blue-50 transition-colors bg-white">
+          <ion-icon name="filter-outline" class="mr-2 text-lg"></ion-icon>
+          <span class="font-medium text-sm">Filter</span>
+        </button>
+
+        <div class="flex items-center border border-[#0099D6] rounded-lg px-3 py-2.5 flex-1 ml-3 bg-white">
+          <ion-icon name="search-outline" class="text-gray-400 mr-2 text-lg"></ion-icon>
+          <input type="search" placeholder="Cari Event..."
+            class="w-full bg-transparent focus:outline-none text-gray-700 text-sm" />
+        </div>
+      </div>
+
+
+      <div class="flex flex-col space-y-6">
+        <div *ngFor="let item of ListEvent" routerLink="/event-detail"
+          class="bg-white rounded-[25px] overflow-hidden border border-cyan-200 shadow-md mb-2 active:scale-95 transition-transform cursor-pointer">
+
+          <div class="m-2 rounded-[20px] overflow-hidden">
+            <div class="h-28 bg-[#5E5858]"></div>
+
+            <div class="bg-[#00D600] text-white text-center text-sm font-bold py-1.5">
+              Tiket Tersedia
+            </div>
+          </div>
+
+          <div class="px-4 pb-4 pt-1">
+            <h3 class="font-bold text-gray-800 text-base">{{ item.nama_event }}</h3>
+
+            <div class="flex items-center text-[#0099D6] text-sm my-1">
+              <ion-icon name="calendar-outline" class="mr-2"></ion-icon>
+              <span class="font-semibold">{{ item.tgl_event | date:'dd MMM yyyy' }}</span>
+            </div>
+
+            <p class="font-bold text-gray-900 mb-2">Rp{{ item.harga_tiket | number }}</p>
+
+            <hr class="border-gray-300 my-2">
+
+            <div class="flex items-center space-x-2 mt-2">
+              <div class="w-8 h-8 bg-[#5E5858] rounded-full flex-shrink-0"></div>
+              <span class="text-gray-700 text-sm font-medium">{{ item.organizer?.nama_eo }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</ion-content>
+
+<app-tabs></app-tabs> -->
+
+<div
+  class="bg-[#16e2eb] pt-12 pb-2 px-4 rounded-b-[30px] shadow-sm text-center flex items-center text-white relative z-10">
+  <ion-title>Explore</ion-title>
+</div>
+
+<ion-content [fullscreen]="true">
+
+  <div class="p-3">
+
+    <div class="px-4 py-2">
+
+      <div class="flex items-center justify-between mb-6">
+        <button
+          class="flex items-center justify-center border border-[#0099D6] text-[#0099D6] rounded-lg px-4 py-2.5 active:bg-blue-50 transition-colors bg-white">
+          <ion-icon name="filter-outline" class="mr-2 text-lg"></ion-icon>
+          <span class="font-medium text-sm">Filter</span>
+        </button>
+
+        <div class="flex items-center border border-[#0099D6] rounded-lg px-3 py-2.5 flex-1 ml-3 bg-white">
+          <ion-icon name="search-outline" class="text-gray-400 mr-2 text-lg"></ion-icon>
+          <input type="search" placeholder="Cari Event..."
+            class="w-full bg-transparent focus:outline-none text-gray-700 text-sm" />
+        </div>
+      </div>
+
+
+      <div class="flex flex-col space-y-6">
+        <div *ngFor="let item of [1,2]" routerLink="/event-detail"
+          class="bg-white rounded-[25px] overflow-hidden border border-cyan-200 shadow-md mb-2 active:scale-95 transition-transform cursor-pointer">
+
+          <div class="m-2 rounded-[20px] overflow-hidden">
+            <div class="h-28 bg-[#5E5858]"></div>
+
+            <div class="bg-[#00D600] text-white text-center text-sm font-bold py-1.5">
+              Tiket Tersedia
+            </div>
+          </div>
+
+          <div class="px-4 pb-4 pt-1">
+            <h3 class="font-bold text-gray-800 text-base">Workshop Digital Marketing</h3>
+
+            <div class="flex items-center text-[#0099D6] text-sm my-1">
+              <ion-icon name="calendar-outline" class="mr-2"></ion-icon>
+              <span class="font-semibold">21 Juni 2026</span>
+            </div>
+
+            <p class="font-bold text-gray-900 mb-2">Rp100.000</p>
+
+            <hr class="border-gray-300 my-2">
+
+            <div class="flex items-center space-x-2 mt-2">
+              <div class="w-8 h-8 bg-[#5E5858] rounded-full flex-shrink-0"></div>
+              <span class="text-gray-700 text-sm font-medium">BEM UBP Karawang</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</ion-content>
+
+<app-tabs></app-tabs>

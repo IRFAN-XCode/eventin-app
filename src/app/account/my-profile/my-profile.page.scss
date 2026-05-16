@@ -1,0 +1,21 @@
+ion-toolbar {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    --background: #16e2eb;
+
+    ion-back-button {
+        color: #ecfeff;
+    }
+
+    ion-title {
+        color: #ecfeff;
+        font-size: 22px;
+        font-weight: 600;
+        --padding-start: 0;
+    }
+}
+
+ion-content {
+    --background: #ecfeff;
+}

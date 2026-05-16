@@ -1,0 +1,71 @@
+<div class="bg-[#16e2eb] pt-10 pb-2 px-2 rounded-b-[30px] shadow-sm flex items-center text-white relative z-10">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/events" icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Detail Event</ion-title>
+  </ion-toolbar>
+</div>
+
+<ion-content [fullscreen]="true">
+
+  <div class="m-5 rounded-[20px] overflow-hidden">
+    <div class="h-28 bg-[#5E5858]"></div>
+  </div>
+
+  <div class="px-6 py-2">
+
+    <div
+      class="inline-block bg-cyan-200 border border-cyan-400 text-cyan-500 px-5 py-1 rounded-lg text-xs font-bold mb-3 shadow-sm">
+      Musik
+    </div>
+
+    <h1 class="text-2xl font-bold text-gray-900 mb-6">Last Voyage</h1>
+
+    <h2 class="text-sm font-bold text-gray-800 mb-4">Detail Acara</h2>
+    <div class="space-y-2 mb-8">
+      <div class="flex items-start text-sm text-gray-900 font-semibold">
+        <ion-icon name="calendar-outline" class="text-gray-500 text-xl mr-3 mt-0.5"></ion-icon>
+        <span>24 Mei 2026</span>
+      </div>
+      <div class="flex items-start text-sm text-gray-900 font-semibold">
+        <ion-icon name="time-outline" class="text-gray-500 text-xl mr-3 mt-0.5"></ion-icon>
+        <span>13.00 - 21.00 WIB</span>
+      </div>
+      <div class="flex items-start text-sm text-gray-900 font-semibold">
+        <ion-icon name="location-outline" class="text-gray-500 text-xl mr-3 mt-0.5"></ion-icon>
+        <span class="leading-tight">Indonesia Arena Indoor -<br>Senayan Jakarta</span>
+      </div>
+    </div>
+
+    <h2 class="text-sm font-bold text-gray-800 mb-4">Penyelenggara</h2>
+    <div class="flex items-center mb-4">
+      <div class="w-12 h-12 bg-[#706E6E] rounded-full mr-4 flex-shrink-0"></div>
+      <span class="font-bold text-gray-900 text-sm">JKT48</span>
+    </div>
+
+    <button
+      class="flex items-center space-x-2 bg-cyan-50 border border-cyan-400 text-cyan-500 px-4 py-1.5 rounded-lg active:bg-cyan-100 transition-colors shadow-sm">
+      <ion-icon name="logo-instagram" class="text-lg"></ion-icon>
+      <span class="text-xs font-bold"><a href="http://jkt48.com">Instagram</a></span>
+    </button>
+
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border bg-white">
+  <div class="px-5 py-4 bg-white">
+    <div class="border border-cyan-400 rounded-2xl p-4 bg-white shadow-sm">
+      <div class="flex justify-between items-center mb-3">
+        <span class="text-xs font-bold text-gray-800">Harga mulai dari</span>
+        <span class="text-sm font-extrabold text-gray-900">Rp80.000</span>
+      </div>
+      <button
+        class="w-full bg-[#00BFFF] text-white font-bold py-3 rounded-xl active:scale-95 transition-transform flex items-center justify-center space-x-2">
+        <ion-icon name="ticket-outline" class="text-xl"></ion-icon>
+        <span routerLink="/transactions">Beli Tiket</span>
+      </button>
+    </div>
+  </div>
+</ion-footer>

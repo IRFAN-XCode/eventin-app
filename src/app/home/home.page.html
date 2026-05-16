@@ -1,20 +1,100 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<div class="bg-cyan-400 pt-8 pb-4 px-4 rounded-b-[20px] shadow-lg z-50">
+  <div class="flex justify-between items-center mb-4 mt-4">
+    <div class="bg-gray-200 px-4 py-1 rounded text-[#4A3AFF] font-bold">Logo</div>
+    <ion-icon routerLink="/notifications" name="notifications-outline" class="text-white text-3xl"></ion-icon>
+  </div>
+  <div class="relative">
+    <ion-searchbar show-cancel-button="never" placeholder="Cari Event..."></ion-searchbar>
+  </div>
+</div>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div class="p-3 no-scrollbar">
+
+    <!-- Kategori Event Section -->
+    <div class="mb-8">
+      <h2 class="text-[#0099D6] font-bold text-lg mb-4 pl-1">Kategori Event</h2>
+
+      <div class="flex space-x-6 overflow-x-auto pb-2 no-scrollbar px-1">
+        <!-- Category Item: Musik -->
+        <div routerLink="/events" class="flex flex-col items-center space-y-2 flex-shrink-0">
+          <div class="w-16 h-16 bg-cyan-100 rounded-full shadow-md flex items-center justify-center">
+            <ion-icon name="musical-notes" class="text-[#0099D6] text-2xl"></ion-icon>
+          </div>
+          <span class="text-xs font-semibold text-[#0099D6]">Musik</span>
+        </div>
+
+        <!-- Category Item: Olahraga -->
+        <div routerLink="/events" class="flex flex-col items-center space-y-2 flex-shrink-0">
+          <div class="w-16 h-16 bg-cyan-100 rounded-full shadow-md flex items-center justify-center">
+            <ion-icon name="football-outline" class="text-[#0099D6] text-2xl"></ion-icon>
+          </div>
+          <span class="text-xs font-semibold text-[#0099D6]">Olahraga</span>
+        </div>
+
+        <!-- Category Item: Workshop -->
+        <div routerLink="/events" class="flex flex-col items-center space-y-2 flex-shrink-0">
+          <div class="w-16 h-16 bg-cyan-100 rounded-full shadow-md flex items-center justify-center">
+            <ion-icon name="construct" class="text-[#0099D6] text-2xl"></ion-icon>
+          </div>
+          <span class="text-xs font-semibold text-[#0099D6]">Workshop</span>
+        </div>
+
+        <!-- Category Item: Seminar -->
+        <div routerLink="/events" class="flex flex-col items-center space-y-2 flex-shrink-0">
+          <div class="w-16 h-16 bg-cyan-100 rounded-full shadow-md flex items-center justify-center">
+            <ion-icon name="school" class="text-[#0099D6] text-2xl"></ion-icon>
+          </div>
+          <span class="text-xs font-semibold text-[#0099D6]">Seminar</span>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="mb-4">
+      <h2 class="text-[#0099D6] font-bold text-lg mb-4 pl-2">Event Terdekat</h2>
+
+      <div class="flex space-x-4 overflow-x-auto pb-4 no-scrollbar">
+        <div *ngFor="let item of ListEvent" routerLink="/events"
+          class="flex-shrink-0 w-[260px] bg-white rounded-[25px] overflow-hidden border border-cyan-200 shadow-md mb-2 active:scale-95 transition-transform cursor-pointer">
+
+          <div class="m-2 rounded-[20px] overflow-hidden">
+            <div class="h-28 bg-[#5E5858]"></div>
+
+            <div class="bg-[#00D600] text-white text-center text-sm font-bold py-1.5">
+              Tiket Tersedia
+            </div>
+          </div>
+
+          <div class="px-4 pb-4 pt-1">
+            <h3 class="font-bold text-gray-800 text-base">{{ item.nama_event }}</h3>
+
+            <div class="flex items-center text-[#0099D6] text-sm my-1">
+              <ion-icon name="calendar-outline" class="mr-2"></ion-icon>
+              <span class="font-semibold">{{ item.tgl_event | date:'dd MMM yyyy' }}</span>
+            </div>
+
+            <p class="font-bold text-gray-900 mb-2">Rp{{ item.harga_tiket | number }}</p>
+
+            <hr class="border-gray-300 my-2">
+
+            <div class="flex items-center space-x-2 mt-2">
+              <div class="w-8 h-8 bg-[#5E5858] rounded-full flex-shrink-0"></div>
+              <span class="text-gray-700 text-sm font-medium">{{ item.organizer?.nama_eo }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-1 px-1">
+        <a routerLink="/events"
+          class="flex items-center text-[#0099D6] font-semibold text-base active:opacity-70 transition-opacity w-max">
+          Event Lainnya <ion-icon name="arrow-forward-outline" class="ml-1 mt-0.5"></ion-icon>
+        </a>
+      </div>
+    </div>
   </div>
 </ion-content>
+
+<app-tabs></app-tabs>

@@ -1,0 +1,137 @@
+<div class="bg-cyan-50 z-10">
+  <div class="bg-[#16e2eb] pt-10 pb-2 px-2 rounded-b-[30px] shadow-sm flex items-center text-white relative z-10">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/events" icon="arrow-back"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Pemesanan Tiket</ion-title>
+    </ion-toolbar>
+  </div>
+
+  <div class="flex justify-between items-center h-10 p-5 bg-cyan-50">
+    <div [ngClass]="currentStep >= 1 ? 'text-[#16e2eb]' : 'text-gray-400'" class="font-bold text-sm transition-colors">
+      1. Kategori</div>
+    <div [ngClass]="currentStep >= 2 ? 'text-[#16e2eb]' : 'text-gray-400'" class="font-bold text-sm transition-colors">
+      2. Data Diri</div>
+
+    <div *ngIf="hasSeats" [ngClass]="currentStep >= 3 ? 'text-[#16e2eb]' : 'text-gray-400'"
+      class="font-bold text-sm transition-colors">3. Kursi</div>
+
+    <div [ngClass]="currentStep === finalStep ? 'text-[#16e2eb]' : 'text-gray-400'"
+      class="font-bold text-sm transition-colors">{{ hasSeats ? '4' : '3' }}. Bayar</div>
+  </div>
+</div>
+
+<ion-content [fullscreen]="true">
+
+  <div *ngIf="currentStep === 1" class="mx-5 my-4 flex flex-col space-y-6">
+    <p class="text-lg font-bold text-cyan-400 ml-2 mt-3">Pilih Kategori Tiket</p>
+
+    <div *ngFor="let cat of categories" (click)="selectCategory(cat)"
+      [ngClass]="selectedCategory?.id === cat.id ? 'bg-cyan-100 border-[#16e2eb]' : 'bg-white border-cyan-200'"
+      class="rounded-[20px] overflow-hidden border p-3 shadow-md mb-2 cursor-pointer transition-colors">
+
+      <p class="text-[23px] ml-2 font-semibold">{{ cat.name }}</p>
+      <hr class="border-gray-300 my-2">
+
+      <div class="flex justify-between items-center text-black">
+        <p class="font-bold text-lg">Rp{{ cat.price | number:'1.0-0' }}</p>
+
+        <span *ngIf="selectedCategory?.id !== cat.id"
+          class="bg-cyan-400 rounded-lg h-10 w-20 text-center py-2 text-white font-bold">Pilih</span>
+
+        <div *ngIf="selectedCategory?.id === cat.id" class="flex justify-between items-center w-28">
+          <button (click)="decreaseQty($event)"
+            class="bg-cyan-400 rounded-full h-8 w-8 flex items-center justify-center text-white font-bold active:scale-90">-</button>
+          <div class="text-cyan-500 font-bold text-lg">{{ ticketQuantity }}</div>
+          <button (click)="increaseQty($event)"
+            class="bg-cyan-400 rounded-full h-8 w-8 flex items-center justify-center text-white font-bold active:scale-90">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="currentStep === 2" class="mx-5 my-4 flex flex-col">
+    <p class="text-lg font-bold text-cyan-400 ml-2 mt-3 mb-3">Isi Identitas Pemesan</p>
+
+    <div class="relative mb-6 mt-2">
+      <ion-input [(ngModel)]="formData.nama_lengkap" label="Nama Lengkap" type="text" label-placement="floating"
+        fill="outline" placeholder="Masukkan Nama Lengkap"></ion-input>
+    </div>
+    <div class="relative mb-6 mt-2">
+      <ion-input [(ngModel)]="formData.email" label="Email" type="email" label-placement="floating" fill="outline"
+        placeholder="Masukkan Email"></ion-input>
+    </div>
+    <div class="relative mb-6 mt-2">
+      <ion-input [(ngModel)]="formData.nomor_handphone" label="Nomor Telepon" type="number" label-placement="floating"
+        fill="outline" placeholder="Masukkan Nomor Telepon"></ion-input>
+    </div>
+    <div class="relative mb-6 mt-2">
+      <ion-input [(ngModel)]="formData.tanggal_lahir" label="Tanggal Lahir" type="date" label-placement="floating"
+        fill="outline"></ion-input>
+    </div>
+    <div class="relative mb-6 mt-2">
+      <p class="text-[15px] mb-2 font-bold text-cyan-400">Jenis Kelamin</p>
+      <ion-radio-group [(ngModel)]="formData.jenis_kelamin" class="flex space-x-6">
+        <ion-radio label-placement="end" value="Laki-laki" class="custom-radio">Laki-laki</ion-radio>
+        <ion-radio label-placement="end" value="Perempuan" class="custom-radio">Perempuan</ion-radio>
+      </ion-radio-group>
+    </div>
+  </div>
+
+  <div *ngIf="currentStep === 3 && hasSeats" class="mx-5 my-4">
+    <p class="text-lg font-bold text-cyan-400 ml-2 mt-3 mb-3">Pilih Seat ({{ selectedSeats.length }}/{{ ticketQuantity
+      }})</p>
+
+    <div class="grid grid-cols-5 gap-4 mb-1">
+      <button *ngFor="let seat of availableSeats" (click)="toggleSeat(seat)" [disabled]="seat.is_booked" [ngClass]="{
+          'bg-[#16e2eb] text-white border-[#16e2eb]': seat.selected,
+          'bg-gray-300 text-gray-500 border-gray-300 opacity-50': seat.is_booked,
+          'bg-white text-gray-800 border-[#16e2eb]': !seat.selected && !seat.is_booked
+        }" type="button" class="h-5 w-5 rounded-lg border font-bold active:scale-90 transition-all">
+        {{ seat.label }}
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="currentStep === finalStep" class="mx-5 my-4">
+    <p class="text-lg font-bold text-cyan-400 ml-2 mt-3 mb-3">Ringkasan Pemesanan</p>
+
+    <div class="bg-white p-4 rounded-2xl border border-cyan-200 shadow-sm mb-6 space-y-3 text-sm">
+      <div class="flex justify-between border-b pb-2"><span class="text-gray-500">Nama</span><span
+          class="font-bold text-gray-800">{{ formData.nama_lengkap || '-' }}</span></div>
+      <div class="flex justify-between border-b pb-2"><span class="text-gray-500">Email</span><span
+          class="font-bold text-gray-800">{{ formData.email || '-' }}</span></div>
+      <div class="flex justify-between border-b pb-2"><span class="text-gray-500">Kategori</span><span
+          class="font-bold text-cyan-500">{{ selectedCategory?.name }} (x{{ ticketQuantity }})</span></div>
+
+      <div *ngIf="hasSeats" class="flex justify-between border-b pb-2">
+        <span class="text-gray-500">Kursi</span>
+        <span class="font-bold text-gray-800">{{ getSelectedSeatsString() || '-' }}</span>
+      </div>
+
+      <div class="flex justify-between text-base pt-2">
+        <span class="font-bold text-cyan-500">Total Pembayaran</span>
+        <span class="font-extrabold text-cyan-600 text-lg">Rp{{ totalPrice | number:'1.0-0' }}</span>
+      </div>
+    </div>
+
+    <div>
+      <p class="text-sm text-gray-500 text-center">Silahkan klik tombol di bawah untuk simulasi pembayaran.</p>
+    </div>
+  </div>
+
+</ion-content>
+
+<ion-footer class="ion-no-border bg-[#ecfeff]">
+  <div class="px-5 py-4 bg-[#ecfeff]">
+    <button (click)="nextStep()" *ngIf="currentStep < finalStep"
+      class="w-full bg-cyan-400 text-white font-bold py-3.5 rounded-xl active:scale-95 transition-transform">
+      Lanjut
+    </button>
+    <button (click)="submitTransaction()" *ngIf="currentStep === finalStep"
+      class="w-full bg-[#00D600] text-white font-bold py-3.5 rounded-xl active:scale-95 transition-transform">
+      Simulasi Bayar Berhasil
+    </button>
+  </div>
+</ion-footer>

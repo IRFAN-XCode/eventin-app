@@ -1,0 +1,59 @@
+<div class="bg-[#16e2eb] pt-12 pb-2 px-2 rounded-b-[30px] shadow-sm flex items-center text-white relative z-10">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/my-profile" icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Edit Profile</ion-title>
+  </ion-toolbar>
+</div>
+
+<ion-content [fullscreen]="true">
+
+  <div class="flex justify-center mt-8 mb-2">
+    <div class="relative">
+      <div class="w-24 h-24 bg-gray-300 rounded-full shadow-sm flex-shrink-0"></div>
+    </div>
+  </div>
+
+  <div class="px-8 flex flex-col space-y-4">
+
+    <div class="relative mb-2 mt-12">
+      <ion-input [(ngModel)]="nama_lengkap" label="Nama Lengkap" type="text" label-placement="floating" fill="outline"
+        placeholder="Masukkan Nama Lengkap" required></ion-input>
+    </div>
+
+    <div class="relative mb-2 mt-6">
+      <ion-input [(ngModel)]="email" label="Email" type="email" label-placement="floating" fill="outline"
+        placeholder="Masukkan Email" required></ion-input>
+    </div>
+
+    <div class="relative mb-2 mt-6">
+      <ion-input [(ngModel)]="nomor_handphone" label="Nomor Handphone" type="text" label-placement="floating"
+        fill="outline" placeholder="Masukkan Nomor Handphone" required></ion-input>
+    </div>
+
+    <div class="relative mb-2 mt-6">
+      <ion-select [(ngModel)]="jenis_kelamin" label="Jenis Kelamin" label-placement="floating" fill="outline"
+        class="icon text placeholder">
+        <ion-select-option value="Laki-laki">Laki-laki</ion-select-option>
+        <ion-select-option value="Perempuan">Perempuan</ion-select-option>
+      </ion-select>
+    </div>
+
+    <div class="pt-8 pb-8 flex justify-center">
+      <button (click)="editProfile()"
+        class="w-[80%] bg-cyan-100 border border-cyan-400 text-cyan-500 font-bold py-3 rounded-2xl active:bg-cyan-200 transition-colors">
+        Simpan
+      </button>
+    </div>
+    <!-- <div class="pt-8 pb-8 flex justify-center">
+      <button
+        class="w-[80%] bg-cyan-100 border border-cyan-400 text-cyan-500 font-bold py-3 rounded-2xl active:bg-cyan-200 transition-colors">
+        Simpan
+      </button>
+    </div> -->
+
+  </div>
+
+</ion-content>

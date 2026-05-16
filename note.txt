@@ -1,0 +1,37 @@
+Sejauh ini dalam proses pembuatan sisi front end untuk aplikasi mobile EventIn sebagai berikut:
+
+Terdapat beberapa page yang sudah dibuat.
+1. src/app/account //menampilkan data singkat serta opsi menu lain (FAQ, terms-contidionts, dll)
+2. src/app/account/my-profile // menampilkan data diri lebih lengkap
+3. src/app/account/edit-profile // untuk mengedit data diri
+4. src/app/auth/login // untuk login
+5. src/app/auth/regist // untuk registrasi
+6. src/app/auth/login-organizer // untuk login sebagai organizer
+7. src/app/auth/regist-organizer // untuk registrasi sebagai organizer
+8. src/app/auth/new-password // untuk ganti password
+9. src/app/auth/reset-password // untuk reset password
+10. src/app/events // untuk menampilkan daftar event
+11. src/app/events/event-detail // untuk menampilkan detail event (mungkin byId atau lainnya)
+12. src/app/home // untuk menampilkan halaman utama 
+13. src/app/my-tickets // untuk menampilkan daftar tiket
+14. src/app/my-tickets/detail-ticket //menampilkan detail tiket termasuk qrcode
+15. src/app/notifications
+
+Berdasarkan page yang sudah ada, ada beberapa hal yang perlu ditanyakan.
+1. Pada src/app/auth/regist-organizer saat ini hanya terdapat input nama, email, nama EO, nama event, kategori event dan upload proposal. Seharusnya ada beberapa inputan yang kurang seperti tgl, harga tiket, kapasitas, tempat, dll. Mohon ditambahkan. Oleh karena itu, apakah sebaiknya proses regist ini dibuat seperti segmentpage?(seperti prosses beli tiket di kai access (terdapat seperti breadcrumbs) atau bagaimana?)
+2. Pada daftar page diatas, saya belum menambahkan page untuk melakukan proses transaksi tiket, saya ingin proses ini seperti proses memberli tiket di KAI access (atau skema proses yang lain) bisa direkomendasikan. Pada prosesnya nanti terdapat (1. Memilih kategori tiket, 2. Isi data diri, 3. memilih seat (jika ada), 4. pilih metode pembayaran, 5. ringkasan proses transaksi (pending/paid)). Buatkan terlebih dahulu alur dan gambarannya seperti apa sebelum masuk ke proses coding untuk page ini.
+3. Untuk aplikasi EventIn bagian metode pembayaran, apakah menggunakan langganan payment gateway terlebih dahulu atau tidak? Karena pada dasarnya aplikasi EventIn saat ini hanya sebuah tugas final project UAS.
+4. Dari daftar page yang telah dibuat, apakah diantaranya ada yang masih memerlukan coding dibagian file .ts nya?
+5. Selain daftar page di atas, apalagi yang perlu dikerjakan pada bagian sisi front-end (Ionic)?
+
+
+Skema Database:
+
+1. Tabel users
+2. Tabel organizer
+3. Tabel participants
+4. Tabel events
+5. Tabel transaction
+6. Tabel notifications
+7. Tabel certificates
+8. Tabel presences

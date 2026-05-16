@@ -1,0 +1,70 @@
+<div class="bg-[#16e2eb] pt-12 pb-2 px-2 rounded-b-[30px] shadow-sm flex items-center text-white relative z-10">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/my-profile" icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Registrasi Organizer</ion-title>
+  </ion-toolbar>
+</div>
+
+<ion-content [fullscreen]="true">
+  <div class="p-4">
+    <p class="text-left m-0 text-sm text-cyan-400">Silahkan isi formulir untuk mendaftar sebagai organizer.</p>
+
+    <div class="relative mb-2 mt-7">
+      <ion-input [(ngModel)]="nama_lengkap" label="Nama Lengkap" type="text" label-placement="floating" fill="outline"
+        placeholder="Masukkan Nama Lengkap" required></ion-input>
+    </div>
+
+    <div class="relative mb-2 mt-5">
+      <ion-input [(ngModel)]="email" label="Email" type="email" label-placement="floating" fill="outline"
+        placeholder="Masukkan Email" required></ion-input>
+    </div>
+
+    <div class="relative mb-2 mt-5">
+      <ion-input [(ngModel)]="name_eo" label="Nama Event Organizer" type="text" label-placement="floating"
+        fill="outline" placeholder="Masukkan Nama Event Organizer" required></ion-input>
+    </div>
+
+    <!-- <div class="relative mb-2 mt-5">
+      <ion-input label="Nama Event" type="text" label-placement="floating" fill="outline"
+        placeholder="Masukkan Nama Event" required></ion-input>
+    </div>
+
+
+    <div class="relative mb-2 mt-5">
+      <ion-select label="Pilih Kategori" label-placement="floating" fill="outline" class="custom-select"
+        interface="popover" [interfaceOptions]="{ cssClass: 'bg-select'}">
+        <ion-select-option value="Musik">Musik</ion-select-option>
+        <ion-select-option value="Olahraga">Olahraga</ion-select-option>
+        <ion-select-option value="Seminar">Seminar</ion-select-option>
+        <ion-select-option value="Workshop">Workshop</ion-select-option>
+      </ion-select>
+    </div> -->
+
+    <div class="relative mb-7 mt-5">
+      <label class="block text-cyan-400 text-xs font-semibold mb-1 ml-1">
+        Upload Proposal
+      </label>
+
+      <input type="file" accept=".pdf" class="block w-full text-sm text-gray-400 bg-cyan-50 border border-cyan-400 rounded-lg cursor-pointer focus:outline-none
+               file:mr-4 file:py-3 file:px-4 
+               file:border-0 file:border-r file:border-cyan-400 
+               file:text-sm file:font-semibold file:bg-[#C4C4C4] file:text-gray-700
+               hover:file:bg-gray-400 file:cursor-pointer file:transition-colors" />
+
+      <p class="text-cyan-400 text-[10px] mt-1 ml-1">
+        File yang diupload hanya berupa pdf.
+      </p>
+    </div>
+
+
+
+    <button type="submit" (click)="registOrganizer()"
+      class="w-full bg-cyan-400 text-white font-bold py-3.5 rounded-lg active:scale-95 transition-transform shadow-md">
+      Daftar
+    </button>
+
+  </div>
+</ion-content>

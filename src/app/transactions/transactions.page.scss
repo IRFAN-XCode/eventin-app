@@ -1,0 +1,30 @@
+ion-toolbar {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    --background: #16e2eb;
+
+    ion-back-button {
+        color: #ecfeff;
+    }
+
+    ion-title {
+        color: #ecfeff;
+        font-size: 22px;
+        font-weight: 600;
+        --padding-start: 0;
+    }
+}
+
+ion-content {
+    --background: #ecfeff;
+
+    ion-input {
+        --border-color: #16e2eb;
+        --background: #ecfeff;
+        --color: #16e2eb;
+        --placeholder-color: #707070;
+        --highlight-color-focused: #16e2eb;
+        --highlight-color-invalid: #ff1717;
+    }
+}

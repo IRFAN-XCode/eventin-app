@@ -8,7 +8,9 @@
  * For more information on global stylesheets, visit the documentation:
  * https://ionicframework.com/docs/layout/global-stylesheets
  */
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 /* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";
 
@@ -35,3 +37,59 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+/* Class untuk menyembunyikan scrollbar */
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.bg-alert {
+    --background: #ecfeff;
+    --backdrop-opacity: 0.8;
+
+    .alert-wrapper {
+        border-radius: 16px !important;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .alert-title {
+        color: #0054e9 !important;
+        font-weight: bold !important;
+        font-size: 22px !important;
+        text-align: left;
+    }
+
+    .alert-message {
+        color: #333333 !important;
+        font-size: 16px !important;
+        text-align: left;
+    }
+
+    .tombol-batal {
+        color: #ff4961 !important;
+        font-weight: bold;
+    }
+
+    .tombol-lanjut {
+        color: #0054e9 !important;
+        font-weight: bold;
+    }
+}
+
+.custom-dropdown-bg {
+    --background: #ecfeff;
+}
+
+.custom-dropdown-bg ion-item {
+    --background: transparent;
+    --color: #0099D6;
+}
+
+.custom-dropdown-bg ion-item::part(native):hover {
+    color: #16e2eb;
+}

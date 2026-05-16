@@ -1,0 +1,110 @@
+<!-- <ion-content [fullscreen]="true">
+
+  <div class="bg-[#16e2eb]">
+
+    <div class="bg-[#16e2eb] h-[40vh] flex flex-col items-center justify-center relative z-10 shadow-sm">
+
+      <div class="bg-red-600 w-40 h-16 flex items-center justify-center">
+        <span class="text-white font-bold text-2xl tracking-wide">Logo</span>
+      </div>
+
+    </div>
+
+    <div class="bg-cyan-50 px-8 pt-8 pb-10 relative z-0 rounded-tl-[80px]">
+
+      <h1 class="text-center text-3xl font-extrabold text-cyan-400 mb-6">Register</h1>
+
+      <div class="relative mb-6 mt-2">
+        <ion-input [(ngModel)]="email" label="Email" type="email" label-placement="floating" fill="outline"
+          placeholder="Masukkan Email" required></ion-input>
+      </div>
+
+      <div class="relative mb-6">
+        <ion-input [(ngModel)]="password" label="Password" type="password" label-placement="floating" fill="outline"
+          placeholder="Masukkan Password" required></ion-input>
+      </div>
+
+      <div class="relative mb-8">
+        <ion-input [(ngModel)]="confirm_password" label="Konfirmasi Password" type="password" label-placement="floating"
+          fill="outline" placeholder="Konfirmasi Password" required></ion-input>
+      </div>
+
+      <button type="submit" (click)="regist()"
+        class="w-full bg-cyan-400 text-white font-bold py-3.5 rounded-lg active:scale-95 transition-transform shadow-md">
+        Daftar
+      </button>
+
+      <div class="mt-8 text-center">
+        <p class="text-xs font-bold text-gray-800">
+          Sudah punya akun?
+          <a routerLink="/login" class="text-cyan-400 ml-1 active:opacity-70 transition-opacity">Masuk di sini.</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+</ion-content> -->
+
+<ion-content [fullscreen]="true">
+
+  <div class="bg-[#16e2eb]">
+
+    <div class="bg-[#16e2eb] h-[40vh] flex flex-col items-center justify-center relative z-10 shadow-sm">
+      <div class="bg-red-600 w-40 h-16 flex items-center justify-center">
+        <span class="text-white font-bold text-2xl tracking-wide">Logo</span>
+      </div>
+    </div>
+
+    <div class="bg-cyan-50 px-8 pt-8 pb-10 relative z-0 rounded-tl-[80px]">
+
+      <h1 class="text-center text-3xl font-extrabold text-cyan-400 mb-6">Register</h1>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+
+        <div class="relative mb-1 mt-2">
+          <ion-input formControlName="email" label="Email" type="email" label-placement="floating" fill="outline"
+            placeholder="Masukkan Email">
+          </ion-input>
+        </div>
+        <div class="mb-5 pl-2" *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid">
+          <small class="text-red-500 font-semibold text-xs">Format email tidak valid atau kosong.</small>
+        </div>
+
+        <div class="relative mb-1">
+          <ion-input formControlName="password" label="Password" type="password" label-placement="floating"
+            fill="outline" placeholder="Masukkan Password">
+          </ion-input>
+        </div>
+        <div class="mb-5 pl-2" *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid">
+          <small class="text-red-500 font-semibold text-xs">Password minimal wajib 6 karakter.</small>
+        </div>
+
+        <div class="relative mb-1">
+          <ion-input formControlName="password_confirmation" label="Konfirmasi Password" type="password"
+            label-placement="floating" fill="outline" placeholder="Konfirmasi Password">
+          </ion-input>
+        </div>
+        <div class="mb-6 pl-2"
+          *ngIf="registerForm.hasError('mismatch') && registerForm.get('password_confirmation')?.touched">
+          <small class="text-red-500 font-semibold text-xs">Konfirmasi password tidak cocok.</small>
+        </div>
+
+        <button type="submit" [disabled]="registerForm.invalid"
+          class="w-full bg-cyan-400 text-white font-bold py-3.5 rounded-lg active:scale-95 transition-transform shadow-md disabled:opacity-50 disabled:scale-100">
+          Daftar
+        </button>
+
+      </form>
+
+      <div class="mt-8 text-center">
+        <p class="text-xs font-bold text-gray-800">
+          Sudah punya akun?
+          <a routerLink="/login" class="text-cyan-400 ml-1 active:opacity-70 transition-opacity">Masuk di sini.</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+</ion-content>

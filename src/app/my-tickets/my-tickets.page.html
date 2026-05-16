@@ -1,0 +1,57 @@
+<div
+  class="bg-[#16e2eb] pt-12 pb-2 px-4 rounded-b-[30px] shadow-sm text-center flex items-center text-white relative z-10">
+  <ion-title>Tiket Saya</ion-title>
+</div>
+
+<ion-content [fullscreen]="true">
+  <div class="px-6 py-6">
+    <h2 class="text-cyan-500 font-bold text-xl mb-6">Daftar Tiket</h2>
+
+    <div class="mb-6">
+      <p class="font-bold text-gray-800 text-sm mb-3">25 Maret 2026</p>
+
+      <div class="bg-white border border-cyan-400 rounded-2xl p-4 shadow-sm mb-4">
+        <div class="border-b border-gray-200 pb-2 mb-3">
+          <span class="text-xs text-gray-800 font-medium">Kode Tiket: LVY-10339237</span>
+        </div>
+
+        <div class="flex items-center mb-4">
+          <div class="w-14 h-14 bg-gray-500 rounded-xl mr-4 flex-shrink-0 shadow-sm"></div>
+          <div>
+            <h3 class="font-bold text-sm text-gray-900 m-0">Last Voyage - Jakarta</h3>
+            <p class="text-xs font-semibold text-gray-800 m-0 mt-1">24 Mei 2025</p>
+          </div>
+        </div>
+
+        <div>
+          <a routerLink="../my-tickets/detail-ticket" class="text-cyan-500 text-sm m-0 font-bold">Lihat Tiket</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-6">
+      <p class="font-bold text-gray-800 text-sm mb-3">3 Mei 2026</p>
+
+      <div class="bg-white border border-cyan-400 rounded-2xl p-4 shadow-sm mb-4">
+        <div class="border-b border-gray-200 pb-2 mb-3">
+          <span class="text-xs text-gray-800 font-medium">Kode Tiket: TKNF-62946201</span>
+        </div>
+
+        <div class="flex items-center mb-4">
+          <div class="w-14 h-14 bg-gray-500 rounded-xl mr-4 flex-shrink-0 shadow-sm"></div>
+          <div>
+            <h3 class="font-bold text-sm text-gray-900 m-0">Synchronize - Jakarta</h3>
+            <p class="text-xs font-semibold text-gray-800 m-0 mt-1">2 Juli 2026</p>
+          </div>
+        </div>
+
+        <div>
+          <a href="#" class="text-cyan-500 text-sm m-0 font-bold">Lihat Tiket</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ion-content>
+
+<app-tabs></app-tabs>
