@@ -7,10 +7,8 @@ const routes: Routes = [
   {
     path: '',
     component: MyTicketsPage
-  },  {
-    path: 'detail-ticket',
-    loadChildren: () => import('./detail-ticket/detail-ticket.module').then( m => m.DetailTicketPageModule)
-  }
+  },
+
 
 ];
 

@@ -3,48 +3,44 @@
   <div class="bg-[#16e2eb]">
 
     <div class="bg-[#16e2eb] h-[40vh] flex flex-col items-center justify-center relative z-10 shadow-sm">
-
-      <div class="bg-red-600 w-40 h-16 flex items-center justify-center">
-        <span class="text-white font-bold text-2xl tracking-wide">Logo</span>
+      <div class="w-44 h-36 mt-14">
+        <img src="../assets/images/eventin-logo.png" alt="Logo EventInr">
       </div>
-
     </div>
 
-    <div class="bg-cyan-50 px-8 pt-8 pb-10 relative z-0 rounded-tl-[80px]">
+    <div class="bg-cyan-50 px-8 pt-8 pb-12 relative z-0 rounded-tl-[80px]">
 
-      <h1 class="text-center text-3xl font-extrabold text-cyan-400 mb-10">Login</h1>
+      <h1 class="text-center text-3xl font-extrabold text-cyan-400 mb-6">Login</h1>
 
-      <div class="relative mb-6 mt-2">
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
 
-        <ion-input [(ngModel)]="email" label="Email" type="email" label-placement="floating" fill="outline"
-          placeholder="Masukkan Email" required></ion-input>
+        <div class="relative mb-5 mt-2">
+          <ion-input formControlName="email" label="Email" type="email" label-placement="floating" fill="outline"
+            placeholder="Masukkan Email">
+          </ion-input>
+        </div>
+        <div class="mb-5 pl-2" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
+          <small class="text-red-500 font-semibold text-xs">Format email tidak valid.</small>
+        </div>
 
-      </div>
+        <div class="relative mb-1">
+          <ion-input formControlName="password" label="Password" type="password" label-placement="floating"
+            fill="outline" placeholder="Masukkan Password">
+          </ion-input>
+        </div>
+        <p><a class="text-sm text-cyan-400" routerLink="/reset-password">Lupa Password?</a></p>
+        <div class="mb-6 pl-2" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+          <small class="text-red-500 font-semibold text-xs">Password wajib diisi.</small>
+        </div>
 
-      <div class="relative mb-2">
+        <button type="submit" [disabled]="loginForm.invalid"
+          class="w-full mt-10 bg-cyan-400 text-white font-bold py-3.5 rounded-lg active:scale-95 transition-transform shadow-md disabled:opacity-50 disabled:scale-100">
+          Masuk
+        </button>
 
-        <ion-input [(ngModel)]="password" label="Password" type="password" label-placement="floating" fill="outline"
-          placeholder="Masukkan Password" required></ion-input>
+      </form>
 
-      </div>
-
-      <div class="flex justify-start mb-8">
-        <a routerLink="/reset-password"
-          class="text-cyan-400 text-xs font-semibold active:opacity-70 transition-opacity">
-          Lupa password?
-        </a>
-      </div>
-
-      <button type="submit" (click)="login()"
-        class="w-full mb-2 bg-cyan-400 text-white font-bold py-3.5 rounded-lg active:scale-95 transition-transform shadow-md">
-        Masuk
-      </button>
-
-      <span class="text-center text-red-600 text-sm">
-        <p> {{ responseLogin }} </p>
-      </span>
-
-      <div class="mt-12 text-center">
+      <div class="mt-8 text-center">
         <p class="text-xs font-bold text-gray-800">
           Belum punya akun?
           <a routerLink="/regist" class="text-cyan-400 ml-1 active:opacity-70 transition-opacity">Daftar di sini.</a>

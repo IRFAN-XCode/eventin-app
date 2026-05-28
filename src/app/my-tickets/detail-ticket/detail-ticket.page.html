@@ -1,84 +1,94 @@
 <div class="bg-[#16e2eb] pt-12 pb-2 px-2 rounded-b-[30px] shadow-sm flex items-center text-white relative z-10">
-  <ion-toolbar>
+  <ion-toolbar class="--background-transparent">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/my-tickets" icon="arrow-back"></ion-back-button>
     </ion-buttons>
-
     <ion-title>Detail Tiket</ion-title>
   </ion-toolbar>
 </div>
 
 <ion-content [fullscreen]="true">
-  <div class="px-6 py-4">
 
-    <button class="flex items-center text-cyan-500 font-bold mb-4 active:opacity-70 transition-opacity bg-transparent">
-      <ion-icon name="download-outline" class="text-xl mr-2"></ion-icon>
-      <span class="text-sm">Download</span>
-    </button>
+  <div *ngIf="isLoading" class="flex flex-col justify-center items-center h-64 space-y-2">
+    <ion-spinner color="viewport" name="crescent"></ion-spinner>
+    <p class="text-xs text-gray-400 font-bold">Menyiapkan barcode tiket...</p>
+  </div>
 
-    <div class="border border-cyan-400 rounded-2xl overflow-hidden shadow-sm mb-6 bg-white">
+  <div class="p-6" *ngIf="!isLoading && ticketDetail">
 
-      <div class="bg-cyan-400 text-white text-center py-2 font-bold text-lg tracking-wide">
-        VIP
-      </div>
+    <div class="flex gap-2 items-center mb-3" (click)="downloadTiket()">
+      <ion-icon name="download" class="text-cyan-400 "></ion-icon>
+      <p class="text-cyan-400 text-lg">Download</p>
+    </div>
 
-      <div class="p-6 text-center">
-        <h2 class="text-gray-900 font-bold text-lg mb-6">Last Voyage</h2>
-
-        <div class="flex justify-center mb-4">
-          <div class="w-48 h-48 rounded-lg flex items-center justify-center bg-gray-50">
-            <ion-icon name="qr-code-outline" class="text-[8rem] text-gray-800"></ion-icon>
+    <div class="bg-white rounded-3xl overflow-hidden border border-cyan-300 shadow-md flex flex-col">
+      
+      <div class="p-5 flex flex-col justify-center space-x-4 bg-white">
+        
+        <h2 class="text-base font-black text-gray-800 text-center leading-tight line-clamp-1">{{ ticketDetail.event?.nama_event }}</h2>
+        <div class="flex flex-col justify-center">
+          <div class="flex justify-center items-center space-x-2 mt-1.5">
+            <span class="text-[9px] font-black uppercase bg-cyan-100 text-cyan-500 px-2 py-0.5 rounded-md">
+              {{ ticketDetail.jenis_tiket }} Class
+            </span>
+            <span *ngIf="ticketDetail.nomor_kursi" class="text-[9px] font-black uppercase bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md">
+              Kursi: {{ ticketDetail.nomor_kursi }}
+            </span>
           </div>
         </div>
+      </div>
 
-        <p class="text-xs text-gray-600 mb-4 font-medium">Kode Tiket: LVY-10339237</p>
+      <div class="relative flex items-center px-4 bg-white">
+        <div class="absolute -left-2.5 w-5 h-5 bg-slate-50 rounded-full border-r border-gray-100"></div>
+        <div class="w-full border-b-2 border-dashed border-gray-100"></div>
+        <div class="absolute -right-2.5 w-5 h-5 bg-slate-50 rounded-full border-l border-gray-100"></div>
+      </div>
 
-        <hr class="border-gray-200 mb-4 w-3/4 mx-auto">
-
-        <div class="mb-3">
-          <p class="text-[10px] text-gray-500 m-0 uppercase tracking-wider">Nama</p>
-          <p class="font-bold text-sm text-gray-800 m-0 mt-1">Irfan Fathurrohman</p>
+      <div class="p-6 bg-white flex flex-col items-center justify-center text-center">
+        
+        <div class="p-3 border-2 border-cyan-400 rounded-2xl bg-white shadow-xs">
+          <qrcode 
+            [qrdata]="ticketDetail.kode_transaksi" 
+            [width]="180" 
+            [errorCorrectionLevel]="'M'">
+          </qrcode>
         </div>
 
-        <div>
-          <p class="text-[10px] text-gray-500 m-0 uppercase tracking-wider">ID Transaksi</p>
-          <p class="font-bold text-sm text-gray-800 m-0 mt-1">07558abhs330afx4</p>
+        <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest mt-4">Kode Invoice Transaksi</span>
+        <p class="font-mono font-black text-gray-800 text-lg tracking-wider m-0 mt-0.5 uppercase">{{ ticketDetail.kode_transaksi }}</p>
+        
+        <p class="text-xs text-gray-400 font-bold mt-1 mb-3">{{ ticketDetail.event?.tgl_event | date:'dd MMMM yyyy':'':'id' }}</p>
+
+        <div class="flex items-center space-x-1 mt-1 text-gray-400 text-xs font-semibold">
+          <ion-icon name="ticket-outline"></ion-icon>
+          <span>1 Tiket Terverifikasi</span>
         </div>
+      </div>
+
+    </div>
+
+    <div class="mt-6 bg-white p-4 rounded-2xl border border-gray-100 space-y-3">
+      <h4 class="text-xs font-black text-gray-800 uppercase tracking-wider m-0">Instruksi Penting:</h4>
+      <div class="flex items-start space-x-2.5 text-xs text-gray-500 leading-normal">
+        <ion-icon name="phone-portrait-outline" class="text-cyan-400 text-base flex-shrink-0"></ion-icon>
+        <p class="m-0">Tunjukkan QR Code ini secara utuh kepada panitia **UKM Malaka** di gerbang masuk pintu utama lokasi event.</p>
+      </div>
+      <div class="flex items-start space-x-2.5 text-xs text-gray-500 leading-normal">
+        <ion-icon name="sunny-outline" class="text-cyan-400 text-base flex-shrink-0"></ion-icon>
+        <p class="m-0">Pastikan tingkat kecerahan (*brightness*) layar HP kamu dalam keadaan maksimal saat melakukan *scanning* tiket.</p>
       </div>
     </div>
 
-    <div class="border border-cyan-400 rounded-2xl p-5 shadow-sm bg-white mb-8">
-      <h3 class="font-bold text-gray-600 text-base mb-2">Detail Peserta</h3>
-
-      <hr class="border-gray-200 mb-4">
-
-      <div class="space-y-4">
-        <div>
-          <p class="text-[10px] text-gray-500 m-0 uppercase tracking-wider">Nama</p>
-          <p class="font-bold text-sm text-gray-800 m-0 mt-1">Irfan Fathurrohman</p>
-        </div>
-
-        <div>
-          <p class="text-[10px] text-gray-500 m-0 uppercase tracking-wider">Email</p>
-          <p class="font-bold text-sm text-gray-800 m-0 mt-1">irfan@gmail.com</p>
-        </div>
-
-        <div>
-          <p class="text-[10px] text-gray-500 m-0 uppercase tracking-wider">Nomor telepon</p>
-          <p class="font-bold text-sm text-gray-800 m-0 mt-1">0294932391739</p>
-        </div>
-
-        <div>
-          <p class="text-[10px] text-gray-500 m-0 uppercase tracking-wider">Tanggal Lahir</p>
-          <p class="font-bold text-sm text-gray-800 m-0 mt-1">32 Februari 2028</p>
-        </div>
-
-        <div>
-          <p class="text-[10px] text-gray-500 m-0 uppercase tracking-wider">Jenis Kelamin</p>
-          <p class="font-bold text-sm text-gray-800 m-0 mt-1">Laki-laki</p>
-        </div>
-      </div>
+    <div class="text-center mt-6">
+      <span class="text-xs font-bold uppercase tracking-wider text-gray-400">
+        Status Kehadiran: 
+        <strong [ngClass]="ticketDetail.status_kehadiran === 'hadir' ? 'text-green-500' : 'text-amber-500'">
+          {{ ticketDetail.status_kehadiran === 'hadir' ? 'SUDAH HADIR' : 'BELUM HADIR' }}
+        </strong>
+      </span>
     </div>
 
   </div>
 </ion-content>
+
+

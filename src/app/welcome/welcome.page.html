@@ -1,0 +1,52 @@
+<ion-content [fullscreen]="true">
+  <div *ngIf="currentStep === 1" class="w-full h-full flex flex-col justify-center p-10 bg-cyan-50 items-center text-center">
+    <div class="w-80 h-52 mx-10">
+      <img src="./assets/images/welcome1.png" alt="First Welcome Page">
+    </div>
+
+    <p class="text-slate-900 text-2xl mb-1 mt-6 text-bold">Selamat Datang!</p>
+    <p class="mt-1 text-slate-900 text-sm">Halo, selamat datang di aplikasi EventIn. Aplikasi penyedia layanan pembelian tiket sebuah event.</p>
+
+  </div>
+
+  <div *ngIf="currentStep === 2" class="w-full h-full flex flex-col justify-center p-10 bg-cyan-50 items-center text-center">
+  
+    <div class="w-80 h-52 mx-10">
+      <img src="./assets/images/welcome2.png" alt="Second Welcome Page">
+    </div>
+
+    <p class="text-slate-900 text-2xl mb-1 mt-6 text-bold">Explore Event Favoritmu</p>
+    <p class="mt-1 text-slate-900 text-sm">Tersedia banyak event menarik yang bisa kamu ikutin, ayo cari dan beli tiket event favoritmu.</p>
+
+    
+  </div>
+
+  <div *ngIf="currentStep === 3" class="w-full h-full flex flex-col justify-center p-10 bg-cyan-50 items-center text-center">
+
+    <div class="w-80 h-52 mx-10">
+      <img src="./assets/images/welcome3.png" alt="Second Welcome Page">
+    </div>
+
+    <p class="text-slate-900 text-2xl mb-1 mt-6 text-bold">Daftar Jadi Organizer</p>
+    <p class="mt-1 text-slate-900 text-sm">Ayo buat eventmu sendiri dengan daftar menjadi organizer bersama EventIn.</p>
+
+  </div>
+
+</ion-content>
+
+<ion-footer class="ion-no-border bg-[#ecfeff]">
+  <div class="px-5 py-4 bg-[#ecfeff]">
+    <button (click)="nextStep()" *ngIf="currentStep != 3"
+      class="w-full bg-cyan-400 text-white font-bold py-3.5 rounded-xl active:scale-95 transition-transform">
+      Lanjut
+    </button>
+    <button (click)="login()" *ngIf="currentStep === 3"
+      class="w-full mb-4 bg-cyan-400 text-white font-bold py-3.5 rounded-xl active:scale-95 transition-transform">
+      Login
+    </button>
+    <button (click)="GoHome()" *ngIf="currentStep === 3"
+      class="w-full mt-3 mb-3 bg-cyan-50 text-cyan-500 border-4 z-10 border-red-600 font-bold py-3.5 rounded-xl active:scale-95 transition-transform">
+      Masuk tanpa daftar
+    </button>
+  </div>
+</ion-footer>

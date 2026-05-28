@@ -3,69 +3,86 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/events" icon="arrow-back"></ion-back-button>
     </ion-buttons>
-
     <ion-title>Detail Event</ion-title>
   </ion-toolbar>
 </div>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" *ngIf="EventDetail">
 
-  <div class="m-5 rounded-[20px] overflow-hidden">
-    <div class="h-28 bg-[#5E5858]"></div>
+  <div class="m-5 rounded-[20px] overflow-hidden shadow-md bg-gray-200 h-36">
+    <img [src]="EventDetail.poster_url" alt="Poster {{ EventDetail.nama_event }}" class="w-full h-full object-cover"
+      loading="lazy" />
   </div>
 
-  <div class="px-6 py-2">
+  <div class="px-6 py-2 pb-10">
 
     <div
-      class="inline-block bg-cyan-200 border border-cyan-400 text-cyan-500 px-5 py-1 rounded-lg text-xs font-bold mb-3 shadow-sm">
-      Musik
+      class="inline-block bg-cyan-50 border border-cyan-400 text-cyan-500 px-4 py-1 rounded-full text-xs font-bold mb-3 shadow-xs uppercase tracking-wider">
+      {{ EventDetail.kategori }}
     </div>
 
-    <h1 class="text-2xl font-bold text-gray-900 mb-6">Last Voyage</h1>
+    <h1 class="text-xl font-black text-gray-900 mb-5 leading-snug">{{ EventDetail.nama_event }}</h1>
 
-    <h2 class="text-sm font-bold text-gray-800 mb-4">Detail Acara</h2>
-    <div class="space-y-2 mb-8">
-      <div class="flex items-start text-sm text-gray-900 font-semibold">
-        <ion-icon name="calendar-outline" class="text-gray-500 text-xl mr-3 mt-0.5"></ion-icon>
-        <span>24 Mei 2026</span>
+    <h2 class="text-sm font-bold text-cyan-500 mb-3 uppercase tracking-wide">Detail Acara</h2>
+    <div class="space-y-3 mb-6 bg-white p-4 rounded-2xl border border-gray-100 shadow-xs">
+
+      <div class="flex items-center text-sm text-gray-700 font-semibold">
+        <ion-icon name="calendar-outline" class="text-cyan-400 text-xl mr-3"></ion-icon>
+        <span>{{ EventDetail.tgl_event | date:'dd MMMM yyyy':'':'id' }}</span>
       </div>
-      <div class="flex items-start text-sm text-gray-900 font-semibold">
-        <ion-icon name="time-outline" class="text-gray-500 text-xl mr-3 mt-0.5"></ion-icon>
-        <span>13.00 - 21.00 WIB</span>
+
+      <div class="flex items-center text-sm text-gray-700 font-semibold">
+        <ion-icon name="time-outline" class="text-cyan-400 text-xl mr-3"></ion-icon>
+        <span>{{ EventDetail.waktu | slice:0:5 }} WIB - Selesai</span>
       </div>
-      <div class="flex items-start text-sm text-gray-900 font-semibold">
-        <ion-icon name="location-outline" class="text-gray-500 text-xl mr-3 mt-0.5"></ion-icon>
-        <span class="leading-tight">Indonesia Arena Indoor -<br>Senayan Jakarta</span>
+
+      <div class="flex items-start text-sm text-gray-700 font-semibold">
+        <ion-icon name="location-outline" class="text-cyan-400 text-xl mr-3 mt-0.5"></ion-icon>
+        <span class="leading-tight flex-1">{{ EventDetail.lokasi }}</span>
+      </div>
+
+      <div class="flex items-center text-sm text-gray-700 font-semibold">
+        <ion-icon name="people-outline" class="text-cyan-400 text-xl mr-3"></ion-icon>
+        <span>Tersedia <strong class="text-emerald-500">{{ EventDetail.total_kapasitas }}</strong> Tiket</span>
       </div>
     </div>
 
-    <h2 class="text-sm font-bold text-gray-800 mb-4">Penyelenggara</h2>
-    <div class="flex items-center mb-4">
-      <div class="w-12 h-12 bg-[#706E6E] rounded-full mr-4 flex-shrink-0"></div>
-      <span class="font-bold text-gray-900 text-sm">JKT48</span>
+    <h2 class="text-sm font-bold text-cyan-500 mb-3 uppercase tracking-wide">Penyelenggara</h2>
+    <div class="flex items-center justify-between bg-white p-4 rounded-2xl border border-gray-100 shadow-xs mb-4">
+      <div class="flex items-center space-x-3">
+        <div
+          class="w-9 h-9 bg-cyan-400 text-white rounded-full flex items-center justify-center font-black text-sm uppercase shadow-xs">
+          {{ (EventDetail.organizer?.nama_eo | slice:0:1) || 'E' }}
+        </div>
+        <div class="flex flex-col">
+          <span class="text-gray-800 font-bold text-sm">{{ EventDetail.organizer?.nama_eo || 'Event Organizer' }}</span>
+          <span class="text-gray-400 text-[11px] font-medium uppercase tracking-wider">Verified Organizer</span>
+        </div>
+      </div>
     </div>
 
-    <button
-      class="flex items-center space-x-2 bg-cyan-50 border border-cyan-400 text-cyan-500 px-4 py-1.5 rounded-lg active:bg-cyan-100 transition-colors shadow-sm">
-      <ion-icon name="logo-instagram" class="text-lg"></ion-icon>
-      <span class="text-xs font-bold"><a href="http://jkt48.com">Instagram</a></span>
-    </button>
+    <div class="flex flex-col justify-start mt-5">
+      <p class="text-sm font-bold text-cyan-500 mb-0 uppercase tracking-wide">Deskripsi Event</p>
+      <div class="h-[1px] w-32 bg-cyan-400 mb-3"></div>
+      <p class="text-xs text-gray-800">{{ EventDetail.deskripsi }}</p>
+    </div>
 
   </div>
 </ion-content>
 
-<ion-footer class="ion-no-border bg-white">
-  <div class="px-5 py-4 bg-white">
-    <div class="border border-cyan-400 rounded-2xl p-4 bg-white shadow-sm">
-      <div class="flex justify-between items-center mb-3">
-        <span class="text-xs font-bold text-gray-800">Harga mulai dari</span>
-        <span class="text-sm font-extrabold text-gray-900">Rp80.000</span>
+    <div *ngIf="EventDetail" class="border z-10 border-gray-100 rounded-2xl p-4 bg-white shadow-md flex flex-col space-y-3">
+
+      <div class="flex justify-between items-center">
+          <span class="text-[12px] font-bold text-gray-400 uppercase tracking-wider">Harga tiket mulai dari</span>
+          <span class="text-base font-black text-red-500">
+            {{ EventDetail.harga_reg | currency:'IDR':'symbol-narrow':'1.0-0' }}
+          </span>
       </div>
-      <button
-        class="w-full bg-[#00BFFF] text-white font-bold py-3 rounded-xl active:scale-95 transition-transform flex items-center justify-center space-x-2">
+
+      <button [routerLink]="['/transactions', EventDetail.id]"
+        class="w-full bg-cyan-400 text-white font-bold py-3.5 rounded-xl active:scale-95 transition-transform flex items-center justify-center space-x-2 shadow-sm">
         <ion-icon name="ticket-outline" class="text-xl"></ion-icon>
-        <span routerLink="/transactions">Beli Tiket</span>
+        <span class="text-sm font-bold tracking-wide">Pesan Tiket Sekarang</span>
       </button>
+
     </div>
-  </div>
-</ion-footer>

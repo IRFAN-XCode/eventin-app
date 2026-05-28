@@ -93,3 +93,24 @@
 .custom-dropdown-bg ion-item::part(native):hover {
     color: #16e2eb;
 }
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.animate-marquee-hover {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.group:active .animate-marquee-hover,
+.group:hover .animate-marquee-hover {
+    animation: marquee 8s linear infinite;
+    padding-left: 30%;
+}

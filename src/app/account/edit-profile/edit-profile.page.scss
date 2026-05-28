@@ -22,23 +22,23 @@ ion-content {
     ion-input {
         --border-color: #16e2eb;
         --background: #ecfeff;
-        --color: #16e2eb;
+        --color: #0f172a;
         --placeholder-color: #707070;
-        --highlight-color-focused: #16e2eb;
+        --highlight-color-focused: #168beb;
         --highlight-color-invalid: #ff1717;
     }
 
     ion-select {
         --border-color: #16e2eb;
         --background: #ecfeff;
-        --color: #16e2eb;
+        --color: #0f172a;
         --placeholder-color: #707070;
-        --highlight-color-focused: #16e2eb;
+        --highlight-color-focused: #168beb;
     }
 
     .text,
     .icon,
     .placeholder {
-        color: #16e2eb;
+        color: #0f172a;
     }
 }

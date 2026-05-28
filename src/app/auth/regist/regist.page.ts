@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastController, LoadingController, NavController } from '@ionic/angular';
+import { ToastController, LoadingController } from '@ionic/angular';
 import { Api } from '../../services/api';
 
 @Component({
@@ -13,12 +13,7 @@ import { Api } from '../../services/api';
 export class RegistPage implements OnInit {
   registerForm!: FormGroup;
 
-  // email: string = '';
-  // password: string = '';
-  // confirm_password: string = '';
-
   constructor(
-    private navCtrl: NavController,
     private fb: FormBuilder,
     private api: Api,
     private router: Router,
@@ -34,7 +29,8 @@ export class RegistPage implements OnInit {
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      password_confirmation: ['', [Validators.required]]
+      password_confirmation: ['', [Validators.required]],
+      terms: [false, Validators.requiredTrue]
     }, {
       validator: this.passwordMatchValidator
     });
@@ -82,15 +78,12 @@ export class RegistPage implements OnInit {
     const toast = await this.toastCtrl.create({
       message: message,
       duration: 3000,
-      position: 'bottom',
+      position: 'top',
       color: color
     });
     await toast.present();
   }
 }
 
-// regist() {
-//   console.log("Yey, berhasil buat akun!")
-//   this.navCtrl.navigateRoot('/login');
-// }
+
 

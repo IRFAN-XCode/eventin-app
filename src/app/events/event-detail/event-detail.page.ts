@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Api } from '../../services/api';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-event-detail',
@@ -9,21 +10,42 @@ import { Api } from '../../services/api';
 })
 export class EventDetailPage implements OnInit {
 
-  EventDetail: any[] = [];
-  IdEvent: any;
+  EventDetail: any = null;
+  IdEvent!: any;
+  isLoading = false;
 
   constructor(
-    private api: Api
+    private api: Api,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    // this.getEventbyId(this.IdEvent);
   }
 
-  // getEventbyId(id: any) {
-  //   this.api.getEventById(id).subscribe((res: any) => {
-  //     this.EventDetail = res.data; // Sesuaikan dengan struktur JSON dari Laravel
-  //   });
-  // }
+  ionViewWillEnter() {
+    this.IdEvent = this.route.snapshot.paramMap.get('id');
+
+    if (this.IdEvent) {
+      this.getEventbyId(this.IdEvent);
+    } else {
+      console.log('Event tidak ditemukan');
+    }
+  }
+
+  getEventbyId(id: any) {
+    this.isLoading = true;
+    this.api.getEventDetail(id).subscribe({
+      next: (res: any) => {
+        this.isLoading = false;
+        if (res.success) {
+          this.EventDetail = res.data;
+        }
+      },
+      error: (err) => {
+        this.isLoading = false;
+        console.error('Gagal memuat daftar event:', err);
+      }
+    });
+  }
 
 }

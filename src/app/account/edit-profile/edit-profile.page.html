@@ -10,49 +10,57 @@
 
 <ion-content [fullscreen]="true">
 
-  <div class="flex justify-center mt-8 mb-2">
-    <div class="relative">
-      <div class="w-24 h-24 bg-gray-300 rounded-full shadow-sm flex-shrink-0"></div>
-    </div>
-  </div>
+  <div class="px-8 flex flex-col space-y-4" *ngIf="userDetailforEdit">
 
-  <div class="px-8 flex flex-col space-y-4">
+    <form [formGroup]="editProfileForm" (ngSubmit)="onUpdate()">
 
-    <div class="relative mb-2 mt-12">
-      <ion-input [(ngModel)]="nama_lengkap" label="Nama Lengkap" type="text" label-placement="floating" fill="outline"
-        placeholder="Masukkan Nama Lengkap" required></ion-input>
-    </div>
+      <div class="relative mb-0.5 mt-12">
+        <ion-input formControlName="nama" label="{{ userDetailforEdit.nama || 'Masukkan Nama Lengkap'}}" type="text"
+          label-placement="floating" fill="outline" placeholder="Masukkan Nama Lengkap" required></ion-input>
+      </div>
+      <div class="mb-2 pl-2" *ngIf="editProfileForm.get('nama')?.touched && editProfileForm.get('nama')?.invalid">
+        <small class="text-red-500 font-semibold text-xs">Nama lengkap wajib diisi.</small>
+      </div>
 
-    <div class="relative mb-2 mt-6">
-      <ion-input [(ngModel)]="email" label="Email" type="email" label-placement="floating" fill="outline"
-        placeholder="Masukkan Email" required></ion-input>
-    </div>
+      <div class="relative mb-0.5 mt-6">
+        <ion-input formControlName="email" label="{{ userDetailforEdit.email || 'Masukkan Email'}}" type="email"
+          label-placement="floating" fill="outline" placeholder="Masukkan Email" required></ion-input>
+      </div>
+      <div class="mb-2 pl-2" *ngIf="editProfileForm.get('email')?.touched && editProfileForm.get('email')?.invalid">
+        <small class="text-red-500 font-semibold text-xs">Format email tidak valid atau kosong.</small>
+      </div>
 
-    <div class="relative mb-2 mt-6">
-      <ion-input [(ngModel)]="nomor_handphone" label="Nomor Handphone" type="text" label-placement="floating"
-        fill="outline" placeholder="Masukkan Nomor Handphone" required></ion-input>
-    </div>
+      <div class="relative mb-0.5 mt-6">
+        <ion-input formControlName="nomor_handphone"
+          label="{{ userDetailforEdit.nomor_handphone || 'Masukkan Nomor Handphone' }}" type="text"
+          label-placement="floating" fill="outline" placeholder="Masukkan Nomor Handphone" required></ion-input>
+      </div>
+      <div class="mb-2 pl-2"
+        *ngIf="editProfileForm.get('nomor_handphone')?.touched && editProfileForm.get('nomor_handphone')?.invalid">
+        <small class="text-red-500 font-semibold text-xs">Nomor handphone wajib diisi.</small>
+      </div>
 
-    <div class="relative mb-2 mt-6">
-      <ion-select [(ngModel)]="jenis_kelamin" label="Jenis Kelamin" label-placement="floating" fill="outline"
-        class="icon text placeholder">
-        <ion-select-option value="Laki-laki">Laki-laki</ion-select-option>
-        <ion-select-option value="Perempuan">Perempuan</ion-select-option>
-      </ion-select>
-    </div>
+      <div class="relative mb-0.5 mt-6">
+        <ion-select formControlName="jenis_kelamin"
+          label="{{ userDetailforEdit.jenis_kelamin || 'Pilih Jenis Kelamin'}}" label-placement="floating"
+          fill="outline" class="icon text placeholder">
+          <ion-select-option value="Laki-laki">Laki-laki</ion-select-option>
+          <ion-select-option value="Perempuan">Perempuan</ion-select-option>
+        </ion-select>
+      </div>
+      <div class="mb-5 pl-2"
+        *ngIf="editProfileForm.get('jenis_kelamin')?.touched && editProfileForm.get('jenis_kelamin')?.invalid">
+        <small class="text-red-500 font-semibold text-xs">Jenis kelamin wajib diisi.</small>
+      </div>
 
-    <div class="pt-8 pb-8 flex justify-center">
-      <button (click)="editProfile()"
-        class="w-[80%] bg-cyan-100 border border-cyan-400 text-cyan-500 font-bold py-3 rounded-2xl active:bg-cyan-200 transition-colors">
-        Simpan
-      </button>
-    </div>
-    <!-- <div class="pt-8 pb-8 flex justify-center">
-      <button
-        class="w-[80%] bg-cyan-100 border border-cyan-400 text-cyan-500 font-bold py-3 rounded-2xl active:bg-cyan-200 transition-colors">
-        Simpan
-      </button>
-    </div> -->
+      <div class="pt-8 pb-8 flex justify-center">
+        <button type="submit" [disabled]="editProfileForm.invalid || editProfileForm.pristine"
+          class="w-[80%] bg-cyan-100 border border-cyan-400 text-cyan-500 font-bold py-3 rounded-2xl active:bg-cyan-200 transition-colors">
+          Simpan
+        </button>
+      </div>
+
+    </form>
 
   </div>
 

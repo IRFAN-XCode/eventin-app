@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Api } from '../services/api';
+import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-account',
@@ -8,9 +12,54 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountPage implements OnInit {
 
-  constructor() { }
+  UserProfile: any;
 
-  ngOnInit() {
+  constructor(
+    private api: Api,
+    private router: Router,
+    private toastCtrl: ToastController
+  ) { }
+
+  ngOnInit() { }
+
+  ionViewWillEnter() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      this.UserProfile = null;
+    } else {
+      this.UserProfile = this.api.getUser();
+    }
   }
 
+  myCertificate() {
+    const urlCertificate = 'https://financialcare.my.id';
+    
+    window.location.href = urlCertificate;
+  }
+
+  onLogout() {
+    this.api.onLogout().subscribe({
+      next: (res: any) => {
+        this.presentToast(res.message || 'Logout berhasil', 'success');
+        localStorage.clear();
+        this.router.navigate(['/login']);
+      },
+      error: (err: any) => {
+        console.error('Backend logout error', err);
+        localStorage.clear();
+        this.presentToast('Sesi berakhir, keluar dari aplikasi..', 'danger');
+        this.router.navigate(['/login']);
+      }
+    });
+  }
+
+  async presentToast(message: string, color: string) {
+    const toast = await this.toastCtrl.create({
+      message,
+      duration: 2000,
+      color,
+      position: 'top'
+    });
+    toast.present();
+  }
 }

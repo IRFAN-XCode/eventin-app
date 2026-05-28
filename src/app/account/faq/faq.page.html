@@ -1,0 +1,93 @@
+<div class="bg-[#16e2eb] pt-12 pb-2 px-2 rounded-b-[30px] shadow-sm flex items-center text-white relative z-10">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/account" icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>FAQ</ion-title>
+  </ion-toolbar>
+</div>
+
+<ion-content [fullscreen]="true">
+
+  <div class="px-5 py-8 w-full">
+
+    <h2 class="text-center text-lg font-bold text-gray-900 mb-2">Frequently Asked Questions</h2>
+    
+    <p class="text-center text-sm font-medium mb-8 text-gray-700 leading-relaxed">
+      Selamat datang di halaman FAQ EventIn. Temukan jawaban untuk pertanyaan umum tentang EventIn.
+    </p>
+
+    <ion-accordion-group expand="inset" class="m-0 shadow-sm">
+      
+      <ion-accordion value="first">
+        <ion-item slot="header" color="light">
+          <ion-label class="font-semibold text-gray-800 text-sm whitespace-normal">Cara Membeli Tiket di EventIn</ion-label>
+        </ion-item>
+        <div class="ion-padding text-sm text-gray-600 bg-white" slot="content">
+          <ul class="list-disc pl-4 space-y-2 m-0">
+            <li>Buka aplikasi Eventin.</li>
+            <li>Cari dan pilih event yang diinginkan.</li>
+            <li>Pilih jenis tiket yang tersedia dan diinginkan.</li>
+            <li>Pastikan sudah melengkapi data diri dengan benar pada halaman profile.</li>
+            <li>Klik "Lanjut" dan pilih nomor kursi jika event yang dipilih menggunakan kursi.</li>
+            <li>Lakukan pembayaran dengan transfer ke nomor rekening tujuan dan isi form konfirmasi lalu klik "Kirim Bukti Pembayaran".</li>
+            <li>Setelah klik "Kirim Bukti Pembayaran", admin EventIn akan verifikasi dan validasi bukti transfer.</li>
+            <li>Setelah sukses, silahkan cek secara berkala halaman tiket Anda.</li>
+          </ul>
+        </div>
+      </ion-accordion>
+
+      <ion-accordion value="second">
+        <ion-item slot="header" color="light">
+          <ion-label class="font-semibold text-gray-800 text-sm whitespace-normal">Kebijakan Pembatalan dan Pengembalian Dana</ion-label>
+        </ion-item>
+        <div class="ion-padding text-sm text-gray-600 bg-white" slot="content">
+          Tiket yang telah dibeli tidak dapat dibatalkan atau dikembalikan. Pastikan Anda memilih acara dan tiket yang sesuai sebelum melakukan pembayaran.
+        </div>
+      </ion-accordion>
+
+      <ion-accordion value="third">
+        <ion-item slot="header" color="light">
+          <ion-label class="font-semibold text-gray-800 text-sm whitespace-normal">Penukaran E-Ticket</ion-label>
+        </ion-item>
+        <div class="ion-padding text-sm text-gray-600 bg-white" slot="content">
+          Untuk informasi jadwal dan lokasi penukaran tiket, silahkan kunjungi akun instagram resmi penyelenggara acara. Saat penukaran, harap membawa:
+          <ul class="list-disc pl-4 mt-2 space-y-1">
+            <li>E-Ticket asli.</li>
+            <li>Identitas asli yang sesuai dengan data pada e-ticket.</li>
+            <li>Persyaratan lainnya (berdasarkan penyelenggara).</li>
+          </ul>
+        </div>
+      </ion-accordion>
+
+      <ion-accordion value="fourth">
+        <ion-item slot="header" color="light">
+          <ion-label class="font-semibold text-gray-800 text-sm whitespace-normal">Metode Pembayaran</ion-label>
+        </ion-item>
+        <div class="ion-padding text-sm text-gray-600 bg-white" slot="content">
+          Saat ini metode pembayaran yang tersedia pada layanan EventIn masih transfer ke nomor rekening pihak EventIn.
+        </div>
+      </ion-accordion>
+
+      <ion-accordion value="fifth">
+        <ion-item slot="header" color="light">
+          <ion-label class="font-semibold text-gray-800 text-sm whitespace-normal">Informasi Harga Tiket</ion-label>
+        </ion-item>
+        <div class="ion-padding text-sm text-gray-600 bg-white" slot="content">
+          Untuk Informasi harga tiket dan detail acara, silahkan kunjungi halaman beranda/jelajah lalu klik event yang dicari.
+        </div>
+      </ion-accordion>
+
+      <ion-accordion value="sixth">
+        <ion-item slot="header" color="light">
+          <ion-label class="font-semibold text-gray-800 text-sm whitespace-normal">Informasi Seputar Acara</ion-label>
+        </ion-item>
+        <div class="ion-padding text-sm text-gray-600 bg-white" slot="content">
+          Untuk informasi lebih lanjut mengenai acara, seperti rundown, guest star dan jadwal penukaran tiket, silahkan hubungi langsung pihak penyelenggara.
+        </div>
+      </ion-accordion>
+
+    </ion-accordion-group>
+  </div>
+</ion-content>

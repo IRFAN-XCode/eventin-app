@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
+import { Api } from 'src/app/services/api';
+import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-organizer',
@@ -9,24 +12,80 @@ import { NavController } from '@ionic/angular';
 })
 export class LoginOrganizerPage implements OnInit {
 
-  email: string = '';
-  password: string = '';
+  loginForm!: FormGroup;
 
   constructor(
-    private navCtrl: NavController
+    private api: Api,
+    private router: Router,
+    private toastCtrl: ToastController,
+    private loadingCtrl: LoadingController,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit() {
+    this.initForm();
   }
 
-  loginOrganizer() {
-    console.log("Yeay, berhasil login.");
-    if (!this.email || !this.password) {
-      console.log('Email dan password harus diisi');
+  initForm() {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]]
+    });
+  }
+
+  async loginOrganizer() {
+    if (this.loginForm.invalid) {
+      this.presentToast('Isi form dengan benar!.', 'danger')
       return;
     }
 
-    this.navCtrl.navigateBack('/home');
+    const loading = await this.loadingCtrl.create({
+      message: 'Memverifikasi akun...',
+    });
+    await loading.present();
+
+    this.api.LoginOrganizer(this.loginForm.value).subscribe({
+      next: async (res: any) => {
+        await loading.dismiss();
+
+        if (res.success) {
+          this.api.saveToken(res.token, res.user);
+          this.presentToast(res.message, 'success');
+          this.loginForm.reset();
+
+          if (res.user.role === 'organizer') {
+            this.router.navigateByUrl('/events');
+          } else if (res.user.role === 'user') {
+            this.router.navigate(['/login-organizer']);
+            this.presentToast('Anda tidak memiliki akses sebagai organizer', 'danger');
+          }
+        }
+      },
+
+      error: async (err: any) => {
+        await loading.dismiss();
+        let errorMsg = 'gagal terhubung ke server.';
+
+        if (err.error && err.error.message) {
+          errorMsg = err.error.message;
+        } else if (err.error && err.error.errors) {
+          const errors = err.error.errors;
+          errorMsg = errors[Object.keys(errors)[0]][0];
+        }
+        this.presentToast(errorMsg, 'danger');
+
+      }
+    });
+  }
+
+  async presentToast(message: string, color: 'success' | 'danger') {
+    const toast = await this.toastCtrl.create({
+      message: message,
+      duration: 3000,
+      position: 'top',
+      color: color
+    });
+    await toast.present();
   }
 
 }

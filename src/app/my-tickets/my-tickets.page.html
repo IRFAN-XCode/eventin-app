@@ -1,56 +1,157 @@
-<div
-  class="bg-[#16e2eb] pt-12 pb-2 px-4 rounded-b-[30px] shadow-sm text-center flex items-center text-white relative z-10">
+<div class="bg-[#16e2eb] pt-12 pb-2 px-4 rounded-b-[30px] shadow-sm text-center flex items-center text-white relative z-10">
   <ion-title>Tiket Saya</ion-title>
 </div>
+
+<!-- <ion-content [fullscreen]="true">
+  <div class="px-6 py-6">
+    <h2 class="text-cyan-500 font-bold text-xl mb-6">Daftar Tiket</h2>
+
+    <div *ngIf="isLoading" class="flex flex-col justify-center items-center h-48 space-y-2">
+      <ion-spinner color="viewport" name="crescent"></ion-spinner>
+      <p class="text-xs text-gray-400 font-bold">Memuat data tiket...</p>
+    </div>
+
+    <div *ngIf="!isLoading && listTicket.length === 0" class="flex flex-col items-center justify-center h-48 text-center">
+      <ion-icon name="ticket-outline" class="text-4xl text-gray-300 mb-2"></ion-icon>
+      <h4 class="text-sm font-bold text-gray-700 m-0">Belum Ada Tiket Aktif</h4>
+      <p class="text-xs text-gray-400 mt-1">Semua tiket yang berhasil kamu beli akan muncul di sini.</p>
+
+      <button routerLink="/events" class="px-3 py-1 rounded-md bg-cyan-400 bordee-none text-cyan-50 mt-5">Beli Sekarang!</button>
+    </div>
+
+    <div *ngIf="!isLoading && listTicket.length > 0">
+      <div class="flex justify-start items-center gap-3 mb-3">
+          <button class="px-5 py-1 rounded-md bg-cyan-100 text-cyan-500">Sukses</button>
+          <button class="px-5 py-1 rounded-md bg-yellow-100 text-yellow-500">Checking</button>
+      </div>
+
+      <div class="mb-6" *ngFor="let tiket of listTicket">
+        
+        <p class="font-bold text-gray-800 text-sm mb-3">
+          {{ tiket.created_at | date:'dd MMMM yyyy' }}
+        </p>
+
+        <div class="bg-white border border-cyan-400 rounded-2xl p-4 shadow-sm mb-4">
+          
+          <div class="border-b border-gray-200 pb-2 mb-3 flex justify-between items-center">
+            <span class="text-xs text-gray-800 font-medium">Kode Tiket: {{ tiket.kode_transaksi }}</span>
+            <span class="text-[10px] font-bold uppercase tracking-wider text-cyan-500 bg-cyan-50 px-2 py-0.5 rounded-md">
+              {{ tiket.jenis_tiket }}
+            </span>
+          </div>
+
+          <div class="flex items-center mb-4">
+            
+            <div>
+              <h3 class="font-bold text-sm text-gray-900 m-0 line-clamp-1">
+                {{ tiket.event?.nama_event || 'Nama Event Tidak Tersedia' }}
+              </h3>
+              <p class="text-xs font-semibold text-gray-800 m-0 mt-1">
+                {{ tiket.event?.tgl_event | date:'dd MMMM yyyy' }} {{ tiket.event?.waktu ? '- ' + tiket.event.waktu : '' }}
+              </p>
+              <p *ngIf="tiket.nomor_kursi" class="text-[11px] font-bold text-cyan-500 m-0 mt-0.5">
+                Nomor Kursi: {{ tiket.nomor_kursi }}
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <button (click)="bukaDetailTiket(tiket.kode_transaksi)" class="text-cyan-500 text-sm m-0 font-bold bg-transparent text-left p-0 outline-none active:opacity-70">
+              Lihat Tiket
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</ion-content> -->
 
 <ion-content [fullscreen]="true">
   <div class="px-6 py-6">
     <h2 class="text-cyan-500 font-bold text-xl mb-6">Daftar Tiket</h2>
 
-    <div class="mb-6">
-      <p class="font-bold text-gray-800 text-sm mb-3">25 Maret 2026</p>
-
-      <div class="bg-white border border-cyan-400 rounded-2xl p-4 shadow-sm mb-4">
-        <div class="border-b border-gray-200 pb-2 mb-3">
-          <span class="text-xs text-gray-800 font-medium">Kode Tiket: LVY-10339237</span>
-        </div>
-
-        <div class="flex items-center mb-4">
-          <div class="w-14 h-14 bg-gray-500 rounded-xl mr-4 flex-shrink-0 shadow-sm"></div>
-          <div>
-            <h3 class="font-bold text-sm text-gray-900 m-0">Last Voyage - Jakarta</h3>
-            <p class="text-xs font-semibold text-gray-800 m-0 mt-1">24 Mei 2025</p>
-          </div>
-        </div>
-
-        <div>
-          <a routerLink="../my-tickets/detail-ticket" class="text-cyan-500 text-sm m-0 font-bold">Lihat Tiket</a>
-        </div>
-      </div>
+    <div *ngIf="isLoading" class="flex flex-col justify-center items-center h-48 space-y-2">
+      <ion-spinner color="viewport" name="crescent"></ion-spinner>
+      <p class="text-xs text-gray-400 font-bold">Memuat data tiket...</p>
     </div>
 
-    <div class="mb-6">
-      <p class="font-bold text-gray-800 text-sm mb-3">3 Mei 2026</p>
-
-      <div class="bg-white border border-cyan-400 rounded-2xl p-4 shadow-sm mb-4">
-        <div class="border-b border-gray-200 pb-2 mb-3">
-          <span class="text-xs text-gray-800 font-medium">Kode Tiket: TKNF-62946201</span>
-        </div>
-
-        <div class="flex items-center mb-4">
-          <div class="w-14 h-14 bg-gray-500 rounded-xl mr-4 flex-shrink-0 shadow-sm"></div>
-          <div>
-            <h3 class="font-bold text-sm text-gray-900 m-0">Synchronize - Jakarta</h3>
-            <p class="text-xs font-semibold text-gray-800 m-0 mt-1">2 Juli 2026</p>
-          </div>
-        </div>
-
-        <div>
-          <a href="#" class="text-cyan-500 text-sm m-0 font-bold">Lihat Tiket</a>
-        </div>
-      </div>
+    <div *ngIf="!isLoading && listTicket.length === 0" class="flex flex-col items-center justify-center h-48 text-center">
+      <ion-icon name="ticket-outline" class="text-4xl text-gray-300 mb-2"></ion-icon>
+      <h4 class="text-sm font-bold text-gray-700 m-0">Belum Ada Tiket Aktif</h4>
+      <p class="text-xs text-gray-400 mt-1">Semua tiket yang berhasil kamu beli akan muncul di sini.</p>
+      <button routerLink="/events" class="px-3 py-1 rounded-md bg-cyan-400 border-none text-cyan-50 mt-5">Beli Sekarang!</button>
     </div>
 
+    <div *ngIf="!isLoading && listTicket.length > 0">
+      
+      <div class="flex justify-start items-center gap-3 mb-5">
+        <button 
+          (click)="gantiStatusFilter('success')"
+          [class]="statusFilter === 'success' ? 'px-5 py-1.5 rounded-full bg-cyan-400 text-white font-bold text-xs shadow-sm transition-all' : 'px-5 py-1.5 rounded-full bg-slate-100 text-gray-500 font-bold text-xs transition-all'">
+          Sukses
+        </button>
+        
+        <button 
+          (click)="gantiStatusFilter('checking_admin')"
+          [class]="statusFilter === 'checking_admin' ? 'px-5 py-1.5 rounded-full bg-yellow-400 text-white font-bold text-xs shadow-sm transition-all' : 'px-5 py-1.5 rounded-full bg-slate-100 text-gray-500 font-bold text-xs transition-all'">
+          Checking
+        </button>
+      </div>
+
+      <div class="mb-6" *ngFor="let tiket of filterTiket">
+        
+        <p class="font-bold text-gray-800 text-sm mb-3">
+          {{ tiket.created_at | date:'dd MMMM yyyy':'':'id' }}
+        </p>
+
+        <div class="bg-white border rounded-2xl p-4 shadow-xs mb-4 {{ statusFilter === 'success' ? 'border-cyan-400' : 'border-yellow-400' }}">
+          
+          <div class="border-b border-gray-100 pb-2 mb-3 flex justify-between items-center">
+            <span class="text-xs text-gray-600 font-medium" *ngIf="tiket.status_pembayaran === 'success'">Kode Tiket: {{ tiket.kode_transaksi }}</span>
+            <span class="text-[10px] font-black uppercase tracking-wider text-cyan-500 bg-cyan-50 px-2 py-0.5 rounded-md">
+              {{ tiket.jenis_tiket }}
+            </span>
+          </div>
+
+          <div class="flex items-center mb-4">
+            <div>
+              <h3 class="font-black text-sm text-gray-900 m-0 line-clamp-1">
+                {{ tiket.event?.nama_event || 'Nama Event Tidak Tersedia' }}
+              </h3>
+              <p class="text-xs font-semibold text-gray-500 m-0 mt-1">
+                {{ tiket.event?.tgl_event | date:'dd MMMM yyyy' }} {{ tiket.event?.waktu ? '- ' + tiket.event.waktu : '' }}
+              </p>
+              <p *ngIf="tiket.nomor_kursi" class="text-[11px] font-bold text-cyan-500 m-0 mt-0.5">
+                Nomor Kursi: {{ tiket.nomor_kursi }}
+              </p>
+            </div>
+          </div>
+
+          <div class="flex justify-between items-center pt-1">
+            <button *ngIf="tiket.status_pembayaran === 'success'" 
+              (click)="bukaDetailTiket(tiket.kode_transaksi)"
+              class="text-cyan-500 text-sm m-0 font-bold bg-transparent text-left p-0 outline-none active:opacity-70">
+              Lihat Tiket
+            </button>
+            
+            <span class="text-[10px] font-black px-2 py-0.5 rounded {{ statusFilter === 'success' ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600' }}">
+              {{ statusFilter === 'success' ? 'LUNAS' : 'DIPROSES' }}
+            </span>
+          </div>
+        </div>
+      </div>
+      
+
+      <div *ngIf="filterTiket.length === 0" class="flex flex-col items-center justify-center py-12 text-center">
+        <ion-icon name="folder-open-outline" class="text-3xl text-gray-300 mb-2"></ion-icon>
+        <p class="text-xs text-gray-400 font-bold">Tidak ada tiket dengan status ini</p>
+      </div>
+
+    </div>
+    
   </div>
 </ion-content>
 

@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Api } from '../services/api';
-// import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
-// interface LaravelResponse {
-//   success: boolean;
-//   message: string;
-//   data: any[];
-// }
 
 @Component({
   selector: 'app-home',
@@ -17,37 +12,66 @@ import { Api } from '../services/api';
 export class HomePage implements OnInit {
 
   ListEvent: any[] = [];
+  isLoading = false;
 
   constructor(
-    private api: Api
-    // private http: HttpClient
+    private api: Api,
+    private router : Router
   ) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
     this.loadEvent();
   }
 
   loadEvent() {
-    this.api.getAllEvent().subscribe((res: any) => {
-      this.ListEvent = res.data; // Sesuaikan dengan struktur JSON dari Laravel
+    this.isLoading = true;
+    this.api.getEvents().subscribe({
+      next: (res: any) => {
+        this.isLoading = false;
+        if (res.success) {
+          this.ListEvent = res.data;
+        }
+      },
+      error: (err) => {
+        this.isLoading = false;
+        console.error('Gagal memuat daftar event:', err);
+      }
     });
   }
 
-  // ionViewWillEnter() {
-  //   this.getAllEvent();
-  // }
+  doRefresh(event: any) {
+    this.api.getEvents().subscribe({
+      next: (res: any) => {
+        if (res.success) {
+          this.ListEvent = res.data;
+        }
+        event.target.complete();
+      },
+      error: () => {
+        event.target.complete();
+      }
+    });
+  }
 
-  // getAllEvent() {
-  //   this.http.get<LaravelResponse>(this.apiUrl).subscribe({
-  //     next: (res) => {
-  //       // Sekarang VS Code tahu 'res' punya 'data'
-  //       this.AllEvent = res.data; 
-  //     },
-  //     error: (err) => {
-  //       console.error('Error saat load data:', err);
-  //     }
-  //   });
-  // }
+  getEventByKategori(namaKategori: string) {
+    this.router.navigate(['events'], {
+      queryParams: { kategori: namaKategori }
+    });
+  }
+
+  onSearch(event: any) {
+    const keyword = event.target.value;
+
+    if (keyword && keyword.trim() !== '') {
+      this.router.navigate(['/events'], {
+        queryParams: {search: keyword}
+      });
+    }
+  }
+
 }
 
 

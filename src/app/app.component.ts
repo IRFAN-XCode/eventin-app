@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,18 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class AppComponent {
-  constructor() {}
+  constructor(
+    public router: Router
+  ) {
+    const token = localStorage.getItem('token');
+      if (token) {
+        this.router.navigateByUrl('/home');
+        return;
+      }
+      this.autoInitializeApp();
+  }
+
+  autoInitializeApp() {
+    this.router.navigateByUrl('splash');
+  }
 }
