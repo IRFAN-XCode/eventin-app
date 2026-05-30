@@ -52,6 +52,7 @@ export class LoginPage implements OnInit {
         await loading.dismiss();
 
         if (res.success) {
+          localStorage.setItem('FirstTime', 'true');
           this.api.saveToken(res.token, res.user);
 
           this.presentToast(res.message, 'success');

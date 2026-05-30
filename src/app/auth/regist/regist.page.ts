@@ -30,7 +30,6 @@ export class RegistPage implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       password_confirmation: ['', [Validators.required]],
-      terms: [false, Validators.requiredTrue]
     }, {
       validator: this.passwordMatchValidator
     });

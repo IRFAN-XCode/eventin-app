@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://eventin.financialcare.my.id/api'
+  apiUrl: 'https://api.financialcare.my.id/api'
 };
 
 /*

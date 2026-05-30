@@ -10,8 +10,9 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): boolean {
     const token = localStorage.getItem('token');
+    const firstTime = localStorage.getItem('FirstTime');
 
-    if (token) {
+    if (token && firstTime) {
       return true;
     }
 

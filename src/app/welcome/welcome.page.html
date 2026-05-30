@@ -1,52 +1,532 @@
-<ion-content [fullscreen]="true">
-  <div *ngIf="currentStep === 1" class="w-full h-full flex flex-col justify-center p-10 bg-cyan-50 items-center text-center">
-    <div class="w-80 h-52 mx-10">
-      <img src="./assets/images/welcome1.png" alt="First Welcome Page">
-    </div>
+<div class="absolute top-0 w-full flex justify-between items-center px-6 py-6 z-50 bg-cyan-50/80 backdrop-blur-sm">
+  <button *ngIf="currentStep > 1" (click)="prevStep()" 
+    class="flex items-center text-cyan-600 font-bold active:scale-90 transition-transform">
+    <ion-icon name="chevron-back" class="text-xl mr-1"></ion-icon> Kembali
+  </button>
+  <div *ngIf="currentStep === 1"></div> 
+  <button *ngIf="currentStep <= 3" (click)="skip()" 
+    class="text-cyan-400 font-bold active:scale-90 transition-transform px-2">
+    Lewati
+  </button>
+</div>
 
-    <p class="text-slate-900 text-2xl mb-1 mt-6 text-bold">Selamat Datang!</p>
-    <p class="mt-1 text-slate-900 text-sm">Halo, selamat datang di aplikasi EventIn. Aplikasi penyedia layanan pembelian tiket sebuah event.</p>
-
-  </div>
-
-  <div *ngIf="currentStep === 2" class="w-full h-full flex flex-col justify-center p-10 bg-cyan-50 items-center text-center">
+<ion-content [fullscreen]="true" style="--background: #ecfeff;">
   
-    <div class="w-80 h-52 mx-10">
-      <img src="./assets/images/welcome2.png" alt="Second Welcome Page">
+  <div *ngIf="currentStep === 1" class="w-full h-full flex flex-col justify-center p-8 bg-cyan-50 items-center text-center animate-fade-in">
+    <div class="w-72 h-52 mx-10 relative">
+      <img src="./assets/images/welcome1.png" alt="First Welcome Page" class="object-contain w-full h-full drop-shadow-lg">
     </div>
-
-    <p class="text-slate-900 text-2xl mb-1 mt-6 text-bold">Explore Event Favoritmu</p>
-    <p class="mt-1 text-slate-900 text-sm">Tersedia banyak event menarik yang bisa kamu ikutin, ayo cari dan beli tiket event favoritmu.</p>
-
-    
+    <h2 class="text-slate-800 text-2xl mb-2 mt-8 font-extrabold tracking-tight">Selamat Datang!</h2>
+    <p class="mt-1 text-slate-500 text-sm leading-relaxed px-2">Halo, selamat datang di aplikasi EventIn. Aplikasi penyedia layanan pembelian tiket sebuah event.</p>
   </div>
 
-  <div *ngIf="currentStep === 3" class="w-full h-full flex flex-col justify-center p-10 bg-cyan-50 items-center text-center">
-
-    <div class="w-80 h-52 mx-10">
-      <img src="./assets/images/welcome3.png" alt="Second Welcome Page">
+  <div *ngIf="currentStep === 2" class="w-full h-full flex flex-col justify-center p-8 bg-cyan-50 items-center text-center animate-fade-in">
+    <div class="w-72 h-52 mx-10 relative">
+      <img src="./assets/images/welcome2.png" alt="Second Welcome Page" class="object-contain w-full h-full drop-shadow-lg">
     </div>
+    <h2 class="text-slate-800 text-2xl mb-2 mt-8 font-extrabold tracking-tight">Explore Event Favoritmu</h2>
+    <p class="mt-1 text-slate-500 text-sm leading-relaxed px-2">Tersedia banyak event menarik yang bisa kamu ikutin, ayo cari dan beli tiket event favoritmu.</p>
+  </div>
 
-    <p class="text-slate-900 text-2xl mb-1 mt-6 text-bold">Daftar Jadi Organizer</p>
-    <p class="mt-1 text-slate-900 text-sm">Ayo buat eventmu sendiri dengan daftar menjadi organizer bersama EventIn.</p>
+  <div *ngIf="currentStep === 3" class="w-full h-full flex flex-col justify-center p-8 bg-cyan-50 items-center text-center animate-fade-in">
+    <div class="w-72 h-52 mx-10 relative">
+      <img src="./assets/images/welcome3.png" alt="Third Welcome Page" class="object-contain w-full h-full drop-shadow-lg">
+    </div>
+    <h2 class="text-slate-800 text-2xl mb-2 mt-8 font-extrabold tracking-tight">Mitra Bersama Kami</h2>
+    <p class="mt-1 text-slate-500 text-sm leading-relaxed px-2">Ayo buat eventmu sendiri dengan daftar menjadi organizer bersama EventIn.</p>
+  </div>
 
+  <div *ngIf="currentStep === 4" class="w-full h-full flex flex-col justify-start pt-24 pb-8 px-6 bg-cyan-50 items-center text-center animate-fade-in">
+    
+    <h2 class="text-slate-800 text-2xl mb-2 font-extrabold tracking-tight">Kebijakan Privasi</h2>
+    
+    <div class="w-full max-w-[320px] h-96 overflow-y-auto bg-white rounded-2xl p-3 text-left shadow-sm border border-cyan-100 mb-2 space-y-2">
+      <div>
+      <h1>Kebijakan Privasi</h1>
+
+        <p>Terakhir diperbarui: 27 Mei 2026</p>
+        <p>Kebijakan Privasi ini menjelaskan kebijakan dan prosedur Kami tentang pengumpulan, penggunaan, 
+          dan pengungkapan informasi Anda saat Anda menggunakan Layanan dan memberi tahu Anda tentang hak privasi 
+          anda dan bagaimana hukum melindungi Anda.</p>
+        <p>Kami menggunakan Data Pribadi Anda untuk menyediakan dan meningkatkan Layanan. Dengan menggunakan Layanan, 
+          anda menyetujui pengumpulan dan penggunaan informasi sesuai dengan Kebijakan Privasi ini. Kebijakan Privasi ini 
+          telah dibuat dengan bantuan <a href="https://www.termsfeed.com/privacy-policy-generator/" target="_blank">
+          TermsFeed Privacy Policy Generator</a>.</p>
+      
+      <h2>Interpretasi dan Definisi</h2>
+      
+      <h3>Interpretasi</h3>
+        <p>Kata-kata yang huruf awalnya dikapitalisasi memiliki arti yang didefinisikan dalam kondisi berikut. Definisi 
+          berikut akan memiliki arti yang sama terlepas dari apakah muncul dalam bentuk tunggal atau jamak.</p>
+      <h3>Definisi</h3>
+        <p>Untuk keperluan Kebijakan Privasi ini:</p>
+        <ul>
+          <li>
+            <p><strong>Akun</strong> berarti akun unik yang dibuat untuk Anda untuk 
+              mengakses Layanan kami atau bagian dari Layanan kami.</p>
+          </li>
+          <li>
+            <p><strong>Afiliasi</strong> berarti entitas yang mengendalikan, dikendalikan oleh, 
+              atau berada di bawah kendali bersama dengan suatu pihak, di mana "kendali" berarti kepemilikan 
+              50% atau lebih dari saham, kepentingan ekuitas, atau sekuritas lain yang berhak untuk memilih direktur atau otoritas pengelola lainnya.</p>
+          </li>
+          <li>
+            <p><strong>Aplikasi</strong> mengacu pada EventIn, program perangkat lunak yang disediakan oleh Perusahaan.</p>
+          </li>
+          <li>
+            <p><strong>Perusahaan</strong> (disebut sebagai "Perusahaan", "Kami", "Kita", atau "Milik Kami" dalam Kebijakan Privasi ini) mengacu pada EventIn.</p>
+          </li>
+          <li>
+            <p><strong>Negara</strong> mengacu pada: Indonesia</p>
+          </li>
+          <li>
+            <p><strong>Perangkat</strong> berarti perangkat apa pun yang dapat mengakses Layanan seperti komputer, telepon seluler, atau tablet digital.</p>
+          </li>
+          <li>
+            <p><strong>Data Pribadi</strong> (atau "Informasi Pribadi") adalah informasi apa pun yang berkaitan dengan individu yang teridentifikasi atau dapat diidentifikasi.</p>
+            <p>Kami menggunakan "Data Pribadi" dan "Informasi Pribadi" secara bergantian kecuali jika undang-undang menggunakan istilah khusus.</p>
+          </li>
+          <li>
+            <p><strong>Layanan</strong> mengacu pada Aplikasi.</p>
+          </li>
+          <li>
+            <p><strong>Penyedia Layanan</strong> berarti setiap orang atau badan hukum yang memproses data atas nama Perusahaan. Ini mengacu pada perusahaan pihak ketiga atau individu yang dipekerjakan oleh Perusahaan untuk memfasilitasi Layanan, untuk menyediakan Layanan atas nama Perusahaan, untuk melakukan layanan yang terkait dengan Layanan atau untuk membantu Perusahaan dalam menganalisis bagaimana Layanan digunakan.</p>
+          </li>
+          <li>
+            <p><strong>Data Penggunaan</strong> mengacu pada data yang dikumpulkan secara otomatis, baik yang dihasilkan oleh penggunaan Layanan atau dari infrastruktur Layanan itu sendiri (misalnya, durasi kunjungan halaman).</p>
+          </li>
+          <li>
+            <p><strong>Anda</strong> berarti individu yang mengakses atau menggunakan Layanan, atau perusahaan, atau entitas hukum lain atas nama individu tersebut yang mengakses atau menggunakan Layanan, sebagaimana berlaku.</p>
+          </li>
+        </ul>
+      <h2>Pengumpulan dan Penggunaan Data Pribadi Anda</h2>
+      
+      <h3>Jenis Data yang Dikumpulkan</h3>
+      
+      <h4>Data Pribadi</h4>
+        <p>Saat menggunakan Layanan Kami, Kami mungkin meminta Anda untuk memberikan kepada Kami informasi identitas pribadi tertentu yang dapat digunakan untuk menghubungi atau mengidentifikasi Anda. Informasi identitas pribadi dapat mencakup, tetapi tidak terbatas pada:</p>
+      
+        <ul>
+          <li>Alamat email</li>
+          <li>Nama depan dan nama belakang</li>
+          <li>Nomor telepon</li>
+        </ul>
+        
+        <h4>Data Penggunaan</h4>
+        
+        <p>Data Penggunaan dikumpulkan secara otomatis saat menggunakan Layanan.</p>
+        <p>Data Penggunaan dapat mencakup informasi seperti alamat Protokol Internet Perangkat Anda (misalnya alamat IP), jenis peramban, versi peramban, halaman Layanan kami yang Anda kunjungi, waktu dan tanggal kunjungan Anda, waktu yang dihabiskan di halaman tersebut, pengidentifikasi perangkat unik, dan data diagnostik lainnya.</p>
+        <p>Saat Anda mengakses Layanan melalui perangkat seluler, Kami dapat mengumpulkan informasi tertentu secara otomatis, termasuk, tetapi tidak terbatas pada, jenis perangkat seluler yang Anda gunakan, ID unik perangkat seluler Anda, alamat IP perangkat seluler Anda, sistem operasi seluler Anda, jenis peramban internet seluler yang Anda gunakan, pengidentifikasi perangkat unik, dan data diagnostik lainnya.</p>
+        <p>Kami juga dapat Kami mengumpulkan informasi yang dikirimkan browser Anda setiap kali Anda mengunjungi Layanan Kami atau saat Anda mengakses Layanan melalui perangkat seluler.</p>
+        
+        <h4>Informasi yang Dikumpulkan saat Menggunakan Aplikasi</h4>
+        
+        <p>Saat menggunakan Aplikasi Kami, untuk menyediakan fitur Aplikasi Kami, Kami dapat mengumpulkan, dengan izin Anda sebelumnya:</p>
+        <ul>
+          <li>Gambar dan informasi lain dari kamera dan perpustakaan foto Perangkat Anda</li>
+        </ul>
+        <p>Kami menggunakan informasi ini untuk menyediakan fitur Layanan Kami, untuk meningkatkan dan menyesuaikan Layanan Kami. Informasi tersebut dapat diunggah ke server Perusahaan dan/atau server Penyedia Layanan atau dapat disimpan di perangkat Anda.</p>
+        <p>Anda dapat mengaktifkan atau menonaktifkan akses ke informasi ini kapan saja, melalui pengaturan Perangkat Anda.</p>
+        
+        <h3>Penggunaan Data Pribadi Anda</h3>
+        <p>Perusahaan dapat menggunakan Data Pribadi untuk tujuan berikut:</p>
+        <ul>
+          <li>
+            <p><strong>Untuk menyediakan dan memelihara Layanan kami</strong>, termasuk untuk memantau penggunaan Layanan kami.</p>
+          </li>
+          <li>
+            <p><strong>Untuk mengelola Akun Anda:</strong> untuk mengelola pendaftaran Anda sebagai pengguna Layanan. Data Pribadi yang Anda berikan dapat memberi Anda akses ke berbagai fungsi Layanan yang tersedia bagi Anda sebagai pengguna terdaftar.</p>
+          </li>
+          <li>
+            <p><strong>Untuk pelaksanaan kontrak:</strong> pengembangan, kepatuhan, dan pelaksanaan kontrak pembelian untuk produk, barang, atau layanan yang telah Anda beli atau kontrak lain apa pun dengan Kami melalui Layanan.</p>
+          </li>
+          <li>
+            <p><strong>Untuk menghubungi Anda:</strong> Untuk menghubungi Anda melalui email, panggilan telepon, SMS, atau bentuk komunikasi elektronik lain yang setara, seperti pemberitahuan push aplikasi seluler mengenai pembaruan atau komunikasi informatif terkait fungsi, produk, atau layanan yang dikontrak, termasuk pembaruan keamanan, bila perlu atau wajar untuk implementasinya.</p>
+          </li>
+          <li>
+            <p><strong>Untuk memberi Anda</strong> berita, penawaran khusus, dan informasi umum tentang barang, layanan, dan acara lain yang Kami tawarkan yang serupa dengan yang telah Anda beli atau tanyakan kecuali Anda telah memilih untuk tidak menerima hal tersebut informasi.</p>
+          </li>
+          <li>
+            <p><strong>Untuk mengelola permintaan Anda:</strong> Untuk menanggapi dan mengelola permintaan Anda kepada Kami.</p>
+          </li>
+          <li>
+            <p><strong>Untuk pengalihan bisnis:</strong> Kami dapat menggunakan Data Pribadi Anda untuk mengevaluasi atau melakukan penggabungan, pelepasan aset, restrukturisasi, reorganisasi, pembubaran, atau penjualan atau pengalihan sebagian atau seluruh aset Kami, baik sebagai perusahaan yang beroperasi atau sebagai bagian dari kebangkrutan, likuidasi, atau proses serupa, di mana Data Pribadi yang Kami miliki tentang pengguna Layanan Kami termasuk di antara aset yang dialihkan.</p>
+          </li>
+          <li>
+            <p><strong>Untuk tujuan lain</strong>: Kami dapat menggunakan informasi Anda untuk tujuan lain, seperti analisis data, mengidentifikasi tren penggunaan, menentukan efektivitas kampanye promosi kami, dan untuk mengevaluasi serta meningkatkan Layanan, produk, layanan, pemasaran, dan pengalaman Anda.</p>
+          </li>
+        </ul>
+        <p>Kami dapat membagikan Data Pribadi Anda dalam situasi berikut:</p>
+        <ul>
+          <li><strong>Dengan Penyedia Layanan:</strong> Kami dapat membagikan Data Pribadi Anda dengan Penyedia Layanan untuk memantau dan menganalisis penggunaan Layanan kami, untuk menghubungi Anda.</li>
+          <li><strong>Untuk pengalihan bisnis:</strong> Kami dapat membagikan atau mentransfer Data Pribadi Anda sehubungan dengan, atau selama negosiasi, penggabungan, penjualan aset Perusahaan, pembiayaan, atau akuisisi seluruh atau sebagian bisnis Kami ke perusahaan lain.</li>
+          <li><strong>Dengan Afiliasi:</strong> Kami dapat membagikan Data Pribadi Anda dengan afiliasi Kami, dalam hal ini kami akan meminta afiliasi tersebut untuk mematuhi Kebijakan Privasi ini. Afiliasi mencakup perusahaan induk Kami dan anak perusahaan lainnya, mitra usaha patungan, atau perusahaan lain yang Kami kendalikan atau yang berada di bawah kendali bersama dengan Kami.</li>
+          <li><strong>Dengan mitra bisnis:</strong> Kami dapat membagikan Data Pribadi Anda dengan mitra bisnis Kami untuk menawarkan kepada Anda produk, layanan, atau promosi tertentu.</li>
+          <li><strong>Dengan pengguna lain:</strong> Jika Layanan Kami menawarkan area publik, ketika Anda membagikan Data Pribadi atau berinteraksi di area publik dengan pengguna lain, informasi tersebut dapat dilihat oleh semua pengguna dan dapat didistribusikan secara publik di luar.</li>
+          <li><strong>Dengan persetujuan Anda</strong>: Kami dapat mengungkapkan Data Pribadi Anda untuk tujuan lain apa pun dengan persetujuan Anda.</li>
+        </ul>
+      
+      <h3>Penyimpanan Data Pribadi Anda</h3>
+        <p>Perusahaan akan menyimpan Data Pribadi Anda hanya selama diperlukan untuk tujuan yang tercantum dalam Kebijakan Privasi ini. Kami akan menyimpan dan menggunakan Data Pribadi Anda sejauh yang diperlukan untuk mematuhi kewajiban hukum kami (misalnya, jika Kami diharuskan untuk menyimpan data Anda untuk mematuhi hukum yang berlaku), menyelesaikan sengketa, dan menegakkan perjanjian dan kebijakan hukum kami.</p>
+        <p>Jika memungkinkan, Kami menerapkan periode penyimpanan yang lebih pendek dan/atau mengurangi kemampuan identifikasi dengan menghapus, menggabungkan, atau menganonimkan data. Kecuali dinyatakan lain, periode penyimpanan di bawah ini adalah periode maksimum ("hingga") dan Kami dapat menghapus atau menganonimkan data lebih cepat jika tidak lagi diperlukan untuk tujuan yang relevan. Kami menerapkan periode penyimpanan yang berbeda untuk berbagai kategori Data Pribadi berdasarkan tujuan pemrosesan dan kewajiban hukum:</p>
+          <ul>
+            <li>
+              <p>Informasi Akun</p>
+              <ul>
+                <li>Akun Pengguna: disimpan selama masa hubungan akun Anda ditambah hingga 24 bulan setelah penutupan akun untuk menangani masalah pasca-penghentian atau menyelesaikan sengketa.</li>
+              </ul>
+            </li>
+          </ul>
+
+        <li>
+          <p>Data Dukungan Pelanggan</p>
+          <ul>
+            <li>Tiket dukungan dan korespondensi: hingga 24 bulan sejak tanggal penutupan tiket untuk menyelesaikan pertanyaan lanjutan, melacak kualitas layanan, dan membela diri terhadap potensi klaim hukum.</li>
+            <li>Transkrip obrolan: hingga 24 bulan untuk tujuan jaminan kualitas dan pelatihan staf.</li>
+          </ul>
+        </li>
+        <li>
+          <p>Data Penggunaan</p>
+          <ul>
+            <li>
+              <p>Statistik penggunaan aplikasi: hingga 24 bulan untuk memahami adopsi fitur dan peningkatan layanan.</p>
+            </li>
+            <li>
+            <p>Log server (alamat IP, waktu akses): hingga 24 bulan untuk tujuan pemantauan keamanan dan pemecahan masalah.</p>
+            </li>
+          </ul>
+        </li>
+        
+        <p>Data Penggunaan disimpan sesuai dengan periode penyimpanan yang dijelaskan di atas, dan dapat disimpan lebih lama hanya jika diperlukan untuk keamanan, pencegahan penipuan, atau kepatuhan hukum.</p>
+        <p>Kami dapat menyimpan Data Pribadi di luar periode yang disebutkan di atas karena berbagai alasan:</p>
+        <ul>
+          <li>Kewajiban hukum: Kami diwajibkan oleh hukum untuk menyimpan data tertentu (misalnya, catatan keuangan untuk otoritas pajak).</li>
+          <li>Klaim hukum: Data diperlukan untuk menetapkan, menjalankan, atau membela klaim hukum.</li>
+          <li>Permintaan eksplisit Anda: Anda meminta Kami untuk menyimpan informasi tertentu.</li>
+          <li>Keterbatasan teknis: Data ada dalam sistem cadangan yang dijadwalkan untuk penghapusan rutin.</li>
+        </ul>
+        <p>Anda dapat meminta informasi tentang berapa lama Kami akan menyimpan Data Pribadi Anda dengan menghubungi Kami.</p>
+        <p>Ketika periode penyimpanan berakhir, Kami menghapus atau menganonimkan Data Pribadi secara aman sesuai dengan Prosedur berikut:</p>
+        <ul>
+          <li>Penghapusan: Data Pribadi dihapus dari sistem Kami dan tidak lagi diproses secara aktif.</li>
+          <li>Retensi cadangan: Salinan residual dapat tetap ada dalam cadangan terenkripsi untuk jangka waktu terbatas sesuai dengan jadwal retensi cadangan kami dan tidak dipulihkan kecuali jika diperlukan untuk keamanan, pemulihan bencana, atau kepatuhan hukum.</li>
+          <li>Anonimisasi: Dalam beberapa kasus, Kami mengubah Data Pribadi menjadi data statistik anonim yang tidak dapat dihubungkan kembali kepada Anda. Data anonim ini dapat disimpan tanpa batas waktu untuk penelitian dan analisis.</li>
+        </ul>
+      <h3>Transfer Data Pribadi Anda</h3>
+      <p>Informasi Anda, termasuk Data Pribadi, diproses di kantor operasional Perusahaan dan di tempat lain di mana pihak-pihak yang terlibat dalam pemrosesan berada. Ini berarti bahwa informasi ini dapat ditransfer ke — dan disimpan di — komputer yang berlokasi di luar negara bagian, provinsi, negara, atau yurisdiksi pemerintahan Anda di mana hukum perlindungan data mungkin berbeda dari hukum di yurisdiksi Anda.</p>
+      <p>Jika diwajibkan oleh hukum yang berlaku, Kami akan memastikan bahwa transfer internasional Data Pribadi Anda tunduk pada perlindungan yang sesuai dan langkah-langkah tambahan jika diperlukan. Perusahaan akan mengambil semua langkah yang wajar untuk memastikan bahwa data Anda diperlakukan dengan aman dan sesuai dengan Kebijakan Privasi ini dan tidak ada transfer Data Pribadi Anda ke organisasi atau negara mana pun kecuali ada kontrol yang memadai termasuk keamanan data Anda dan informasi pribadi lainnya.</p>
+      <h3>Hapus Data Pribadi Anda</h3>
+      <p>Anda berhak untuk menghapus atau meminta agar Kami membantu menghapus Data Pribadi yang telah Kami kumpulkan tentang Anda.</p>
+      <p>Layanan Kami mungkin memberi Anda kemampuan untuk menghapus informasi tertentu tentang Anda dari dalam Layanan.</p>
+      <p>Anda dapat memperbarui, mengubah, atau menghapus informasi Anda kapan saja dengan masuk ke Akun Anda, jika Anda memilikinya, dan mengunjungi bagian pengaturan akun yang memungkinkan Anda untuk mengelola informasi pribadi Anda. Anda juga dapat menghubungi Kami untuk meminta akses ke, mengoreksi, atau menghapus Data Pribadi apa pun yang telah Anda berikan kepada Kami.</p>
+      <p>Namun, harap diperhatikan bahwa Kami mungkin perlu menyimpan informasi tertentu ketika Kami memiliki kewajiban hukum atau dasar hukum untuk melakukannya.</p>
+      <h3>Pengungkapan Data Pribadi Anda</h3>
+      <h4>Transaksi Bisnis</h4>
+      <p>Jika Perusahaan terlibat dalam penggabungan, akuisisi, atau penjualan aset, Data Pribadi Anda dapat ditransfer. Kami akan memberikan pemberitahuan sebelum Data Pribadi Anda ditransfer dan tunduk pada Kebijakan Privasi yang berbeda.</p>
+      <h4>Penegakan Hukum</h4>
+      <p>Dalam keadaan tertentu, Perusahaan mungkin diharuskan untuk mengungkapkan Data Pribadi Anda jika diwajibkan oleh hukum atau sebagai tanggapan atas permintaan yang sah dari otoritas publik (misalnya, pengadilan atau lembaga pemerintah).</p>
+      <h4>Persyaratan Hukum Lainnya</h4>
+      <p>Perusahaan dapat mengungkapkan Data Pribadi Anda dengan itikad baik bahwa tindakan tersebut diperlukan untuk:</p>
+      <ul>
+      <li>Mematuhi kewajiban hukum</li>
+      <li>Melindungi dan membela hak atau properti Perusahaan</li>
+      <li>Mencegah atau menyelidiki kemungkinan pelanggaran hukum terkait dengan Layanan</li>
+      <li>Melindungi keselamatan pribadi Pengguna Layanan atau publik</li>
+      <li>Melindungi dari tanggung jawab hukum</li>
+      </ul>
+      <h3>Keamanan Data Pribadi Anda</h3>
+      <p>Keamanan Data Pribadi Anda penting bagi Kami, tetapi ingatlah bahwa tidak ada metode transmisi melalui Internet, atau metode penyimpanan elektronik yang 100% aman. Meskipun Kami berupaya menggunakan cara-cara yang wajar secara komersial untuk melindungi Data Pribadi Anda, Kami tidak dapat menjamin keamanan absolutnya.</p>
+      <h2>Privasi Anak</h2>
+      <p>Layanan Kami tidak ditujukan kepada siapa pun yang berusia di bawah 16 tahun. Kami tidak dengan sengaja mengumpulkan informasi identitas pribadi dari siapa pun yang berusia di bawah 16 tahun. Jika Anda adalah orang tua atau wali dan Anda mengetahui bahwa anak Anda telah memberikan Data Pribadi kepada Kami, silakan hubungi Kami. Jika Kami mengetahui bahwa Kami telah mengumpulkan Data Pribadi dari siapa pun yang berusia di bawah 16 tahun tanpa verifikasi persetujuan orang tua, Kami akan mengambil langkah-langkah untuk menghapus informasi tersebut dari server Kami.</p>
+      <p>Jika Kami perlu mengandalkan persetujuan sebagai dasar hukum untuk memproses informasi Anda dan negara Anda mensyaratkan persetujuan dari orang tua, Kami mungkin memerlukan persetujuan orang tua Anda sebelum Kami mengumpulkan dan menggunakan informasi tersebut.</p>
+      <h2>Tautan ke Situs Web Lain</h2>
+      <p>Layanan Kami mungkin berisi tautan ke situs web lain yang tidak dioperasikan oleh Kami. Jika Anda mengklik tautan pihak ketiga, Anda akan diarahkan ke situs pihak ketiga tersebut. Kami sangat menyarankan Anda untuk meninjau Kebijakan Privasi setiap situs yang Anda kunjungi.</p>
+      <p>Kami tidak memiliki kendali atas dan tidak bertanggung jawab atas konten, kebijakan privasi, atau praktik situs atau layanan pihak ketiga mana pun.</p>
+      <h2>Perubahan pada Kebijakan Privasi ini</h2>
+      <p>Kami dapat memperbarui Kebijakan Privasi kami dari waktu ke waktu. Kami akan memberi tahu Anda tentang perubahan apa pun dengan memposting Kebijakan Privasi baru di halaman ini.</p>
+      <p>Kami akan memberi tahu Anda melalui email dan/atau pemberitahuan yang jelas di Layanan kami, sebelum perubahan tersebut berlaku dan memperbarui tanggal "Terakhir diperbarui" di bagian atas Kebijakan Privasi ini.</p>
+      <p>Anda disarankan untuk meninjau Kebijakan Privasi ini secara berkala untuk mengetahui perubahan apa pun. Perubahan pada Kebijakan Privasi ini berlaku efektif ketika diposting di halaman ini.</p>
+      <h2>Hubungi Kami</h2>
+      <p>Jika Anda memiliki pertanyaan tentang Kebijakan Privasi ini, Anda dapat menghubungi kami:</p>
+      <ul>
+      <li>Melalui email: irfan.fathurrohman2006@gmail.com</li>
+      </ul>
+    </div>
+    </div>
+    
+    <div class="mt-6 flex flex-col items-center w-full max-w-[320px]">
+      <div class="flex items-center text-left bg-white p-4 rounded-2xl shadow-sm border w-full transition-colors"
+           [ngClass]="showPrivacyError ? 'border-red-400' : 'border-cyan-100'">
+        <ion-checkbox [(ngModel)]="isPrivacyChecked" (ionChange)="showPrivacyError = false" justify="start" labelPlacement="end" class="text-sm font-bold text-slate-700 w-full" 
+          style="--checkbox-background-checked: #16e2eb; --border-color-checked: #16e2eb;">
+          Saya menyetujui <span class="text-cyan-500">Kebijakan Privasi</span>
+        </ion-checkbox>
+      </div>
+      
+      <div *ngIf="showPrivacyError" class="w-full pl-3 mt-2 flex items-center text-red-500 animate-fade-in">
+        <ion-icon name="alert-circle-outline" class="mr-1 text-sm"></ion-icon>
+        <small class="font-bold text-xs">Silahkan ceklis jika menyetujui Kebijakan Privasi.</small>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="currentStep === 5" class="w-full h-full flex flex-col justify-start pt-24 pb-8 px-6 bg-cyan-50 items-center text-center animate-fade-in">
+    
+    <h2 class="text-slate-800 text-2xl mb-2 font-extrabold tracking-tight">Syarat & Ketentuan</h2>
+    
+    <div class="w-full max-w-[320px] h-96 overflow-y-auto bg-white rounded-2xl p-3 text-left shadow-sm border border-cyan-100 mb-6 space-y-4">
+      <div>
+      <p class="mb-3 mt-2 text-sm">Selamat datang di aplikasi EventIn.</p>
+      
+      <p>Dengan mengunduh, mendaftar, dan/atau menggunakan layanan EventIn, 
+        maka Anda dianggap telah membaca, mengerti, menerima dan menyetujui semua isi dalam Syarat dan Ketentuan ini. 
+        Syarat dan Ketentuan ini merupakan bentuk kesepakatan yang dituangkan dalam suatu perjanjian yang sah antara Anda dengan 
+        EventIn. Anda diwajibkan memebaca dengan seksama karena dapat berdampak secara hukum kepada hak dan kewajiban Anda.
+      </p>
+      <p>Jika Anda tidak menyetujui sebagian atau seluruh isi Syarat dan Ketentuan, maka Anda tidak diperkenankan mengunduh dan/atau 
+        menggunakan layanan EventIn. Apabila Anda telah mendaftar layanan EventIn dan/atau mengunduh aplikasi, maka Anda wajib untuk berhenti menggunakan 
+        layanan EventIn dan menghapus akun dan/atau aplikasi secara permanen dari perangkat Anda.
+      </p>
+
+      <span>"Terakhir diperbarui pada tanggal 28 Mei 2026."</span>
+
+      <h2>1. Definisi</h2>
+
+      <ul>
+        <ol>1. <strong>Akun</strong> adalah akun elektronik yang dibuat dalam layanan EventIn yang menjadi suatu identitas Anda.</ol>
+        <ol>2. <strong>Organizer</strong> adalah pihak yang menyediakan, membuat, mengadakan dan yang memiliki konten dalam layanan EventIn.</ol>
+        <ol>3. <strong>E-Ticket</strong> adalah tiket elektronik yang diterbitkan dan disimpan secara elektronik dalam format PDF atau Kode QR atas acara atau kegiatan yang diadakan oleh organizer.</ol>
+        <ol>4. <strong>Hak Kekayaan Intelektual</strong> adalah hak cipta, merek dagang dan hak-hak lain atas setiap nama, logo, layanan, konten, aplikasi dan web yang disediakan berdasarkan hukum Negara Republik Indonesia.</ol>
+        <ol>5. <strong>Hari Kerja</strong> adalah Senin sampai dengan Jumat pukul 09.00-17.00 WIB, selain Sabtu dan Minggu atau hari libur nasional yang ditetapkan oleh pemerintah Republik Indonesia.</ol>
+        <ol>5. <strong>Kebijakan Privasi</strong> adalah kebijakan yangberkaitan dengan bagaimana kami mengumpulka, memproses, dan mengungkapkan informasi pribadi Anda, dan bagaimana Anda dapat mengelola privasi online Anda saat menggunakan layanan EventIn. Selengkapnya Anda bisa baca <a class="text-cyan-500" routerLink="/privacy-policy">di sini.</a></ol>
+        <ol>6. <strong>Layanan EventIn</strong> adalah platform baik berupa aplikasi dan/atau web yang berfungsi sebagai media dimana Organizer dapat membuat dan mengelola event juga pengguna atau pembeli dalam mencari dan membeli tiket event.</ol>
+        <ol>7. <strong>Pengguna</strong> atau <strong>Anda</strong> adalah setiap individu yang mengunduh, mendaftar dan/atau menggunakan layanan EventIn.</ol>
+        <ol>8. <strong>Eventin</strong> atau <strong>Kami</strong> adalah grup yang memiliki dan mengembangkan layanan EventIn dari waktu ke waktu, yang merupakan platform untuk membeli tiket, mengadakan event dan mengelola event.</ol>
+      </ul>
+
+      <h2>2. Pengertian Umum/Ruang Lingkup</h2>
+      
+      <p>Aplikasi atau layanan EventIn merupakan layanan teknologi perangkat lunak berbasis aplikasi mobile yang berfungsi sebagai sarana interaksi antara Organizer dimana organizer dapat membuat dan mengelola event. Melalui EventIn, organizer dapat mengelola sebuah event dan monitoring peserta event yang diadakan. 
+        Oleh karena itu, kami dengan hati-hati akan melakukan moderasi Pengguna agar konten benar-benar bebas dari konten yang mengganggu/menyinggung di negara tempat EventIn beroperasi.
+      </p>
+
+      <h2>3. Aplikasi, Akun dan Keamanan</h2>
+
+      <ul>
+        <ol>1. Anda menyatakan dan menjamin bahwa Anda adalah individu yang secara hukum berhak untuk mengadakan perjanjian yang mengikat berdasarkan hukum Negara Republik Indonesia untuk menggunakan layanan EventIn. 
+          Anda menyatakan bahwa Anda berada di bawah perwalian. Jika anda berusia di bawah 18 tahun atau berada di bawah pengampuan, maka Anda harus memperoleh persetujuan orang tua atau wali Anda, terhadap (i) tindakan 
+          Anda dalam penggunaan layanan EventIn; (ii) biaya yang timbul akibat penggunaan layanan EventIn; dan (iii) penerimaan dan kepatuhan Anda sesuai dengan Syarat dan Ketenttuan ini. Jika Anda tidak memiliki izin 
+          dari orang tua atau wali, Anda harus berhenti menggunakan dan/atau menghapus akun dan aplikasi EventIn secara permanen dari perangkat Anda,
+        </ol>
+        <ol>2. Untuk dapat menggunakan layanan EventIn ini maka anda wajib untuk melakukan pendaftarana dengan cara mengisi isian yang telah disediakan oleh kami pada aplikasi dan memberikan data pendukung lainnya yang 
+          dibutuhkan untuk melakukan pendaftaran.</ol>
+        <ol>3. Isian yang harus Anda lengkapi adalah informasi nama, alamat email, nomor telepon seluler dan jenis kelamin. Anda harus memberikan informasi dan data yang akurat, benar dan lengkap, melakukan pengkinian data 
+          dan setuju untuk memberikan kepada kami bukti identitas yang diminta. Dalam hal Anda memberiikan informasi dan data yang tidak benar/tidak sesuai baik disengaja maupuun tidak, dimana hal tersebut menimbulkan kerugian 
+          kepada EventIn, maka anda bertanggung jawab sepenuhnya atas kerugian tersebut dan membebaskan EventIn dari segala kerugian dan tuntutan ganti rugi dari pihak manapun.
+        </ol>
+        <ol>4. Apabila Anda mendaftar sebagai organizer kemudian membuat dan/atau mengadakan event, maka proses pembayaran atau uang masuk awal dari pengguna yang membeli tiket event anda akan melalui pihak EventIn terlebih dahulu.</ol>
+        <ol>5. Pengguna yang mendaftar sebagai organizer dilarang menggunakan nama Event Organizer yang mengandung unsur SARA, pornografi, ujaran kebencian, dan unsur yang melanggar hukuum atau norma yang berlaku di masyarakat. Kami 
+          berhak untuk menolak akun yang melanggar ketentuan ini.
+        </ol>
+        <ol>6. Dalam menentukan nama EventOrganizer, Anda tidak dapat menggunakan nama yang terasosiasi dengan organisasi negara atau internasional, merek dagang, publik figur apabila itu bukan Anda (kecuali dengan izin resmi). Upaya untuk menjual, membeli, atau meminta 
+          pembayaran lain dengan imbalan nama EO juga merupakan pelanggaran dan dapat mengakibatkan penangguan akun secara permanen.
+        </ol>
+        <ol>7. Hanya Anda yang dapat menggunakan akun Anda sendiri dan Anda berjanji untuk tidak memberikan wewenang kepada orang lain untuk menggunakan identitas anda atau menggunakan akun Anda. Anda tidak dapat menyerahkan atau mengalihkan akun Anda kepada pihak lain. 
+          Apabila Anda dengan sengaja memberikan akses akun Anda kepada orang lain, maka setiap aktivitas dalam akun Anda tetap menjadi tanggung jawab Anda, dan dengan ini Anda membebaskan kami dari segala bentuk klaim, permintaan ganti, rugi, gugatam atau tuntutan dari pihak manapun 
+          atas aktivitas akun Anda. Anda harus menjaga keamanan dan kerahasiaan data, nama, rincian, OTP serta password Anda dan setiap identifikasi yang kami berikan kepada Anda dan kami tidak aplikasin bertanggung jawab dalam bentuk apapun atas adanya pengungkapan atas data-data tersebut. 
+        Dalam hal terjadi pengungkapan atas hal tersebut, dengan cara apapun, yang mengakibatkan stiap penggunaan yang tidak sah atau kewenangan atas akun atau identitas Anda, segala pengajuan dan/atau permintaan yang diterima dari penggunaan yang tidak sah atau tanpa kewenangan tersebut masih akan dianggap sebagai 
+        pengajuan dan /atau permintaan yang sah.</ol>
+        <ol>8. Mohon menghubungi kontak kami yang terdapat di akhir halaman ini jika Anda tidak lagi memiliki kontrol atas akun Anda, sebagai contoh akun Anda dengan cara bagaimanapun diretas atau telepon Anda dicuri, sehingga kami dapat membatalkan akun Anda dengan sebagaimana mestinya. 
+          Mohon diperhatikann bahwa anda bertanggung jawab atas penggunaan akun Anda dan Anda mungkin dapat dimintakan tanggung jawabnya meskipun jika akun Anda tersebut disalahgunakan oleh orang lain.
+        </ol>
+        <ol>9. Anda memahami dan setuju bahwa penggunaan layanan EventIn akan tunduk pula pada kebijakan privasi dan sebagaimana dapat diubah dari waktu ke waktu. Dengan tetap menggunakan layanan EventIn, Anda dianggap juga telah membaca, memhami serta memberikan persetujuan sebagaimana dipersyaratkan berdasarkan kebijakan privasi.</ol>
+        <ol>10. Anda setuju bahwa kami berhak mengubah syarat dan ketentuan ini dari waktu ke waktu, dengan alasan apapun dengan /tanpa melakukan pemberitahuan di aplikasi kami. Anda harus memeriksa dan melihat syarat dan ketentuan secara teratur dan berkala untuk mengetahui perubahan tersebut. 
+          Kami akan memperbarui "Terakhir diperbarui" di bagian atas syarat dan ketentuan ini, yang mencerminkan informasi pembaruan syarat dan ketentuantersebut. Penggunaan berkelanjutan atas layanan EventIn setelah tanggal syarat dan ketentuan baru merupakan penerimaan Anda atas syarat dan ketentuan ssecara otomatis. Jika Anda tidak menyetujui 
+          syarat dan ketentuan baru, maka Anda wajib berhenti mengakses atau menggunakan aplikasi EventIn.
+        </ol>
+      </ul>
+
+      <h2>4. Kebijakan Privasi</h2>
+
+      <p>Privasi anda penting bagi EventIn. Silahkan lihat dan baca dengan seksama <a routerLink="/privacy-policy">Kebijakan Privasi</a> kami untuk informasi yang berkaitan dengan bagaimana kami mengumpulkan, menggunaka, dan mengungkapkaninformasi pribadi anda, dan pilihan privasi kami tentang bagaimana Anda dapat mengelola privasi online Anda ketika Anda menggunakan aplikasi EventIn.</p>
+
+      <h2>5. Bentuk Layanan EventIn dan Ketentuan Terkait</h2>
+
+      <ul>
+        <ol>1. EventIn memiliki layanan yaitu pembelian tiket event, pendaftaran sebagai organizerr, membuat dan/atau mengelola event dan E-Ticket. Kami dapat sewaktu-waktu untuk 
+          mengubah menambahkan bentuk konten lainnya di masa yang akan datang.
+        </ol>
+        <ol>2. Seluruh transaksi yang Anda lakukan melalui platform EventIn, merupakan hubungan hukum dan kontrak yang mengikta antara Anda dengann organizer. 
+          Dalam hal ini, kami bertindak hanya sebagai agen atau perantara yang memfasilitasi transaksi antara Anda dengan organizer.
+        </ol>
+        <ol>3. Hubungan kami dengan organizer hanya sebatas kemitraan sehingga kami perlu tekankan bahwa organizer bukan merupakan bagian atau afiliasi dari kami.</ol>
+        <ol>4. Seluruh informasi termasuk deskripsi dan foto terkait dengan produk tertentu yang tercantum pada aplikasi atau website kami merupakan informasi yang kami 
+          terima dari Creator. Kami mempublikasikan data dan informasi tersebut apa adanya sebagaimana kami terima dari Creator. Oleh karena itu, data, informasi dan 
+          deskripsi dapat berbeda dengan aslinya dan berubah sewaktu-waktu sesuai dengan perubahan terakhir yang dilakukan oleh Creator.</ol>
+        <ol>5. Kecuali ditentukan lain dalam deskripsi seluruh produk tidak diproduksi langsung oleh kami. Oleh karena itu, jika Anda memiliki 
+          keluhan terkait dengan produk maka keluhan tersebut wajib ditujukan kepada Creator, bukan kami. Berdasarkan upaya yang wajar Kami 
+          dapat membantu dan memfasilitasi keluhan Anda kepada Creator selaku penjual produk.</ol>
+        <ol>6. Anda (organizer) dengan ini setuju bahwa anda telah memperoleh seluruh izin pihak ketiga yang diperlukan atas seluruh instrumen yang terkandung 
+          dalam konten yang anda buat dan/atau unggah dalam Layanan EventIn.</ol>
+        <ol>7. Anda setuju untuk memberikan seluruh hak yang diperlukan oleh kami untuk menggunakan dan menayangkan konten dalam Layanan EventIn. 
+          Anda selanjutnya memberi kami hak seluas-luasnya dan bebas atas royalti untuk menggunakan nama, gambar, suara, dan seluruh unsur yang 
+          terdapat dalam konten untuk digunakan seluas-luasnya sehubungan dengan maksud dan tujuan dari bidang usaha kami.</ol>
+        <ol>8. Tanggung jawab atas Konten yang diunggah oleh organizer dalam Layanan EventIn berada pada organizer. Kami berhak meninjau Konten yang 
+          anda unggah ke dalam Layanan EventIn. Jika kami menemukan pelanggaran atas Syarat dan Ketentuan, kami berhak untuk menghapus dan menolak untuk 
+          menampilkan Konten tersebut. Kami akan memberikan kesempatan kepada organizer untuk membela diri. Kami akan mengirimkan email ke alamat email yang 
+          organizer daftarkan untuk melakukan konfirmasi atas Konten yang ditayangkan dalam Layanan EventIn. Anda wajib untuk memberikan tanggapan terkait dengan 
+          email yang kami kirimkan sesuai dengan batas waktu yang ditentukan oleh Kami dalam email</ol>
+        <ol>9. Dengan mengunggah Konten melalui Layanan EventIn anda menyatakan setuju untuk memberikan seluruh hak yang kami perlukan untuk menggunakan Konten 
+          Anda sebagai materi pemasaran atau promosi Layanan EventIn. Anda dengan ini membebaskan kami dari segala bentuk klaim, tuntutan, gugatan, atau permintaan 
+          ganti rugi atas penggunaan Konten anda sebagai materi pemasaran atau promosi kami.</ol>
+      </ul>
+
+      <h2>6. E-Ticket</h2>
+
+      <ul>
+        <ol>1. organizer dapat memasarkan E-Ticket atas acara, kegiatan atau kelas yang diselenggarakan oleh organizer.</ol>
+        <ol>2. Untuk dapat memasarkan E-Ticket atas acara, kegiatan atau kelas, organizer wajib melakukan dan 
+          lolos proses verifikasi identitas dengan melampirkan nama lengkap, alamat email Event Organizer, nomor ponsel, dan proposal acara.</ol>
+        <ol>3. Kecuali dinyatakan lain dalam perjanjian terpisah, seluruh acara yang organizer selenggarakan adalah kegiatan yang 
+          independen dan tidak dapat diasosiasikan dengan pihak EventIn (EventIn hanya merupakan partner yang ditunjuk dalam 
+          memasarkan tiket dari kegiatan organizer). Seluruh tanggung jawab atau kewajiban yang terjadi dalam acara, kegiatan atau kelas melekat pada organizer.</ol>
+        <ol>4. EventIn menjadi mitra eksklusif untuk pemesanan E-Ticket  acara, kegiatan atau kelas offline dan/atau online yang diselenggarakan oleh organizer. 
+          EventIn akan mengelola seluruh pembayaran dan registrasi setiap pengguna yang membeli E-Ticket acara, kegiatan atau kelas melalui platform EventIn.</ol>
+        <ol>5. EventIn hanya menyediakan mekanisme pembayaran dalam mata uang Rupiah dan untuk penyelenggara di lokasi Republik Indonesia.</ol>
+        <ol>6. EventIn berhak untuk menolak memasarkan E-Ticket acara, kegiatan, atau kelas yang diselenggarakan oleh organizer dengan alasan apapun, dengan atau tanpa pemberitahuan kepada organizer.</ol>
+        <ol>7. Organizer wajib mendapatkan seluruh izin dari pihak yang berwajib atau pihak ketiga dimana hal tersebut diperlukan untuk menyelenggarakan acara, kegiatan atau kelas ini.</ol>
+        <ol>8. Seluruh konten atau materi yang organizer bagikan selama acara, kegiatan, atau kelas berlangsung tidak melanggar, menyalahi, dan atau menyalahgunakan hak cipta pihak ketiga manapun. 
+          Semua perizinan, persetujuan, pemberitahuan, pelaporan, termasuk namun tidak terbatas pada izin Pemberian Hak Kekayaan Intelektual Pihak Ketiga (sebagaimana berlaku) yang diperlukan telah diperoleh 
+          organizer sebelum menyelenggarakan kegiatan ini.</ol>
+        <ol>9. Seluruh konten atau materi yang organizer bagikan selama acara, kegiatan, atau kelas tidak melanggar ketentuan peraturan perundang-undangan yang berlaku, Syarat dan Ketentuan dan Kebijakan Privasi.</ol>
+        <ol>10. Organizer menjamin tidak akan membagikan konten atau materi yang mengandung suku, agama, ras, antar golongan, politik, atau isu sensitif lainnya ("Konten Sensitif"), tidak terkecuali konten atau 
+          materi yang memprovokasi atau mengomentari kebijakan negara tertentu, yang dapat menimbulkan dampak negatif.</ol>
+        <ol>11. Organizer akan mendapatkan 95% dari setiap penjualan E-Ticket yang terjual melalui platform EventIn, sedangkan EventIn akan mendapatkan 5% dari setiap penjualan E-Ticket yang terjual sebagai biaya 
+          platform untuk terus melakukan pengembangan dan memberikan pengalaman terbaik bagi Pengguna, kecuali ditentukan lain dalam perjanjian terpisah yang ditandatangani oleh EventIn dan organizer.</ol>
+        <ol>12. Organizer akan mendapatkan dana atas penjualan E-Ticket 1 Hari Kerja setelah acara, kegiatan atau kelas selesai diselenggarakan, kecuali ditentukan lain di dalam perjanjian terpisah yang ditandatangani oleh EventIn dan organizer.</ol>
+        <ol>13. Organizer wajib memberikan pemberitahuan tertulis kepada pembeli yang telah membeli E-Ticket apabila terjadi perubahan detail atau pembatalan acara.</ol>
+        <ol>14. Dalam hal organizer melanggar ketentuan-ketentuan di atas dan kegiatan yang organizer selenggarakan menimbulkan kerugian material dan/atau immaterial bagi EventIn, maka dengan ini organizer setuju untuk mengganti kerugian, 
+          membebaskan dam melindungi EventIn, afiliasinya beserta para direktur, pejabat, karyawan, agen, perusahaan dan distributornya masing-masing dari dan terhadap segala kerugian, biaya dan pengeluaran, termasuk biaya pengacara yang wajar, 
+          yang terjadi sehubungan dengan klaim atau tuntutan apa pun, yang timbul dari pelanggaran hukum atau Syarat dan Ketentuan ini.</ol>
+        <ol>15. EventIn berhak untuk menolak, menghapus, tidak memproses, masukan ke daftar hitam, blokir, menghentikan kerja sama secara sepihak, menuntut ganti rugi, menuntut berbagai hak untuk memulihkan hak yang 
+          telah dilanggar apabila berdasarkan pertimbangan EventIn bahwa organizer telah melakukan tindakan yang merugikan EventIn dan/atau pembeli.</ol>
+      </ul>
+
+      <h2>7. Perubahan dan Pembatalan E-Ticket</h2>
+
+      <ul>
+        <ol>1. Organizer dapat melakukan perubahan detail (lokasi, jadwal, dan/atau pengisi acara) acara yang dijual di dalam E-Ticket dengan ketentuan perubahan detail acara atau pembatalan acara tersebut dilakukan selambat-lambatnya 3 (tiga) hari 
+          kalender sebelum acara, kegiatan atau kelas diselenggarakan. Organizer dapat menghubungi Customer Care untuk informasi lebih lanjut.</ol>
+          <ol>2. Organizer dapat memberikan opsi refund kepada Pengguna yang tidak setuju dengan perubahan acara tersebut sebesar 100% dari harga dasar E-Ticket apabila terjadi perubahan detail (lokasi, jadwal, dan/atau pengisi acara).</ol>
+          <ol>3. Organizer setuju untuk mengembalikan dana sebesar 100% (seratus persen) dari harga dasar E-Ticket apabila Pihak Kedua melakukan pembatalan acara.</ol>
+          <ol>4. Organizer wajib memberikan pemberitahuan tertulis kepada Pengguna yang telah membeli E-Ticket apabila terjadi perubahan detail atau pembatalan acara.</ol>
+          <ol>5. Apabila terdapat permintaan refund yang diajukan oleh Pengguna sehubungan dengan ketentuan poin 1, organizer wajib mengembalikan dana langsung ke rekening yang ditunjuk oleh Pengguna.</ol>
+          <ol>6. Pengembalian dana tersebut wajib dilakukan selambat-lambatnya 30 (tiga puluh) hari kalender sejak perubahan dan/atau pengumuman pembatalan acara dilakukan oleh organizer.</ol>
+          <ol>7. Dalam hal terjadi permintaan refund atas terjadinya perubahan acara sebagaimana dijelaskan pada poin 2 atau pembatalan E-Ticket, EventIn tetap berhak atas Platform Fee dan biaya-biaya lainnya yang telah 
+            dikeluarkan oleh EventIn termasuk diantaranya namun tidak terbatas pada promo yang diberikan oleh EventIn dan biaya transaksi pembayaran.</ol>
+      </ul>
+
+      <h2>8. Hak Kekayaan Intelektual</h2>
+
+      <ul>
+        <ol>1. EventIn, baik nama, logo, Layanan EventIn dan aplikasi, dilindungi oleh hak cipta, merek dagang dan hak-hak lain yang disediakan 
+          berdasarkan hukum Negara Republik Indonesia. Kami (dan pemberi lisensi kami, sebagaimana berlaku) secara eksklusif memiliki semua hak, 
+          kepemilikan dan kepentingan dalam dan terhadap Layanan EventIn, termasuk semua hak kekayaan intelektual terkait.</ol>
+        <ol>2. Kekayaan Intelektual atas konten merupakan milik dan/atau hak dari organizer. Organizer dengan ini memberikan lisensi yang tidak dapat dibatalkan, namun dapat dialihkan, disublisensikan, 
+          berlaku global dan berlaku selama Perjanjian berlaku kepada kami untuk menggunakan (termasuk memodifikasi, mengadaptasi, mempublikasikan, mereproduksi dan membuat karya turunan dari) 
+          Kekayaan Intelektual konten. Lisensi Hak Kekayaan Intelektual ini berakhir apabila Anda menghapus konten.</ol>
+      </ul>
+
+      <h2>9. Jaminan dari EventIn</h2>
+
+      <p>Kami tidak menyatakan atau menjamin bahwa (a) penggunaan Layanan EventIn akan aman, tepat waktu, tanpa gangguan atau terbebas dari kesalahan atau beroperasi dengan 
+        kombinasi dengan perangkat keras lain, perangkat lunak, sistem atau data, (b) setiap data yang tersimpan akan akurat atau dapat diandalkan, (c) kualitas produk, 
+        layanan, informasi, atau Konten diperoleh oleh Anda melalui Layanan Eventin akan memenuhi kebutuhan atau harapan Anda (d) kesalahan atau kecacatan dalam Layanan EventIn 
+        akan segera diperbaiki, (e) server yang menyediakan Layanan EventIn terbebas dari virus atau komponen berbahaya lainnya, layanan Eventin disediakan untuk Anda terbatas hanya pada dasar "sebagaimana adanya". Semua kondisi, pernyataan dan jaminan, baik tersurat, 
+        tersirat, yang diwajibkan oleh undang-undang atau sebaliknya, termasuk, namun tidak terbatas pada, jaminan yang tersirat mengenai jual beli, kesesuaian untuk tujuan tertentu, 
+        atau tidak adanya pelanggaran hak pihak ketiga, dengan ini dikecualikan dan dikesampingkan dengan batas tertinggi dan maksimum. <strong> ANDA MENGAKUI DAN MENYETUJUI BAHWA SELURUH RISIKO 
+        YANG TIMBUL DARI PENGGUNAAN LAYANAN EVENTIN OLEH ANDA SEPENUHNYA ADA PADA ANDA DAN ANDA TIDAK AKAN MEMILIKI HAK UNTUK MEMINTA GANTI RUGI APAPUN DARI EVENTIN.</strong></p>
+
+      <h2>10. Tanggung Jawab EventIn</h2>
+      
+      <ul>
+        <ol>1. Kami dengan usaha terbaik selalu berupaya untuk menjaga Aplikasi aman, berfungsi dengan baik dan terbebas dari virus dan kesalahan. Namun demikian kami tidak dapat menjamin operasi terus-menerus dan terhadap hal-hal di luar kendali kami tidak dapat
+          menjamin keamanan database. Kami juga tidak dapat menjamin bahwa informasi yang Anda berikan tidak akan ditahan/terganggu saat sedang dikirimkan kepada kami. Informasi dan data dalam aplikasi bisa saja tidak terjadi secara realtime.
+        </ol>
+        <ol>2. Kami akan memiliki hak untuk menyelidiki dan menuntut setiap pelanggaran syarat dan ketentuan, kebijakan privasi dan ketentuan hukum yang berlaku. Kami dapat melibatkan dan bekerja sama dengan pihaknpenegak hukum dalam menuntut pengguna yang melanggar ketentuan-ketentuan di atas. 
+          Kami berhak untuk memonitor akses anda ke atau penggunaan layanan EventIn untuk memastikan kepatuhan dengan ketentuan penggunaan ini, atau untuk mematuhi peraturan yang berlaku atau perintah atau persyaratan dari pengadilan, lembaga administratif atau badan pemerintah lainnya.
+        </ol>
+        <ol>3. Aplikasi ini dapat mengalami keterbatasan, penundaan dan masalah-masala lain yang terdapat dalam penggunaan internet dan komunikasi elektronik, termasuk perangkat yang digunakan oleh Anda, tidak terhubung, berada di luar jangkauan, dimatikan atau tidak berfungsi. 
+          Kami tidak bertanggung jawab atas keterlambatan, kegagalan anda masuk ke dalamsession, kerusakan atau kerugian yang diakibatkan olehh masalah-masalah tersebut.
+        </ol>
+        <ol>4. Kami berhak untuk memperbaiki, menghilangkan, meningkatkan, menambah, memodifikasi, menghentikan sementara, menghentikan penyediaan, menghapus, baik secara sebagian maupun keseluruhan dari aplikasi, tanpa berkewajiban untuk memberikan alasan & pemberitahuan sebelumnya kepada Anda. 
+          Kami tidak bertanggung jawab jika peningkatan, modifikasi, suspensi atau penghapusan tersebut mencegah Anda dalam mengakses aplikasi.
+        </ol>
+        <ol>5. EventIn memiliki kewenangan untuk menutup akun Anda baik sementara maupun permanen apabila didapati adanya tindakan kecurangan dalam bertransaksi dan/atau pelanggaran terhadap syarat dan ketentuan.</ol>
+        <ol>6. Setiap saat, Anda setuju dan memberikan kewenangan kepada kami untuk mengubah atau memodifikasi layanan EventIn dan syarat dan ketentuan, sehingga kami berhak dan tidak wajib untuk:
+          <ul>
+            <ol>1. Memeriksa pelanggaran terhadap syarat dan ketentuan pada layanan EventIn dan juga mengambil tindakan apapun yang juga dianggap diperlukan, termasuk melakukan pembekuan atas dana yang telah dibayarkan.</ol>
+            <ol>2. Mencegah atau membatasi akses Anda dalam mengakses layanan EventIn.</ol>
+            <ol>3. Melakukan pengawasan atas seluruh interaksi atau transaksi yang terjadi melalui layanan EventIn termasuk melaporkan kegiatan yang dicurigai sebagai pelanggaran terhadap hukum yang berlaku, undang-undang atau peraturan yang dikeluarkan 
+              oleh pihak yang berwenang, serta bekerja sama dengan pihak berwenang  yang bersangkutan untuk memberikan informasi maupun tindakan lainnya yang dianggap diperlukan dalam menindaklanjuti laporan tersebut, dan/atau
+            </ol>
+            <ol>4. Meminta informasi dan data yang diperlukan dari Anda sehubungan dengan penggunaan aplikasi.</ol>
+          </ul>
+        </ol>
+      </ul>
+
+      <h2>11. Kontak Kami</h2>
+
+      <p>Untuk menjamin kenyamanan pengguna dalam menikmatik layanan EventIn, anda dapat mengirimkan email ke irfan.fathurrohman2006@gmail.com.</p>
+    </div>
+    </div>
+    
+    <div class="mt-2 flex flex-col items-center w-full max-w-[320px]">
+      <div class="flex items-center text-left bg-white p-4 rounded-2xl shadow-sm border w-full transition-colors"
+           [ngClass]="showTermsError ? 'border-red-400' : 'border-cyan-100'">
+        <ion-checkbox [(ngModel)]="isTermsChecked" (ionChange)="showTermsError = false" justify="start" labelPlacement="end" class="text-sm font-bold text-slate-700 w-full" 
+          style="--checkbox-background-checked: #16e2eb; --border-color-checked: #16e2eb;">
+          Saya menyetujui <span class="text-cyan-500">Syarat & Ketentuan</span>
+        </ion-checkbox>
+      </div>
+      
+      <div *ngIf="showTermsError" class="w-full pl-3 mt-2 flex items-center text-red-500 animate-fade-in">
+        <ion-icon name="alert-circle-outline" class="mr-1 text-sm"></ion-icon>
+        <small class="font-bold text-xs">Silahkan ceklis jika menyetujui Syarat & Ketentuan.</small>
+      </div>
+    </div>
   </div>
 
 </ion-content>
 
 <ion-footer class="ion-no-border bg-[#ecfeff]">
-  <div class="px-5 py-4 bg-[#ecfeff]">
-    <button (click)="nextStep()" *ngIf="currentStep != 3"
-      class="w-full bg-cyan-400 text-white font-bold py-3.5 rounded-xl active:scale-95 transition-transform">
-      Lanjut
-    </button>
-    <button (click)="login()" *ngIf="currentStep === 3"
-      class="w-full mb-4 bg-cyan-400 text-white font-bold py-3.5 rounded-xl active:scale-95 transition-transform">
-      Login
-    </button>
-    <button (click)="GoHome()" *ngIf="currentStep === 3"
-      class="w-full mt-3 mb-3 bg-cyan-50 text-cyan-500 border-4 z-10 border-red-600 font-bold py-3.5 rounded-xl active:scale-95 transition-transform">
-      Masuk tanpa daftar
-    </button>
+  <div class="px-6 py-5 bg-[#ecfeff] flex flex-col items-center">
+
+    <div class="flex justify-center space-x-2.5 mb-6">
+      <div [class]="currentStep === 1 ? 'w-8 bg-cyan-500 shadow-sm shadow-cyan-300' : 'w-2 bg-cyan-200'" class="h-2.5 rounded-full transition-all duration-300"></div>
+      <div [class]="currentStep === 2 ? 'w-8 bg-cyan-500 shadow-sm shadow-cyan-300' : 'w-2 bg-cyan-200'" class="h-2.5 rounded-full transition-all duration-300"></div>
+      <div [class]="currentStep === 3 ? 'w-8 bg-cyan-500 shadow-sm shadow-cyan-300' : 'w-2 bg-cyan-200'" class="h-2.5 rounded-full transition-all duration-300"></div>
+      <div [class]="currentStep === 4 ? 'w-8 bg-cyan-500 shadow-sm shadow-cyan-300' : 'w-2 bg-cyan-200'" class="h-2.5 rounded-full transition-all duration-300"></div>
+      <div [class]="currentStep === 5 ? 'w-8 bg-cyan-500 shadow-sm shadow-cyan-300' : 'w-2 bg-cyan-200'" class="h-2.5 rounded-full transition-all duration-300"></div>
+    </div>
+
+    <div class="w-full flex flex-col space-y-3">
+      
+      <button (click)="nextStep()" *ngIf="currentStep != 5"
+        class="w-full bg-gradient-to-r from-cyan-400 to-[#16e2eb] text-white font-bold text-base py-3.5 rounded-lg shadow-md shadow-cyan-300/50 active:scale-[0.98] transition-all duration-200">
+        Lanjut
+      </button>
+
+      <button (click)="login()" *ngIf="currentStep === 5"
+        class="w-full bg-gradient-to-r from-cyan-400 to-[#16e2eb] text-white font-bold text-base py-3.5 rounded-lg shadow-md shadow-cyan-300/50 active:scale-[0.98] transition-all duration-200">
+        Login
+      </button>
+
+      <button (click)="GoHome()" *ngIf="currentStep === 5"
+        class="w-full bg-white text-cyan-500 border border-cyan-100 font-extrabold text-sm py-3.5 rounded-lg active:scale-[0.98] active:bg-cyan-50 transition-all duration-200 shadow-sm">
+        Masuk tanpa daftar
+      </button>
+
+    </div>
   </div>
 </ion-footer>

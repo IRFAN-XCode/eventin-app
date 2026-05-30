@@ -1,61 +1,74 @@
-<div class="bg-[#16e2eb] pt-12 pb-2 px-2 rounded-b-[30px] shadow-sm flex items-center text-white relative z-10">
-  <ion-toolbar>
+<div class="bg-gradient-to-r from-cyan-400 to-[#16e2eb] pt-14 pb-6 px-4 rounded-b-[40px] shadow-lg shadow-cyan-200/50 flex items-center text-white relative z-10">
+  <ion-toolbar style="--background: transparent; --color: white; --border-width: 0;">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/my-profile" icon="arrow-back"></ion-back-button>
+      <ion-back-button defaultHref="/my-profile" icon="arrow-back" class="text-white"></ion-back-button>
     </ion-buttons>
 
-    <ion-title>Edit Profile</ion-title>
+    <ion-title class="font-bold tracking-wide text-lg">Edit Profile</ion-title>
   </ion-toolbar>
 </div>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" style="--background: #f8fafc;">
 
-  <div class="px-8 flex flex-col space-y-4" *ngIf="userDetailforEdit">
+  <div class="px-5 py-8 flex flex-col" *ngIf="userDetailforEdit">
 
-    <form [formGroup]="editProfileForm" (ngSubmit)="onUpdate()">
+    <form [formGroup]="editProfileForm" (ngSubmit)="onUpdate()" 
+          class="bg-white p-6 rounded-[28px] shadow-sm border border-slate-100">
 
-      <div class="relative mb-0.5 mt-12">
+      <div class="relative mb-1 mt-2">
         <ion-input formControlName="nama" label="{{ userDetailforEdit.nama || 'Masukkan Nama Lengkap'}}" type="text"
-          label-placement="floating" fill="outline" placeholder="Masukkan Nama Lengkap" required></ion-input>
+          label-placement="floating" fill="outline" placeholder="Masukkan Nama Lengkap" required
+          style="--border-radius: 12px; --border-color: #cbd5e1; --highlight-color-focused: #16e2eb;"></ion-input>
       </div>
-      <div class="mb-2 pl-2" *ngIf="editProfileForm.get('nama')?.touched && editProfileForm.get('nama')?.invalid">
-        <small class="text-red-500 font-semibold text-xs">Nama lengkap wajib diisi.</small>
-      </div>
-
-      <div class="relative mb-0.5 mt-6">
-        <ion-input formControlName="email" label="{{ userDetailforEdit.email || 'Masukkan Email'}}" type="email"
-          label-placement="floating" fill="outline" placeholder="Masukkan Email" required></ion-input>
-      </div>
-      <div class="mb-2 pl-2" *ngIf="editProfileForm.get('email')?.touched && editProfileForm.get('email')?.invalid">
-        <small class="text-red-500 font-semibold text-xs">Format email tidak valid atau kosong.</small>
+      <div class="mb-4 pl-3" *ngIf="editProfileForm.get('nama')?.touched && editProfileForm.get('nama')?.invalid">
+        <small class="text-rose-500 font-medium text-xs flex items-center">
+          <ion-icon name="alert-circle-outline" class="mr-1"></ion-icon> Nama lengkap wajib diisi.
+        </small>
       </div>
 
-      <div class="relative mb-0.5 mt-6">
+      <div class="relative mb-1 mt-4">
+        <ion-input formControlName="email" label="Email" type="email"
+          label-placement="floating" fill="outline" placeholder="Masukkan Email" required
+          style="--border-radius: 12px; --border-color: #cbd5e1; --highlight-color-focused: #16e2eb;"></ion-input>
+      </div>
+      <div class="mb-4 pl-3" *ngIf="editProfileForm.get('email')?.touched && editProfileForm.get('email')?.invalid">
+        <small class="text-rose-500 font-medium text-xs flex items-center">
+          <ion-icon name="alert-circle-outline" class="mr-1"></ion-icon> Format email tidak valid atau kosong.
+        </small>
+      </div>
+
+      <div class="relative mb-1 mt-4">
         <ion-input formControlName="nomor_handphone"
           label="{{ userDetailforEdit.nomor_handphone || 'Masukkan Nomor Handphone' }}" type="text"
-          label-placement="floating" fill="outline" placeholder="Masukkan Nomor Handphone" required></ion-input>
+          label-placement="floating" fill="outline" placeholder="Masukkan Nomor Handphone" required
+          style="--border-radius: 12px; --border-color: #cbd5e1; --highlight-color-focused: #16e2eb;"></ion-input>
       </div>
-      <div class="mb-2 pl-2"
+      <div class="mb-4 pl-3"
         *ngIf="editProfileForm.get('nomor_handphone')?.touched && editProfileForm.get('nomor_handphone')?.invalid">
-        <small class="text-red-500 font-semibold text-xs">Nomor handphone wajib diisi.</small>
+        <small class="text-rose-500 font-medium text-xs flex items-center">
+          <ion-icon name="alert-circle-outline" class="mr-1"></ion-icon> Nomor handphone wajib diisi.
+        </small>
       </div>
 
-      <div class="relative mb-0.5 mt-6">
+      <div class="relative mb-1 mt-4">
         <ion-select formControlName="jenis_kelamin"
           label="{{ userDetailforEdit.jenis_kelamin || 'Pilih Jenis Kelamin'}}" label-placement="floating"
-          fill="outline" class="icon text placeholder">
+          fill="outline" class="icon text placeholder"
+          style="--border-radius: 12px; --border-color: #cbd5e1; --highlight-color-focused: #16e2eb;">
           <ion-select-option value="Laki-laki">Laki-laki</ion-select-option>
           <ion-select-option value="Perempuan">Perempuan</ion-select-option>
         </ion-select>
       </div>
-      <div class="mb-5 pl-2"
+      <div class="mb-8 pl-3"
         *ngIf="editProfileForm.get('jenis_kelamin')?.touched && editProfileForm.get('jenis_kelamin')?.invalid">
-        <small class="text-red-500 font-semibold text-xs">Jenis kelamin wajib diisi.</small>
+        <small class="text-rose-500 font-medium text-xs flex items-center">
+          <ion-icon name="alert-circle-outline" class="mr-1"></ion-icon> Jenis kelamin wajib diisi.
+        </small>
       </div>
 
-      <div class="pt-8 pb-8 flex justify-center">
+      <div class="pt-4 pb-2 flex justify-center">
         <button type="submit" [disabled]="editProfileForm.invalid || editProfileForm.pristine"
-          class="w-[80%] bg-cyan-100 border border-cyan-400 text-cyan-500 font-bold py-3 rounded-2xl active:bg-cyan-200 transition-colors">
+          class="w-full bg-gradient-to-r from-cyan-400 to-[#16e2eb] text-white font-bold text-base py-3.5 rounded-2xl shadow-md shadow-cyan-300/50 active:scale-95 transition-all duration-200 ease-in-out disabled:opacity-50 disabled:shadow-none disabled:active:scale-100">
           Simpan
         </button>
       </div>

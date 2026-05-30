@@ -43,15 +43,6 @@
         <small class="text-red-500 font-semibold text-xs">Konfirmasi password tidak cocok.</small>
       </div>
     
-      <div class="flex items-start mb-6 px-1 space-x-2">
-        <ion-checkbox formControlName="terms" class="mt-0.5 text-xs"></ion-checkbox>
-        <ion-label class="text-[11px] text-gray-600 font-medium leading-relaxed">
-          Saya menyetujui <a routerLink="/tos" class="text-cyan-500 font-bold underline">Syarat & Ketentuan</a> serta <a routerLink="/privacy-policy" class="text-cyan-500 font-bold underline">Kebijakan Privasi</a> yang berlaku di EventIn.
-        </ion-label>
-      </div>
-      <div class="mb-5 pl-2" *ngIf="registerForm.get('terms')?.touched && registerForm.get('terms')?.invalid">
-        <small class="text-red-500 font-semibold text-xs">Anda wajib menyetujui ketentuan layanan kami.</small>
-      </div>
     
       <button type="submit" [disabled]="registerForm.invalid"
         class="w-full bg-cyan-400 text-white font-bold py-3.5 rounded-lg active:scale-95 transition-transform shadow-md disabled:opacity-50 disabled:scale-100">

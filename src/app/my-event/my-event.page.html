@@ -1,0 +1,90 @@
+<!-- <div class="bg-cyan-50 px-3 py-2 shadow-sm flex items-center text-cyan-400 relative z-10">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/account" icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Event Saya</ion-title>
+  </ion-toolbar>
+</div>
+
+<ion-content [fullscreen]="true">
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="chevron-down-circle-outline" pullingText="Tarik untuk memperbarui..."
+      refreshingSpinner="circles" refreshingText="Memuat event terbaru...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <div class="px-4 py-2 mt-4">
+    <div class="flex items-center justify-between mb-6">
+      <div class="flex items-center border border-[#0099D6] rounded-lg px-1 flex-1 bg-white">
+          <ion-searchbar show-cancel-button="never"
+            placeholder="Cari Event..."
+            [debounce]="500" 
+            (ionInput)="onSearching($event)">
+          </ion-searchbar>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="ListEvent.length === 0" class="flex flex-col justify-center items-center px-3 m-auto bg-slate-800 h-full">
+    <ion-icon name="today-outline" class="text-4xl text-gray-300 mb-2 animate-bounce"></ion-icon>
+    <h4 class="text-base font-bold text-gray-50 m-0">Kamu belum punya event nih!</h4>
+    <p class="text-sm text-gray-50 mt-1 mx-5 text-center">Daftarkan dirimu jadi organizer dan buat eventmu sendiri yuk!</p>
+    <button routerLink="/regist-organizer" class="px-3 py-2 rounded-md bg-cyan-400 border-none text-cyan-50 mt-5">Daftar Yuk</button>
+  </div>
+
+  
+
+    <div class="p-3">
+
+      <div class="px-4 py-2">
+
+        <div class="flex flex-col space-y-6">
+          <div *ngFor="let event of ListEvent" [routerLink]="['/event-detail', event.id]"
+            class="group bg-white rounded-[25px] overflow-hidden border border-cyan-200 shadow-md mb-2 active:scale-95 transition-transform cursor-pointer">
+
+            <div class="m-2 rounded-[20px] overflow-hidden relative bg-gray-100 h-28">
+              <img [src]="event.poster_url" alt="Poster {{ event.nama_event }}" class="w-full h-full object-cover"
+                loading="lazy" />
+
+              <span
+                class="absolute top-2 left-2 bg-black/50 backdrop-blur-sm text-white text-[9px] px-2 py-0.5 rounded-full font-bold uppercase">
+                {{ event.kategori }}
+              </span>
+
+            </div>
+
+            <div class="mx-2 bg-[#00D600] text-white text-center text-sm py-1 font-bold uppercase rounded-lg shadow-sm">
+              {{ event.status }}
+            </div>
+            
+            <div class="px-4 pb-4 pt-1">
+              <div>
+                <h3
+                  class="text-gray-800 font-extrabold text-base leading-snug inline-block transition-colors group-hover:text-cyan-500 animate-marquee-hover">
+                  {{ event.nama_event }}
+                </h3>
+
+                <p class="text-gray-400 font-semibold text-xs mt-1 mb-5 flex items-center">
+                  <ion-icon name="business-outline" class="mr-1 text-cyan-400"></ion-icon>
+                  {{ event.organizer?.nama_eo || 'Organizer' }}
+                </p>
+              </div>
+
+              <div class="flex items-center text-[#0099D6] text-sm my-1">
+                <ion-icon name="calendar-outline" class="mr-2"></ion-icon>
+                <span class="font-semibold">{{ event.tgl_event | date:'dd MMM yyyy':'':'id' }}</span>
+              </div>
+
+              <p class="font-bold text-gray-900 mb-2">{{ event.harga_reg | currency:'IDR':'symbol-narrow':'1.0-0' }}</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</ion-content> -->

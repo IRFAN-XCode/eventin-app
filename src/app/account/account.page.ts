@@ -32,7 +32,7 @@ export class AccountPage implements OnInit {
   }
 
   myCertificate() {
-    const urlCertificate = 'https://financialcare.my.id';
+    const urlCertificate = 'https://eventin.financialcare.my.id';
     
     window.location.href = urlCertificate;
   }

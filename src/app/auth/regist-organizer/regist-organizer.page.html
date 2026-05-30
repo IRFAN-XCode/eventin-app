@@ -8,75 +8,126 @@
 </div>
 
 <ion-content [fullscreen]="true">
-  <div class="p-4">
-    <p class="text-left m-0 text-sm text-cyan-400">Silahkan isi formulir untuk mendaftar sebagai organizer.</p>
+  <div class="flex justify-between items-center h-12 px-6 bg-cyan-50 border-b border-cyan-100 sticky top-0 z-20">
+    <div [ngClass]="currentStep >= 1 ? 'text-[#16e2eb]' : 'text-gray-400'" class="font-bold text-xs transition-colors">1. Personal</div>
+    <div [ngClass]="currentStep >= 2 ? 'text-[#16e2eb]' : 'text-gray-400'" class="font-bold text-xs transition-colors">2. Event</div>
+    <div [ngClass]="currentStep >= 3 ? 'text-[#16e2eb]' : 'text-gray-400'" class="font-bold text-xs transition-colors">3. Tiket</div>
+    <div [ngClass]="currentStep >= 4 ? 'text-[#16e2eb]' : 'text-gray-400'" class="font-bold text-xs transition-colors">4. Akun</div>
+  </div>
 
-    <form [formGroup]="registOrgForm" (ngSubmit)="onRegistOrganizer()">
+  <div class="p-6" [formGroup]="registerForm">
 
-      <div class="relative mb-1 mt-5">
-        <ion-input formControlName="nama" label="Nama" type="text" label-placement="floating" fill="outline"
-          placeholder="Masukkan Nama Lengkap" required></ion-input>
+    <div *ngIf="currentStep === 1" class="animate-fade-in">
+      <h2 class="text-lg font-bold text-cyan-500 mb-4">Informasi Personal</h2>
+      <div class="relative mb-4">
+        <ion-input formControlName="nama" label="Nama Lengkap" type="text" label-placement="floating" fill="outline" placeholder="Masukkan Nama Lengkap"></ion-input>
       </div>
-      <div class="mb-4 pl-2" *ngIf="registOrgForm.get('nama')?.touched && registOrgForm.get('nama')?.invalid">
-        <small class="text-red-500 font-semibold text-xs">Nama Lengkap wajib diisi.</small>
+      <div class="relative mb-4">
+        <ion-input formControlName="email" label="Email" type="email" label-placement="floating" fill="outline" placeholder="Masukkan Email"></ion-input>
       </div>
+      <div class="relative mb-4">
+        <ion-input formControlName="nomor_handphone" label="Nomor Handphone" type="number" label-placement="floating" fill="outline" placeholder="Masukkan Nomor Handphone"></ion-input>
+      </div>
+      <div class="relative mb-4">
+        <ion-input formControlName="alamat" label="Alamat" type="text" label-placement="floating" fill="outline" placeholder="Masukkan Alamat"></ion-input>
+      </div>
+    </div>
 
-      <div class="relative mb-1 mt-4">
-        <ion-input formControlName="email" label="Email" type="email" label-placement="floating" fill="outline"
-          placeholder="Masukkan Email" required></ion-input>
+    <div *ngIf="currentStep === 2" class="animate-fade-in">
+      <h2 class="text-lg font-bold text-cyan-500 mb-4">Informasi Event</h2>
+      <div class="relative mb-4">
+        <ion-input formControlName="nama_eo" label="Nama Event Organizer" type="text" label-placement="floating" fill="outline" placeholder="Masukkan Nama Organizer"></ion-input>
       </div>
-      <div class="mb-4 pl-2" *ngIf="registOrgForm.get('email')?.touched && registOrgForm.get('email')?.invalid">
-        <small class="text-red-500 font-semibold text-xs">Format email tidak valid atau kosong.</small>
+      <div class="relative mb-4">
+        <ion-input formControlName="nama_event" label="Nama Event" type="text" label-placement="floating" fill="outline" placeholder="Masukkan Nama Event"></ion-input>
       </div>
-
-      <div class="relative mb-1 mt-4">
-        <ion-input formControlName="nama_eo" label="Nama Event Organizer" type="text" label-placement="floating"
-          fill="outline" placeholder="Masukkan Nama Event Organizer" required></ion-input>
+      <div class="relative mb-4">
+        <ion-select formControlName="kategori_event" label="Kategori Event" label-placement="floating" fill="outline">
+          <ion-select-option value="musik">Musik</ion-select-option>
+          <ion-select-option value="teater">Teater</ion-select-option>
+          <ion-select-option value="seminar">Seminar</ion-select-option>
+          <ion-select-option value="workshop">Workshop</ion-select-option>
+        </ion-select>
       </div>
-      <div class="mb-4 pl-2" *ngIf="registOrgForm.get('nama_eo')?.touched && registOrgForm.get('nama_eo')?.invalid">
-        <small class="text-red-500 font-semibold text-xs">Nama Event Organizer wajib diisi.</small>
+      <div class="relative mb-4">
+        <ion-input formControlName="deskripsi" label="Deskripsi" type="text" label-placement="floating" fill="outline" placeholder="Masukkan Deskripsi"></ion-input>
       </div>
-
-      <div class="relative mb-1 mt-4">
-        <ion-input formControlName="password" label="Password" type="password" label-placement="floating" fill="outline"
-          placeholder="Masukkan Password" required></ion-input>
+      <div class="relative mb-4">
+        <ion-input formControlName="lokasi" label="Lokasi Event" type="text" label-placement="floating" fill="outline" placeholder="Masukkan Lokasi"></ion-input>
       </div>
-      <div class="mb-4 pl-2" *ngIf="registOrgForm.get('password')?.touched && registOrgForm.get('password')?.invalid">
-        <small class="text-red-500 font-semibold text-xs">Password minimal wajib 6 karakter.</small>
-      </div>
-
-      <div class="relative mb-1 mt-4">
-        <ion-input formControlName="password_confirmation" label="Konfirmasi Password" type="password"
-          label-placement="floating" fill="outline" placeholder="Masukkan Konfirmasi Password" required></ion-input>
-      </div>
-      <div class="mb-4 pl-2"
-        *ngIf="registOrgForm.hasError('mismatch') && registOrgForm.get('password_confirmation')?.touched">
-        <small class="text-red-500 font-semibold text-xs">Konfirmasi password tidak cocok.</small>
-      </div>
-
-      <div class="relative mb-1 mt-4">
-        <label class="block text-cyan-400 text-xs font-semibold mb-1 ml-1">
-          Upload Proposal
-        </label>
-        <input type="file" accept="application/pdf" (change)="onFileChange($event)" class="block w-full text-sm text-gray-400 bg-cyan-50 border border-cyan-400 rounded-lg cursor-pointer focus:outline-none
-               file:mr-4 file:py-3 file:px-4 
-               file:border-0 file:border-r file:border-cyan-400 
-               file:text-sm file:font-semibold file:bg-[#C4C4C4] file:text-gray-700
-               hover:file:bg-gray-400 file:cursor-pointer file:transition-colors" />
-        <p class="text-cyan-400 text-[10px] mt-1 ml-1">
-          File yang diupload hanya berupa pdf.
-        </p>
-      </div>
-      <div class="mb-6 pl-2"
-        *ngIf="registOrgForm.get('file_proposal')?.touched && registOrgForm.get('file_proposal')?.invalid">
-        <small class="text-red-500 font-semibold text-xs">File proposal wajib diunggah.</small>
+      <div class="grid grid-cols-2 gap-4 mb-4">
+        <ion-input formControlName="tgl_mulai" label="Tgl Mulai" type="date" label-placement="floating" fill="outline"></ion-input>
+        <ion-input formControlName="tgl_berakhir" label="Tgl Akhir" type="date" label-placement="floating" fill="outline"></ion-input>
       </div>
 
-      <button type="submit" [disabled]="registOrgForm.invalid"
-        class="w-full bg-cyan-400 text-white font-bold py-3.5 rounded-lg active:scale-95 transition-transform shadow-md disabled:opacity-50 disabled:scale-100 mt-4">
-        Daftar
-      </button>
+      <div class="relative mb-4">
+        <label class="block text-cyan-500 text-xs font-semibold mb-1 ml-1">Poster / Gambar Event</label>
+        <input type="file" accept="image/*" (change)="onImageChange($event)" class="block w-full text-sm text-gray-500 bg-white border border-cyan-400 rounded-lg cursor-pointer focus:outline-none file:mr-4 file:py-3 file:px-4 file:border-0 file:border-r file:border-cyan-400 file:text-sm file:font-semibold file:bg-cyan-50 file:text-cyan-600 hover:file:bg-cyan-100 transition-colors" />
+      </div>
 
-    </form>
+      <div class="relative mb-4">
+        <label class="block text-cyan-500 text-xs font-semibold mb-1 ml-1">Upload Proposal (PDF)</label>
+        <input type="file" accept="application/pdf" (change)="onFileChange($event)" class="block w-full text-sm text-gray-500 bg-white border border-cyan-400 rounded-lg cursor-pointer focus:outline-none file:mr-4 file:py-3 file:px-4 file:border-0 file:border-r file:border-cyan-400 file:text-sm file:font-semibold file:bg-cyan-50 file:text-cyan-600 hover:file:bg-cyan-100 transition-colors" />
+      </div>
+    </div>
+
+    <div *ngIf="currentStep === 3" class="animate-fade-in">
+      <h2 class="text-lg font-bold text-cyan-500 mb-4">Pengaturan Tiket</h2>
+      
+      <div class="relative mb-4">
+        <ion-select formControlName="type_event" label="Jenis Pembayaran" label-placement="floating" fill="outline">
+          <ion-select-option value="unpaid">Gratis</ion-select-option>
+          <ion-select-option value="paid">Berbayar</ion-select-option>
+        </ion-select>
+      </div>
+
+      <div class="bg-white border border-cyan-400 rounded-xl p-3 mb-6 flex justify-between items-center shadow-sm">
+        <div>
+          <p class="text-sm font-bold text-gray-800">Gunakan Kursi (Seating)</p>
+          <p class="text-xs text-gray-500">Aktifkan jika event memiliki nomor kursi</p>
+        </div>
+        <ion-toggle formControlName="seats" color="primary"></ion-toggle>
+      </div>
+
+      <p class="text-xs text-cyan-600 mb-3 ml-1 font-medium">* Wajib mengisi minimal satu harga tiket (Reguler/VIP)</p>
+      
+      <div class="grid grid-cols-2 gap-4 mb-4">
+        <ion-input formControlName="harga_reg" label="Harga Reguler" type="number" label-placement="floating" fill="outline"></ion-input>
+        <ion-input formControlName="harga_vip" label="Harga VIP" type="number" label-placement="floating" fill="outline"></ion-input>
+      </div>
+
+      <div *ngIf="registerForm.get('seats')?.value" class="p-4 bg-cyan-50 border border-cyan-200 rounded-xl mb-4 animate-fade-in">
+        <p class="text-sm font-bold text-cyan-600 mb-3">Pengaturan Kapasitas Kursi</p>
+        <div class="grid grid-cols-2 gap-4">
+          <ion-input formControlName="kapasitas_reg" label="Kapasitas Reguler" type="number" label-placement="floating" fill="outline" class="bg-white"></ion-input>
+          <ion-input formControlName="kapasitas_vip" label="Kapasitas VIP" type="number" label-placement="floating" fill="outline" class="bg-white"></ion-input>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="currentStep === 4" class="animate-fade-in">
+      <h2 class="text-lg font-bold text-cyan-500 mb-4">Keamanan Akun</h2>
+      <div class="relative mb-4">
+        <ion-input formControlName="password" label="Password" type="password" label-placement="floating" fill="outline" placeholder="Masukkan Password"></ion-input>
+      </div>
+      <div class="relative mb-4">
+        <ion-input formControlName="password_confirmation" label="Konfirmasi Password" type="password" label-placement="floating" fill="outline" placeholder="Ulangi Password"></ion-input>
+      </div>
+    </div>
+
   </div>
 </ion-content>
+
+<ion-footer class="ion-no-border bg-cyan-50 shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
+  <div class="px-6 py-4 flex gap-3">
+    <button *ngIf="currentStep > 1" (click)="prevStep()" class="w-1/3 bg-gray-200 text-gray-700 font-bold py-3.5 rounded-xl active:scale-95 transition-transform">
+      Kembali
+    </button>
+    <button *ngIf="currentStep < 4" (click)="nextStep()" class="flex-1 bg-[#16e2eb] text-white font-bold py-3.5 rounded-xl active:scale-95 transition-transform">
+      Lanjut
+    </button>
+    <button *ngIf="currentStep === 4" (click)="submitForm()" class="flex-1 bg-[#00D600] text-white font-bold py-3.5 rounded-xl active:scale-95 transition-transform">
+      Daftar Organizer
+    </button>
+  </div>
+</ion-footer>

@@ -105,7 +105,7 @@ export class TransactionsPage implements OnInit {
     this.daftarKursi = [];
 
     const totalKapasitas = this.jenisTiket === 'vip' ? this.eventDetail.kapasitas_vip : this.eventDetail.kapasitas_reg;
-    const kodeKursi = this.jenisTiket === 'vip' ? 'V' : 'R';
+    const kodeKursi = this.jenisTiket === 'vip' ? 'VIP-' : 'REG-';
 
     for (let i = 1; i <= totalKapasitas; i++) {
       this.daftarKursi.push(kodeKursi + i);
