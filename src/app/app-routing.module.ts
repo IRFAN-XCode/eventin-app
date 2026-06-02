@@ -91,10 +91,6 @@ const routes: Routes = [
     path: 'faq',
     loadChildren: () => import('./account/faq/faq.module').then( m => m.FaqPageModule)
   },
-  {
-    path: 'my-event',
-    loadChildren: () => import('./my-event/my-event.module').then( m => m.MyEventPageModule)
-  },
 ];
 
 @NgModule({

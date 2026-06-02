@@ -15,6 +15,9 @@ export class DetailTicketPage implements OnInit {
   ticketDetail: any = null;
   isLoading: boolean = false;
 
+  StringQrCode: string = '';
+  viewEntered: boolean = false;
+
   constructor(
     private api: Api,
     private toast : ToastController,
@@ -27,7 +30,6 @@ export class DetailTicketPage implements OnInit {
         const paramKode = params.get('id');
         if (paramKode) {
           this.kodeTransaksi = paramKode;
-          this.loadTicketData();
         }
       },
       error: (err) => {
@@ -36,37 +38,61 @@ export class DetailTicketPage implements OnInit {
     });
   }
 
-  downloadTiket() {
-    if (!this.kodeTransaksi) return;
+  ionViewWillEnter() {
+    this.viewEntered = false;
+    this.StringQrCode = '';
+    
+    if (this.kodeTransaksi) {
+      this.loadTicketData();
+    }
+  }
 
-    const downloadPDF = this.api.getTiketDownload(this.kodeTransaksi);
+  ionViewDidEnter() {
+    this.viewEntered = true;
+    
+    if (this.ticketDetail && this.ticketDetail.kode_transaksi) {
+      this.StringQrCode = this.ticketDetail.kode_transaksi;
+    }
+  }
 
-    (window as any).open(downloadPDF, '_blank');
+  ionViewWillLeave() {
+    this.StringQrCode = '';
   }
 
   loadTicketData() {
     this.isLoading = true;
     const token = localStorage.getItem('token');
 
-    this.api.getDetailTicketManual(this.kodeTransaksi, token).subscribe({
+    this.api.getDetailTicket(this.kodeTransaksi, token).subscribe({
       next: (res: any) => {
         this.isLoading = false;
         if (res.success) {
           this.ticketDetail = res.data;
+          
+          if (this.viewEntered) {
+            this.StringQrCode = this.ticketDetail.kode_transaksi;
+          }
         }
       },
       error: (err: any) => {
         this.isLoading = false;
-        this.presentToast('gagal memuat detail tiket.', 'danger');
+        this.presentToast('Gagal memuat detail tiket.', 'danger');
       }
     });
+  }
+
+  downloadTiket() {
+    if (!this.kodeTransaksi) return;
+    const downloadPDF = this.api.getTiketDownload(this.kodeTransaksi);
+    (window as any).open(downloadPDF, '_blank');
   }
 
   async presentToast(message: string, color: string) {
     const toast = await this.toast.create({
       message, 
       duration: 2500,
-      position: 'top'
+      position: 'top',
+      color: color
     });
     await toast.present();
   }

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">EventIn</string>
+    <string name="title_activity_main">EventIn</string>
+    <string name="package_name">id.my.eventin.fp</string>
+    <string name="custom_url_scheme">id.my.eventin.fp</string>
+</resources>

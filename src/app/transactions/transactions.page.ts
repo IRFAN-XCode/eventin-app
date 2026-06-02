@@ -48,13 +48,16 @@ export class TransactionsPage implements OnInit {
     private route: ActivatedRoute
   ) { }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ionViewWillEnter() {
     this.idEvent = this.route.snapshot.paramMap.get('id');
     if (this.idEvent) {
       this.loadEventDetail();
       this.loadUserProfile();
     }
   }
+
 
   loadUserProfile() {
     this.api.getProfileUser().subscribe({

@@ -52,6 +52,7 @@ export class WelcomePage implements OnInit {
       return;
     }
     
+    localStorage.setItem('FirstTime', 'false');
     this.navCtrl.navigateRoot('/home');
   }
 

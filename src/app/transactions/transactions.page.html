@@ -87,25 +87,28 @@
     </button>
   </div>
 
-  <div class="w-full p-4 bg-white rounded-2xl border border-gray-100 shadow-2xs">
-    <div class="grid grid-cols-10 gap-2 justify-items-center">
-      <button *ngFor="let kursi of seatsFiltered" 
-        (click)="pilihKursi(kursi)"
-        type="button"
-        [disabled]="kursiDisabled(kursi)"
-        [ngClass]="{
-          'bg-cyan-400 text-white border-cyan-400 shadow-xs shadow-cyan-100 scale-105': nomorKursi === kursi && !kursiDisabled(kursi),
-          'bg-slate-50 text-gray-700 border-gray-200 hover:border-cyan-300': nomorKursi !== kursi && !kursiDisabled(kursi),
-          'bg-gray-200 text-gray-400 border-gray-200 opacity-40 cursor-not-allowed line-through': kursiDisabled(kursi)
-        }"
-        class="h-9 w-9 rounded-lg border text-[10px] font-black flex items-center justify-center active:scale-90 transition-all">
-        {{ kursi }}
-      </button>
-    </div>
+  <div class="w-full p-4 bg-white rounded-2xl border border-gray-100 shadow-sm">
+    <div class="max-h-64 overflow-y-auto pr-2">
+      <div class="grid grid-cols-5 gap-3 justify-items-center">
+        <button *ngFor="let kursi of seatsFiltered" 
+          (click)="pilihKursi(kursi)"
+          type="button"
+          [disabled]="kursiDisabled(kursi)"
+          [ngClass]="{
+            'bg-cyan-400 text-white border-cyan-400 shadow-sm shadow-cyan-100 scale-105': nomorKursi === kursi && !kursiDisabled(kursi),
+            'bg-slate-50 text-gray-700 border-gray-200 hover:border-cyan-300': nomorKursi !== kursi && !kursiDisabled(kursi),
+            'bg-gray-200 text-gray-400 border-gray-200 opacity-40 cursor-not-allowed line-through': kursiDisabled(kursi)
+          }"
+          class="h-9 w-full rounded-lg border text-xs font-black flex items-center justify-center active:scale-90 transition-all">
+          {{ kursi }}
+        </button>
 
-    <div *ngIf="seatsFiltered.length === 0" class="text-center py-6 flex flex-col items-center justify-center space-y-2">
-      <ion-icon name="sad-outline" class="text-2xl text-gray-300"></ion-icon>
-      <span class="text-xs font-bold text-gray-400">Nomor kursi tidak ditemukan</span>
+      </div>
+
+      <div *ngIf="seatsFiltered.length === 0" class="text-center py-6 flex flex-col items-center justify-center space-y-2">
+        <ion-icon name="sad-outline" class="text-2xl text-gray-300"></ion-icon>
+        <span class="text-xs font-bold text-gray-400">Nomor kursi tidak ditemukan</span>
+      </div>
     </div>
   </div>
 

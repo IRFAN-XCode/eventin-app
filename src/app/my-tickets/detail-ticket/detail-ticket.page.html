@@ -46,13 +46,17 @@
 
       <div class="p-6 bg-white flex flex-col items-center justify-center text-center">
         
-        <div class="p-3 border-2 border-cyan-400 rounded-2xl bg-white shadow-xs">
-          <qrcode 
-            [qrdata]="ticketDetail.kode_transaksi" 
-            [width]="180" 
-            [errorCorrectionLevel]="'M'">
-          </qrcode>
-        </div>
+      <div *ngIf="StringQrCode" class="p-3 border-2 border-cyan-400 rounded-2xl bg-white shadow-xs">
+        <qrcode 
+          [qrdata]="StringQrCode" 
+          [width]="180" 
+          [errorCorrectionLevel]="'M'">
+        </qrcode>
+      </div>
+
+      <div *ngIf="!StringQrCode" class="p-3 border-2 border-gray-200 rounded-2xl bg-gray-100 flex justify-center items-center h-[208px] w-[208px] animate-pulse mx-auto">
+        <ion-spinner name="crescent" color="primary"></ion-spinner>
+      </div>
 
         <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest mt-4">Kode Invoice Transaksi</span>
         <p class="font-mono font-black text-gray-800 text-lg tracking-wider m-0 mt-0.5 uppercase">{{ ticketDetail.kode_transaksi }}</p>
@@ -71,11 +75,11 @@
       <h4 class="text-xs font-black text-gray-800 uppercase tracking-wider m-0">Instruksi Penting:</h4>
       <div class="flex items-start space-x-2.5 text-xs text-gray-500 leading-normal">
         <ion-icon name="phone-portrait-outline" class="text-cyan-400 text-base flex-shrink-0"></ion-icon>
-        <p class="m-0">Tunjukkan QR Code ini secara utuh kepada panitia **UKM Malaka** di gerbang masuk pintu utama lokasi event.</p>
+        <p class="m-0">Tunjukkan QR Code ini secara utuh kepada panitia di gerbang masuk pintu utama lokasi event.</p>
       </div>
       <div class="flex items-start space-x-2.5 text-xs text-gray-500 leading-normal">
         <ion-icon name="sunny-outline" class="text-cyan-400 text-base flex-shrink-0"></ion-icon>
-        <p class="m-0">Pastikan tingkat kecerahan (*brightness*) layar HP kamu dalam keadaan maksimal saat melakukan *scanning* tiket.</p>
+        <p class="m-0">Pastikan tingkat kecerahan (brightness) layar HP kamu dalam keadaan maksimal saat melakukan *scanning* tiket.</p>
       </div>
     </div>
 

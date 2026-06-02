@@ -3,111 +3,121 @@
   <ion-title>Akun</ion-title>
 </div>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="bg-slate-50">
 
-  <div *ngIf="UserProfile; else belumLoginTemplate" class="flex items-center mt-8 mb-8 px-6 animate-fadeIn">
-    <div class="w-14 h-14 mr-3 bg-cyan-400 text-white rounded-full flex items-center justify-center font-black text-sm uppercase shadow-xs">
+  <div *ngIf="UserProfile; else belumLoginTemplate" class="flex items-center mt-8 mb-6 px-6 animate-fadeIn">
+    <div class="w-16 h-16 mr-4 bg-gradient-to-tr from-cyan-400 to-teal-400 text-white rounded-2xl flex items-center justify-center font-black text-lg uppercase shadow-md shadow-cyan-100">
       {{ (UserProfile?.nama | slice:0:1) || 'E' }}
     </div>
-
     <div>
-      <h2 class="text-lg font-bold text-gray-900 m-0">
+      <h2 class="text-xl font-extrabold text-slate-900 m-0">
         {{ UserProfile?.nama || 'Pengguna EventIn' }}
       </h2>
-      <p class="text-sm text-gray-600 m-0 mt-1">
-        {{ UserProfile?.email }}
+      <p class="text-xs font-medium text-slate-500 m-0 mt-1 flex items-center">
+        <ion-icon name="mail-outline" class="mr-1"></ion-icon> {{ UserProfile?.email }}
       </p>
     </div>
   </div>
 
   <ng-template #belumLoginTemplate>
-    <div class="flex flex-col items-center mt-8 mb-8 px-6 text-center animate-fadeIn">
-
-      <div class="flex w-full space-x-3">
+    <div class="flex flex-col items-center mt-10 mb-8 px-6 text-center animate-fadeIn">
+      <h2 class="text-lg font-bold text-slate-800 m-0">Selamat Datang di EventIn</h2>
+      <p class="text-xs text-slate-500 mt-1 mb-5">Masuk atau daftar akun untuk mulai mengelola tiket event.</p>
+      
+      <div class="flex w-full space-x-3 max-w-sm">
         <button routerLink="/login" 
-          class="flex-1 bg-cyan-400 text-white font-bold py-2.5 rounded-xl active:scale-95 transition-transform shadow-sm text-sm tracking-wide">
+          class="flex-1 bg-cyan-400 text-white font-bold py-3 rounded-xl active:scale-95 transition-all shadow-sm shadow-cyan-100 text-sm tracking-wide cursor-pointer">
           Masuk
         </button>
-
         <button routerLink="/regist" 
-          class="flex-1 bg-white text-cyan-400 border border-cyan-400 font-bold py-2.5 rounded-xl active:scale-95 transition-transform shadow-sm text-sm tracking-wide">
+          class="flex-1 bg-white text-cyan-400 border border-cyan-400 font-bold py-3 rounded-xl active:scale-95 transition-all shadow-sm text-sm tracking-wide cursor-pointer">
           Daftar
         </button>
       </div>
-
     </div>
   </ng-template>
 
-  <div class="px-6 flex flex-col">
-
-    <div routerLink="/my-profile"
-      class="flex items-center justify-between py-4 border-b border-gray-300 active:bg-gray-50 transition-colors">
-      <div class="flex items-center text-gray-800">
-        <ion-icon name="person-outline" class="text-xl mr-4"></ion-icon>
-        <span class="font-semibold text-sm">Lihat Profile</span>
+  <div class="px-6 mb-8">
+    
+    <div *ngIf="UserProfile" class="bg-white rounded-2xl p-2 shadow-sm border border-slate-100 mb-5">
+      <div class="px-4 py-2 text-lg font-bold text-slate-400 tracking-wider uppercase">Pengaturan Akun</div>
+      
+      <div routerLink="/my-profile"
+        class="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 active:bg-slate-100 transition-all cursor-pointer">
+        <div class="flex items-center text-slate-700">
+          <div class="w-8 h-8 bg-cyan-50 text-cyan-500 rounded-lg flex items-center justify-center mr-3 text-lg"><ion-icon name="person-outline"></ion-icon></div>
+          <span class="font-semibold text-sm">Lihat Profile</span>
+        </div>
+        <ion-icon name="chevron-forward-outline" class="text-slate-400 text-sm"></ion-icon>
       </div>
-      <ion-icon name="chevron-forward-outline" class="text-gray-400"></ion-icon>
+
+      <div routerLink="/new-password"
+        class="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 active:bg-slate-100 transition-all cursor-pointer">
+        <div class="flex items-center text-slate-700">
+          <div class="w-8 h-8 bg-amber-50 text-amber-500 rounded-lg flex items-center justify-center mr-3 text-lg"><ion-icon name="key-outline"></ion-icon></div>
+          <span class="font-semibold text-sm">Ganti Kata Sandi</span>
+        </div>
+        <ion-icon name="chevron-forward-outline" class="text-slate-400 text-sm"></ion-icon>
+      </div>
+
+      <div (click)="myCertificate()"
+        class="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 active:bg-slate-100 transition-all cursor-pointer">
+        <div class="flex items-center text-slate-700">
+          <div class="w-8 h-8 bg-purple-50 text-purple-500 rounded-lg flex items-center justify-center mr-3 text-lg"><ion-icon name="ribbon-outline"></ion-icon></div>
+          <span class="font-semibold text-sm">Sertifikat Saya</span>
+        </div>
+        <ion-icon name="chevron-forward-outline" class="text-slate-400 text-sm"></ion-icon>
+      </div>
+
+      <div routerLink="/regist-organizer"
+        class="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 active:bg-slate-100 transition-all cursor-pointer">
+        <div class="flex items-center text-slate-700">
+          <div class="w-8 h-8 bg-emerald-50 text-emerald-500 rounded-lg flex items-center justify-center mr-3 text-lg"><ion-icon name="calendar-outline"></ion-icon></div>
+          <span class="font-semibold text-sm">Daftar Organizer</span>
+        </div>
+        <ion-icon name="chevron-forward-outline" class="text-slate-400 text-sm"></ion-icon>
+      </div>
     </div>
 
-    <div routerLink="/new-password"
-      class="flex items-center justify-between py-4 border-b border-gray-300 active:bg-gray-50 transition-colors">
-      <div class="flex items-center text-gray-800">
-        <ion-icon name="key-outline" class="text-xl mr-4"></ion-icon>
-        <span class="font-semibold text-sm">Ganti Kata Sandi</span>
+    <div class="bg-white rounded-2xl p-2 shadow-sm border border-slate-100 mb-5">
+      <div class="px-4 py-2 text-lg font-bold text-slate-400 tracking-wider uppercase">Informasi & Bantuan</div>
+
+      <div routerLink="/toc"
+        class="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 active:bg-slate-100 transition-all cursor-pointer">
+        <div class="flex items-center text-slate-700">
+          <div class="w-8 h-8 bg-blue-50 text-blue-500 rounded-lg flex items-center justify-center mr-3 text-lg"><ion-icon name="document-text-outline"></ion-icon></div>
+          <span class="font-semibold text-sm">Syarat & Ketentuan</span>
+        </div>
+        <ion-icon name="chevron-forward-outline" class="text-slate-400 text-sm"></ion-icon>
       </div>
-      <ion-icon name="chevron-forward-outline" class="text-gray-400"></ion-icon>
+
+      <div routerLink="/faq"
+        class="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 active:bg-slate-100 transition-all cursor-pointer">
+        <div class="flex items-center text-slate-700">
+          <div class="w-8 h-8 bg-indigo-50 text-indigo-500 rounded-lg flex items-center justify-center mr-3 text-lg"><ion-icon name="chatbubble-outline"></ion-icon></div>
+          <span class="font-semibold text-sm">FAQ</span>
+        </div>
+        <ion-icon name="chevron-forward-outline" class="text-slate-400 text-sm"></ion-icon>
+      </div>
+
+      <div routerLink="/privacy-policy"
+        class="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 active:bg-slate-100 transition-all cursor-pointer">
+        <div class="flex items-center text-slate-700">
+          <div class="w-8 h-8 bg-teal-50 text-teal-500 rounded-lg flex items-center justify-center mr-3 text-lg"><ion-icon name="shield-half-outline"></ion-icon></div>
+          <span class="font-semibold text-sm">Kebijakan Privasi</span>
+        </div>
+        <ion-icon name="chevron-forward-outline" class="text-slate-400 text-sm"></ion-icon>
+      </div>
     </div>
 
-    <div routerLink="/toc"
-      class="flex items-center justify-between py-4 border-b border-gray-300 active:bg-gray-50 transition-colors">
-      <div class="flex items-center text-gray-800">
-        <ion-icon name="document-text-outline" class="text-xl mr-4"></ion-icon>
-        <span class="font-semibold text-sm">Syarat & ketentuan</span>
-      </div>
-      <ion-icon name="chevron-forward-outline" class="text-gray-400"></ion-icon>
-    </div>
-
-    <div routerLink="/faq"
-      class="flex items-center justify-between py-4 border-b border-gray-300 active:bg-gray-50 transition-colors">
-      <div class="flex items-center text-gray-800">
-        <ion-icon name="chatbubble-outline" class="text-xl mr-4"></ion-icon>
-        <span class="font-semibold text-sm">FAQ</span>
-      </div>
-      <ion-icon name="chevron-forward-outline" class="text-gray-400"></ion-icon>
-    </div>
-
-    <div routerLink="/privacy-policy"
-      class="flex items-center justify-between py-4 border-b border-gray-300 active:bg-gray-50 transition-colors">
-      <div class="flex items-center text-gray-800">
-        <ion-icon name="shield-half-outline" class="text-xl mr-4"></ion-icon>
-        <span class="font-semibold text-sm">Kebijakan Privasi</span>
-      </div>
-      <ion-icon name="chevron-forward-outline" class="text-gray-400"></ion-icon>
-    </div>
-
-    <div (click)="myCertificate()"
-      class="flex items-center justify-between py-4 border-b border-gray-300 active:bg-gray-50 transition-colors">
-      <div class="flex items-center text-gray-800">
-        <ion-icon name="ribbon-outline" class="text-xl mr-4"></ion-icon>
-        <span class="font-semibold text-sm">Sertifikat Saya</span>
-      </div>
-      <ion-icon name="chevron-forward-outline" class="text-gray-400"></ion-icon>
-    </div>
-
-    <div routerLink="/my-event"
-      class="flex items-center justify-between py-4 border-b border-gray-300 active:bg-gray-50 transition-colors">
-      <div class="flex items-center text-gray-800">
-        <ion-icon name="calendar-outline" class="text-xl mr-4"></ion-icon>
-        <span class="font-semibold text-sm">Event Saya</span>
-      </div>
-      <ion-icon name="chevron-forward-outline" class="text-gray-400"></ion-icon>
-    </div>
-
-    <div (click)="onLogout()"
-      class="flex items-center justify-between py-4 border-b border-gray-300 active:bg-red-50 transition-colors">
-      <div class="flex items-center text-red-500">
-        <ion-icon name="log-out-outline" class="text-xl mr-4"></ion-icon>
-        <span class="font-bold text-sm">Keluar</span>
+    <div *ngIf="UserProfile" class="bg-white rounded-2xl p-2 shadow-sm border border-slate-100">
+      <div (click)="onLogout()"
+        class="flex items-center justify-between p-3 rounded-xl hover:bg-red-50 active:bg-red-100 transition-all cursor-pointer group">
+        <div class="flex items-center text-red-500">
+          <div class="w-8 h-8 bg-red-50 group-hover:bg-red-100 rounded-lg flex items-center justify-center mr-3 text-lg"><ion-icon name="log-out-outline"></ion-icon></div>
+          <span class="font-bold text-sm">Keluar Akun</span>
+        </div>
+        <ion-icon name="chevron-forward-outline" class="text-red-300 group-hover:text-red-500 text-sm"></ion-icon>
       </div>
     </div>
 

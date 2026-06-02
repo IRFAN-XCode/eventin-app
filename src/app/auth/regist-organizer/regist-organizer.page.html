@@ -15,7 +15,7 @@
     <div [ngClass]="currentStep >= 4 ? 'text-[#16e2eb]' : 'text-gray-400'" class="font-bold text-xs transition-colors">4. Akun</div>
   </div>
 
-  <div class="p-6" [formGroup]="registerForm">
+  <div class="p-6" [formGroup]="registerForm" (submit)="$event.preventDefault()">
 
     <div *ngIf="currentStep === 1" class="animate-fade-in">
       <h2 class="text-lg font-bold text-cyan-500 mb-4">Informasi Personal</h2>
@@ -44,7 +44,7 @@
       <div class="relative mb-4">
         <ion-select formControlName="kategori_event" label="Kategori Event" label-placement="floating" fill="outline">
           <ion-select-option value="musik">Musik</ion-select-option>
-          <ion-select-option value="teater">Teater</ion-select-option>
+          <ion-select-option value="pameran">Pameran</ion-select-option>
           <ion-select-option value="seminar">Seminar</ion-select-option>
           <ion-select-option value="workshop">Workshop</ion-select-option>
         </ion-select>
@@ -54,6 +54,9 @@
       </div>
       <div class="relative mb-4">
         <ion-input formControlName="lokasi" label="Lokasi Event" type="text" label-placement="floating" fill="outline" placeholder="Masukkan Lokasi"></ion-input>
+      </div>
+      <div class="relative mb-4">
+        <ion-input formControlName="waktu" label="Waktu" type="text" label-placement="floating" fill="outline" placeholder="Masukkan Lokasi"></ion-input>
       </div>
       <div class="grid grid-cols-2 gap-4 mb-4">
         <ion-input formControlName="tgl_mulai" label="Tgl Mulai" type="date" label-placement="floating" fill="outline"></ion-input>
@@ -73,34 +76,46 @@
 
     <div *ngIf="currentStep === 3" class="animate-fade-in">
       <h2 class="text-lg font-bold text-cyan-500 mb-4">Pengaturan Tiket</h2>
-      
+
       <div class="relative mb-4">
-        <ion-select formControlName="type_event" label="Jenis Pembayaran" label-placement="floating" fill="outline">
+        <ion-select formControlName="type_event" label="Tipe Event" label-placement="floating" fill="outline">
           <ion-select-option value="unpaid">Gratis</ion-select-option>
           <ion-select-option value="paid">Berbayar</ion-select-option>
         </ion-select>
+        <p class="text-xs text-cyan-600 mt-1 ml-1" *ngIf="registerForm.get('type_event')?.value === 'unpaid'">
+          * Untuk event gratis, Anda dapat mengisi harga dengan angka 0.
+        </p>
       </div>
-
+    
+      <div class="relative mb-6">
+        <ion-select formControlName="opsi_tiket" label="Kategori Tiket yang Dijual" label-placement="floating" fill="outline">
+          <ion-select-option value="reg">Reguler</ion-select-option>
+          <ion-select-option value="vip">VIP</ion-select-option>
+          <ion-select-option value="both">Keduanya (Reguler & VIP)</ion-select-option>
+        </ion-select>
+      </div>
+    
       <div class="bg-white border border-cyan-400 rounded-xl p-3 mb-6 flex justify-between items-center shadow-sm">
         <div>
-          <p class="text-sm font-bold text-gray-800">Gunakan Kursi (Seating)</p>
-          <p class="text-xs text-gray-500">Aktifkan jika event memiliki nomor kursi</p>
+          <p class="text-sm font-bold text-gray-800">Gunakan Nomor Kursi</p>
+          <p class="text-xs text-gray-500">Aktifkan jika event memiliki seating layout</p>
         </div>
         <ion-toggle formControlName="seats" color="primary"></ion-toggle>
       </div>
-
-      <p class="text-xs text-cyan-600 mb-3 ml-1 font-medium">* Wajib mengisi minimal satu harga tiket (Reguler/VIP)</p>
-      
-      <div class="grid grid-cols-2 gap-4 mb-4">
-        <ion-input formControlName="harga_reg" label="Harga Reguler" type="number" label-placement="floating" fill="outline"></ion-input>
-        <ion-input formControlName="harga_vip" label="Harga VIP" type="number" label-placement="floating" fill="outline"></ion-input>
+    
+      <div *ngIf="showReguler()" class="p-4 bg-gray-50 border border-gray-200 rounded-xl mb-4 animate-fade-in">
+        <p class="text-sm font-bold text-gray-700 mb-3">Pengaturan Reguler</p>
+        <div class="grid grid-rows-2 gap-4">
+          <ion-input formControlName="harga_reg" label="Harga Reguler" type="number" label-placement="floating" fill="outline" class="bg-white"></ion-input>
+          <ion-input formControlName="kapasitas_reg" label="Kapasitas / Kuota" type="number" label-placement="floating" fill="outline" class="bg-white"></ion-input>
+        </div>
       </div>
-
-      <div *ngIf="registerForm.get('seats')?.value" class="p-4 bg-cyan-50 border border-cyan-200 rounded-xl mb-4 animate-fade-in">
-        <p class="text-sm font-bold text-cyan-600 mb-3">Pengaturan Kapasitas Kursi</p>
-        <div class="grid grid-cols-2 gap-4">
-          <ion-input formControlName="kapasitas_reg" label="Kapasitas Reguler" type="number" label-placement="floating" fill="outline" class="bg-white"></ion-input>
-          <ion-input formControlName="kapasitas_vip" label="Kapasitas VIP" type="number" label-placement="floating" fill="outline" class="bg-white"></ion-input>
+    
+      <div *ngIf="showVip()" class="p-4 bg-[#fffdf0] border border-[#fce47c] rounded-xl mb-4 animate-fade-in">
+        <p class="text-sm font-bold text-yellow-700 mb-3">Pengaturan VIP</p>
+        <div class="grid grid-rows-2 gap-4">
+          <ion-input formControlName="harga_vip" label="Harga VIP" type="number" label-placement="floating" fill="outline" class="bg-white"></ion-input>
+          <ion-input formControlName="kapasitas_vip" label="Kapasitas / Kuota" type="number" label-placement="floating" fill="outline" class="bg-white"></ion-input>
         </div>
       </div>
     </div>
@@ -120,13 +135,13 @@
 
 <ion-footer class="ion-no-border bg-cyan-50 shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
   <div class="px-6 py-4 flex gap-3">
-    <button *ngIf="currentStep > 1" (click)="prevStep()" class="w-1/3 bg-gray-200 text-gray-700 font-bold py-3.5 rounded-xl active:scale-95 transition-transform">
+    <button type="button" *ngIf="currentStep > 1" (click)="prevStep()" class="w-1/3 bg-gray-200 text-gray-700 font-bold py-3.5 rounded-xl active:scale-95 transition-transform">
       Kembali
     </button>
-    <button *ngIf="currentStep < 4" (click)="nextStep()" class="flex-1 bg-[#16e2eb] text-white font-bold py-3.5 rounded-xl active:scale-95 transition-transform">
+    <button type="button" *ngIf="currentStep < 4" (click)="nextStep()" class="flex-1 bg-[#16e2eb] text-white font-bold py-3.5 rounded-xl active:scale-95 transition-transform">
       Lanjut
     </button>
-    <button *ngIf="currentStep === 4" (click)="submitForm()" class="flex-1 bg-[#00D600] text-white font-bold py-3.5 rounded-xl active:scale-95 transition-transform">
+    <button type="button" *ngIf="currentStep === 4" (click)="submitForm()" class="flex-1 bg-[#00D600] text-white font-bold py-3.5 rounded-xl active:scale-95 transition-transform">
       Daftar Organizer
     </button>
   </div>

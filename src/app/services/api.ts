@@ -149,7 +149,7 @@ export class Api {
     return this.http.get(`${environment.apiUrl}/my-tickets`, { headers });
   }
 
-  getDetailTicketManual(kodeTransaksi: string, token: any): Observable<any> {
+  getDetailTicket(kodeTransaksi: string, token: any): Observable<any> {
     const headers = new HttpHeaders({
       'Authorization': `${token}`
     });

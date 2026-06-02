@@ -38,6 +38,47 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
 
+/* --- EventIn Web UI Variables --- */
+:root {
+    --color-primary: #006876;
+    --color-primary-container: #00bcd4;
+    --font-headline: "Manrope", sans-serif;
+    --font-body: "Inter", sans-serif;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: #f8fafb;
+    background-image: radial-gradient(circle at 2px 2px, #e1e3e4 1px, transparent 0);
+    background-size: 32px 32px;
+}
+
+ion-content {
+    --background: transparent;
+    --ion-background-color: transparent;
+}
+
+.font-headline {
+    font-family: var(--font-headline);
+}
+
+.font-body {
+    font-family: var(--font-body);
+}
+
+.primary-gradient {
+    background: linear-gradient(135deg, #006876 0%, #00bcd4 100%);
+}
+
+.glass-panel {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(187, 201, 204, 0.3);
+}
+/* ------------------------------- */
+
+
 /* Class untuk menyembunyikan scrollbar */
 .no-scrollbar {
     -ms-overflow-style: none;

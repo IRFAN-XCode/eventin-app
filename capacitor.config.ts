@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'EventInApp',
+  appId: 'id.my.eventin.fp',
+  appName: 'EventIn',
   webDir: 'www'
 };
 

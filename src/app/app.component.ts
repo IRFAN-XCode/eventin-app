@@ -14,31 +14,34 @@ export class AppComponent {
     public router: Router,
     private platform: Platform
   ) {
-    const token = localStorage.getItem('token');
-      if (token) {
-        this.router.navigateByUrl('/home');
-        return;
-      }
-      this.autoInitializeApp();
+    this.platform.ready().then(() => {
       this.initializeBackButtonHandler();
+      const token = localStorage.getItem('token');
+      const FirstTime = localStorage.getItem('FirstTime');
+      
+      if (token || FirstTime === 'false') {
+        this.router.navigateByUrl('/home', { replaceUrl: true });
+      } else {
+        this.autoInitializeApp(); 
+      }
+    });
   }
 
   autoInitializeApp() {
-    this.router.navigateByUrl('splash');
+    this.router.navigateByUrl('/splash', { replaceUrl: true });
   }
 
   private initializeBackButtonHandler() {
-    this.platform.ready().then(() => {
+    
       this.platform.backButton.subscribeWithPriority(10, () => {
         const currentPath = this.router.url.split('?')[0].split('#')[0];
 
-        if (currentPath === '/welcome' || currentPath === '/home' || currentPath === '/') {
+        if (currentPath === '/splash' || currentPath === '/welcome' || currentPath === '/home' || currentPath === '/') {
           CapacitorApp.exitApp();
           return;
         }
 
         this.router.navigateByUrl('/home', { replaceUrl: true });
       });
-    });
+    };
   }
-}

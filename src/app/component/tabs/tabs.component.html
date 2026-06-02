@@ -1,23 +1,25 @@
-<ion-footer class="ion-no-border">
-  <div class="bg-cyan-400 flex justify-around items-center py-3 text-white">
-    <div class="flex flex-col items-center" tabs="home" routerLink="/home" routerLinkActive="active-link">
-      <ion-icon name="home-outline" class="text-2xl"></ion-icon>
-      <span class="text-xs">Beranda</span>
+<ion-footer class="ion-no-border bg-transparent font-body relative z-50">
+  <div class="glass-panel mx-4 mb-4 rounded-3xl flex justify-around items-center py-3 text-slate-400 shadow-xl shadow-cyan-500/10 border border-white/60">
+    
+    <div class="flex flex-col items-center transition-all cursor-pointer relative group" tabs="home" routerLink="/home" routerLinkActive="text-[#00bcd4] scale-110 drop-shadow-md">
+      <span class="material-symbols-outlined text-2xl group-active:scale-95 transition-transform">home</span>
+      <span class="text-[10px] font-bold mt-0.5 opacity-0 group-[.text-\\[\\#00bcd4\\]]:opacity-100 transition-opacity absolute -bottom-4">Beranda</span>
     </div>
-    <div class="flex flex-col items-center opacity-80" tabs="events" routerLink="/events"
-      routerLinkActive="active-link">
-      <ion-icon name="compass-outline" class="text-2xl"></ion-icon>
-      <span class="text-xs">Jelajah</span>
+    
+    <div class="flex flex-col items-center transition-all cursor-pointer relative group" tabs="events" routerLink="/events" routerLinkActive="text-[#00bcd4] scale-110 drop-shadow-md">
+      <span class="material-symbols-outlined text-2xl group-active:scale-95 transition-transform">explore</span>
+      <span class="text-[10px] font-bold mt-0.5 opacity-0 group-[.text-\\[\\#00bcd4\\]]:opacity-100 transition-opacity absolute -bottom-4">Jelajah</span>
     </div>
-    <div class="flex flex-col items-center opacity-80" tabs="my-tickets" routerLink="/my-tickets"
-      routerLinkActive="active-link">
-      <ion-icon name="ticket-outline" class="text-2xl"></ion-icon>
-      <span class="text-xs">Tiket Saya</span>
+    
+    <div class="flex flex-col items-center transition-all cursor-pointer relative group" tabs="my-tickets" routerLink="/my-tickets" routerLinkActive="text-[#00bcd4] scale-110 drop-shadow-md">
+      <span class="material-symbols-outlined text-2xl group-active:scale-95 transition-transform">confirmation_number</span>
+      <span class="text-[10px] font-bold mt-0.5 opacity-0 group-[.text-\\[\\#00bcd4\\]]:opacity-100 transition-opacity absolute -bottom-4">Tiket</span>
     </div>
-    <div class="flex flex-col items-center opacity-80" tabs="account" routerLink="/account"
-      routerLinkActive="active-link">
-      <ion-icon name="person-outline" class="text-2xl"></ion-icon>
-      <span class="text-xs">Akun</span>
+    
+    <div class="flex flex-col items-center transition-all cursor-pointer relative group" tabs="account" routerLink="/account" routerLinkActive="text-[#00bcd4] scale-110 drop-shadow-md">
+      <span class="material-symbols-outlined text-2xl group-active:scale-95 transition-transform">person</span>
+      <span class="text-[10px] font-bold mt-0.5 opacity-0 group-[.text-\\[\\#00bcd4\\]]:opacity-100 transition-opacity absolute -bottom-4">Akun</span>
     </div>
+    
   </div>
 </ion-footer>
