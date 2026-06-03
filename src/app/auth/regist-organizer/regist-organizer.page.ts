@@ -27,11 +27,12 @@ export class RegistOrganizerPage implements OnInit {
 
   ngOnInit() {
     this.registerForm = this.fb.group({
+      // Step 1: Personal
       nama: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       nomor_handphone: ['', Validators.required],
-      alamat: ['', Validators.required],
       
+      // Step 2: Event
       nama_eo: ['', Validators.required],
       nama_event: ['', Validators.required],
       kategori_event: ['', Validators.required],
@@ -39,8 +40,9 @@ export class RegistOrganizerPage implements OnInit {
       lokasi: ['', Validators.required],
       waktu: ['', Validators.required],
       tgl_mulai: ['', Validators.required],
-      tgl_berakhir: ['', Validators.required],
+      tgl_berakhir: [''], // ✅ Dihidupkan kembali (tidak di-comment) agar tidak bikin macet step 2
       
+      // Step 3: Tiket
       type_event: ['', Validators.required],
       opsi_tiket: ['', Validators.required],
       seats: [false], 
@@ -49,6 +51,7 @@ export class RegistOrganizerPage implements OnInit {
       kapasitas_reg: [''],
       kapasitas_vip: [''],
 
+      // Step 4: Akun
       password: ['', [Validators.required, Validators.minLength(6)]],
       password_confirmation: ['', Validators.required]
     }, { 
@@ -68,8 +71,9 @@ export class RegistOrganizerPage implements OnInit {
 
   dynamicPriceValidator(control: AbstractControl): ValidationErrors | null {
     const opsi = control.get('opsi_tiket')?.value;
+    const typeEvent = control.get('type_event')?.value;
     
-    if (!opsi) return null; 
+    if (!opsi || typeEvent === 'unpaid') return null; // Jika gratis, abaikan validasi harga wajib isi
 
     const regValue = control.get('harga_reg')?.value;
     const vipValue = control.get('harga_vip')?.value;
@@ -80,11 +84,9 @@ export class RegistOrganizerPage implements OnInit {
     if (opsi === 'reg' && isRegEmpty) {
       return { priceRequiredError: 'Harga Reguler wajib diisi' };
     }
-    
     if (opsi === 'vip' && isVipEmpty) {
       return { priceRequiredError: 'Harga VIP wajib diisi' };
     }
-    
     if (opsi === 'both' && (isRegEmpty || isVipEmpty)) {
       return { priceRequiredError: 'Harga Reguler dan VIP wajib diisi' };
     }
@@ -96,9 +98,11 @@ export class RegistOrganizerPage implements OnInit {
     let isValid = true;
     for (const field of fields) {
       const control = this.registerForm.get(field);
-      if (control && control.invalid) {
-        control.markAsTouched();
-        isValid = false;
+      if (control) {
+        if (control.invalid) {
+          control.markAsTouched();
+          isValid = false;
+        }
       }
     }
     return isValid;
@@ -106,7 +110,7 @@ export class RegistOrganizerPage implements OnInit {
 
   nextStep() {
     if (this.currentStep === 1) {
-      const fields = ['nama', 'email', 'nomor_handphone', 'alamat'];
+      const fields = ['nama', 'email', 'nomor_handphone']; // ✅ Menghapus 'alamat' karena di HTML tidak ada input alamat
       if (!this.isStepValid(fields)) {
         this.showToast('Mohon lengkapi semua Data Personal dengan benar.', 'warning');
         return;
@@ -119,13 +123,13 @@ export class RegistOrganizerPage implements OnInit {
         this.showToast('Mohon lengkapi semua Informasi Event.', 'warning');
         return;
       }
+
       const tglMulai = this.registerForm.get('tgl_mulai')?.value;
       const tglBerakhir = this.registerForm.get('tgl_berakhir')?.value;
       
       if (tglMulai && tglBerakhir) {
         const start = new Date(tglMulai);
         const end = new Date(tglBerakhir);
-        
         if (end < start) {
           this.showToast('Tanggal berakhir tidak boleh lebih cepat dari tanggal mulai.', 'warning');
           return;
@@ -158,7 +162,6 @@ export class RegistOrganizerPage implements OnInit {
         this.showToast('Mohon isi Kapasitas / Kuota untuk tiket Reguler.', 'warning');
         return;
       }
-      
       if (this.showVip() && !capVip) {
         this.showToast('Mohon isi Kapasitas / Kuota untuk tiket VIP.', 'warning');
         return;
@@ -169,7 +172,6 @@ export class RegistOrganizerPage implements OnInit {
       this.currentStep++;
     }
   }
-
 
   prevStep() {
     if (this.currentStep > 1) {
@@ -202,8 +204,6 @@ export class RegistOrganizerPage implements OnInit {
   }
 
   async submitForm() {
-
-    this.currentStep;
     const fields = ['password', 'password_confirmation'];
     if (!this.isStepValid(fields)) {
       this.showToast('Mohon lengkapi Password Anda.', 'warning');
@@ -230,18 +230,20 @@ export class RegistOrganizerPage implements OnInit {
       formData.append(key, value);
     });
 
-    formData.append('gambar_event', this.selectedImage as File);
+    formData.append('gambar_event', this.selectedImage as File); 
     formData.append('file_proposal', this.selectedPdf as File);
 
     this.api.registerOrganizer(formData).subscribe({
       next: (res: any) => {
         loading.dismiss();
-        this.showToast('Registrasi Organizer dan Event Berhasil!', 'success');
-        this.registerForm.reset();
-        this.selectedImage = null;
-        this.selectedPdf = null;
-        this.currentStep = 1;
-        this.router.navigate(['/login-organizer']);
+        if (res.success) {
+          this.showToast('Registrasi Organizer dan Event Berhasil!', 'success');
+          this.registerForm.reset();
+          this.selectedImage = null;
+          this.selectedPdf = null;
+          this.currentStep = 1;
+          this.router.navigate(['/account']);
+        }
       },
       error: (err: any) => {
         loading.dismiss();

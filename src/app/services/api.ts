@@ -39,6 +39,10 @@ export class Api {
     return this.http.get(`${environment.apiUrl}/event-detail/${id}`);
   }
 
+  getEventSeats(id: any): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/events/${id}/seats`)
+  }
+
   register(data: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/register`, data, {
       headers: {
@@ -74,7 +78,7 @@ export class Api {
   }
 
   registerOrganizer(data: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/register-organizer`, data, {
+    return this.http.post(`${environment.apiUrl}/regist-organizer`, data, {
       headers: {
         'Accept': 'application/json'
       }
@@ -139,7 +143,7 @@ export class Api {
       'Authorization': `${token}`
     });
 
-    return this.http.post(`${environment.apiUrl}/checkout-event`, formData, { headers });
+    return this.http.post(`${environment.apiUrl}/checkout-manual`, formData, { headers });
   }
 
   getMyTickets(token: any): Observable<any> {

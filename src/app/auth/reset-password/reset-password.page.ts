@@ -18,6 +18,9 @@ export class ResetPasswordPage implements OnInit {
   passwordBaru: string = '';
   konfirmasiPassword: string = '';
 
+  showPasswordBaru: boolean = false;
+  showKonfirmasiPassword: boolean = false;
+
   constructor(
     private toastCtrl: ToastController,
     private router: Router,
@@ -38,6 +41,7 @@ export class ResetPasswordPage implements OnInit {
         if (res.success) {
           this.presentToast(res.message, 'success');
           this.currentStep = 2;
+          console.log(this.currentStep);
         }
       },
       error: (err) => {

@@ -22,101 +22,103 @@
     <h3 class="text-xs font-black text-gray-400 uppercase tracking-wider ml-1">Pilih Kategori Tiket</h3>
 
     <div class="space-y-4">
-    <div (click)="setKategoriTiket('reguler')" 
-      class="w-full bg-white rounded-[24px] border-2 p-5 flex flex-col relative transition-all active:scale-[0.99] shadow-xs {{ jenisTiket === 'reguler' ? 'border-[#16e2eb]' : 'border-gray-200' }}">
-      
-      <div class="flex flex-col pb-3">
-        <span class="text-xl font-extrabold text-gray-900 tracking-tight">Reguler</span>
-        <span class="text-[11px] text-gray-400 font-medium mt-0.5">Sisa Kuota: {{ eventDetail.kapasitas_reg }} tiket</span>
-      </div>
-      
-      <div class="w-full h-[1.5px] bg-[#16e2eb]"></div>
-      
-      <div class="flex items-center justify-between pt-4">
-        <span class="text-lg font-black text-gray-900">
-          {{ eventDetail.harga_reg | currency:'IDR':'symbol-narrow':'1.0-0' }}
-        </span>
+      <div (click)="setKategoriTiket('reguler')" 
+        class="w-full bg-white rounded-[24px] border-2 p-5 flex flex-col relative transition-all active:scale-[0.99] shadow-xs {{ jenisTiket === 'reguler' ? 'border-[#16e2eb]' : 'border-gray-200' }}">
         
-        <button type="button"
-          class="px-6 py-2 rounded-xl text-sm font-extrabold transition-all {{ jenisTiket === 'reguler' ? 'bg-[#16e2eb] text-white shadow-sm shadow-cyan-100' : 'bg-gray-100 text-gray-500' }}">
-          {{ jenisTiket === 'reguler' ? 'Dipilih' : 'Pilih' }}
-        </button>
+        <div class="flex flex-col pb-3">
+          <span class="text-xl font-extrabold text-gray-900 tracking-tight">Reguler</span>
+          <span class="text-[11px] text-gray-400 font-medium mt-0.5">Sisa Kuota: {{ eventDetail.kapasitas_reg }} tiket</span>
+        </div>
+        
+        <div class="w-full h-[1.5px] bg-[#16e2eb]"></div>
+        
+        <div class="flex items-center justify-between pt-4">
+          <span class="text-lg font-black text-gray-900">
+            {{ eventDetail.harga_reg | currency:'IDR':'symbol-narrow':'1.0-0' }}
+          </span>
+          
+          <button type="button"
+            class="px-6 py-2 rounded-xl text-sm font-extrabold transition-all {{ jenisTiket === 'reguler' ? 'bg-[#16e2eb] text-white shadow-sm shadow-cyan-100' : 'bg-gray-100 text-gray-500' }}">
+            {{ jenisTiket === 'reguler' ? 'Dipilih' : 'Pilih' }}
+          </button>
+        </div>
       </div>
-    </div>
 
-    <div *ngIf="eventDetail.harga_vip > 0" (click)="setKategoriTiket('vip')" 
-      class="w-full bg-white rounded-[24px] border-2 p-5 flex flex-col relative transition-all active:scale-[0.99] shadow-xs {{ jenisTiket === 'vip' ? 'border-[#16e2eb]' : 'border-gray-200' }}">
-      
-      <div class="flex flex-col pb-3">
-        <span class="text-xl font-extrabold text-gray-900 tracking-tight">VIP</span>
-        <span class="text-[11px] text-gray-400 font-medium mt-0.5">Sisa Kuota: {{ eventDetail.kapasitas_vip }} tiket</span>
-      </div>
-      
-      <div class="w-full h-[1.5px] bg-[#16e2eb]"></div>
-      
-      <div class="flex items-center justify-between pt-4">
-        <span class="text-lg font-black text-gray-900">
-          {{ eventDetail.harga_vip | currency:'IDR':'symbol-narrow':'1.0-0' }}
-        </span>
+      <div *ngIf="eventDetail.harga_vip > 0" (click)="setKategoriTiket('vip')" 
+        class="w-full bg-white rounded-[24px] border-2 p-5 flex flex-col relative transition-all active:scale-[0.99] shadow-xs {{ jenisTiket === 'vip' ? 'border-[#16e2eb]' : 'border-gray-200' }}">
         
-        <button type="button"
-          class="px-6 py-2 rounded-xl text-sm font-extrabold transition-all {{ jenisTiket === 'vip' ? 'bg-[#16e2eb] text-white shadow-sm shadow-cyan-100' : 'bg-gray-100 text-gray-500' }}">
-          {{ jenisTiket === 'vip' ? 'Dipilih' : 'Pilih' }}
-        </button>
+        <div class="flex flex-col pb-3">
+          <span class="text-xl font-extrabold text-gray-900 tracking-tight">VIP</span>
+          <span class="text-[11px] text-gray-400 font-medium mt-0.5">Sisa Kuota: {{ eventDetail.kapasitas_vip }} tiket</span>
+        </div>
+        
+        <div class="w-full h-[1.5px] bg-[#16e2eb]"></div>
+        
+        <div class="flex items-center justify-between pt-4">
+          <span class="text-lg font-black text-gray-900">
+            {{ eventDetail.harga_vip | currency:'IDR':'symbol-narrow':'1.0-0' }}
+          </span>
+          
+          <button type="button"
+            class="px-6 py-2 rounded-xl text-sm font-extrabold transition-all {{ jenisTiket === 'vip' ? 'bg-[#16e2eb] text-white shadow-sm shadow-cyan-100' : 'bg-gray-100 text-gray-500' }}">
+            {{ jenisTiket === 'vip' ? 'Dipilih' : 'Pilih' }}
+          </button>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 
   <div *ngIf="currentStep === 2 && hasSeats" class="p-5 space-y-4">
-  <div class="flex flex-col space-y-1">
-    <h3 class="text-xs font-black text-gray-400 uppercase tracking-wider ml-1">Pilih Nomor Kursi (1 - {{ jenisTiket === 'vip' ? eventDetail.kapasitas_vip : eventDetail.kapasitas_reg }})</h3>
-  </div>
+    <div class="flex flex-col space-y-1">
+      <h3 class="text-xs font-black text-gray-400 uppercase tracking-wider ml-1">
+        Pilih Nomor Kursi (1 - {{ jenisTiket === 'vip' ? eventDetail.kapasitas_vip : eventDetail.kapasitas_reg }})
+      </h3>
+    </div>
 
-  <div class="w-full relative flex items-center">
-    <ion-icon name="search-outline" class="absolute left-4 text-gray-400 text-lg"></ion-icon>
-    <input 
-      type="text" 
-      [(ngModel)]="searchQuery" 
-      (input)="filterKursi()"
-      placeholder="Cari nomor kursi (Contoh: R1, V5)..." 
-      class="w-full bg-slate-50 border border-gray-200 rounded-2xl py-3 pl-11 pr-4 text-sm font-medium text-gray-700 placeholder-gray-400 focus:outline-none focus:border-cyan-400 focus:bg-white transition-all"
-    />
-    <button *ngIf="searchQuery" (click)="clearSearch()" class="absolute right-4 text-gray-400 hover:text-gray-600">
-      <ion-icon name="close-circle"></ion-icon>
-    </button>
-  </div>
+    <div class="w-full relative flex items-center">
+      <ion-icon name="search-outline" class="absolute left-4 text-gray-400 text-lg"></ion-icon>
+      <input 
+        type="text" 
+        [(ngModel)]="searchQuery" 
+        (input)="filterKursi()"
+        placeholder="Cari nomor kursi (Contoh: R1, V5)..." 
+        class="w-full bg-slate-50 border border-gray-200 rounded-2xl py-3 pl-11 pr-4 text-sm font-medium text-gray-700 placeholder-gray-400 focus:outline-none focus:border-cyan-400 focus:bg-white transition-all"
+      />
+      <button *ngIf="searchQuery" (click)="clearSearch()" class="absolute right-4 text-gray-400 hover:text-gray-600">
+        <ion-icon name="close-circle"></ion-icon>
+      </button>
+    </div>
 
-  <div class="w-full p-4 bg-white rounded-2xl border border-gray-100 shadow-sm">
-    <div class="max-h-64 overflow-y-auto pr-2">
-      <div class="grid grid-cols-5 gap-3 justify-items-center">
-        <button *ngFor="let kursi of seatsFiltered" 
-          (click)="pilihKursi(kursi)"
-          type="button"
-          [disabled]="kursiDisabled(kursi)"
-          [ngClass]="{
-            'bg-cyan-400 text-white border-cyan-400 shadow-sm shadow-cyan-100 scale-105': nomorKursi === kursi && !kursiDisabled(kursi),
-            'bg-slate-50 text-gray-700 border-gray-200 hover:border-cyan-300': nomorKursi !== kursi && !kursiDisabled(kursi),
-            'bg-gray-200 text-gray-400 border-gray-200 opacity-40 cursor-not-allowed line-through': kursiDisabled(kursi)
-          }"
-          class="h-9 w-full rounded-lg border text-xs font-black flex items-center justify-center active:scale-90 transition-all">
-          {{ kursi }}
-        </button>
+    <div class="w-full p-4 bg-white rounded-2xl border border-gray-100 shadow-sm">
+      <div class="max-h-64 overflow-y-auto pr-2">
+        <div class="grid grid-cols-5 gap-3 justify-items-center">
+          
+          <button *ngFor="let kursi of seatsFiltered" 
+            (click)="pilihKursi(kursi)"
+            type="button"
+            [disabled]="kursiDisabled(kursi)"
+            [ngClass]="{
+              'bg-cyan-400 text-white border-cyan-400 shadow-sm shadow-cyan-100 scale-105': nomorKursi === kursi.nomor_kursi && !kursiDisabled(kursi),
+              'bg-slate-50 text-gray-700 border-gray-200 hover:border-cyan-300': nomorKursi !== kursi.nomor_kursi && !kursiDisabled(kursi),
+              'bg-gray-200 text-gray-400 border-gray-200 opacity-40 cursor-not-allowed line-through': kursiDisabled(kursi)
+            }"
+            class="h-9 w-full rounded-lg border text-xs font-black flex items-center justify-center active:scale-90 transition-all">
+            {{ kursi.nomor_kursi }} </button>
 
-      </div>
+        </div>
 
-      <div *ngIf="seatsFiltered.length === 0" class="text-center py-6 flex flex-col items-center justify-center space-y-2">
-        <ion-icon name="sad-outline" class="text-2xl text-gray-300"></ion-icon>
-        <span class="text-xs font-bold text-gray-400">Nomor kursi tidak ditemukan</span>
+        <div *ngIf="seatsFiltered.length === 0" class="text-center py-6 flex flex-col items-center justify-center space-y-2">
+          <ion-icon name="sad-outline" class="text-2xl text-gray-300"></ion-icon>
+          <span class="text-xs font-bold text-gray-400">Nomor kursi tidak ditemukan</span>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div *ngIf="nomorKursi" class="bg-cyan-50/50 border border-cyan-100 rounded-xl p-3 flex items-center justify-between animate-fadeIn">
-    <span class="text-xs font-bold text-gray-500">Kursi yang Anda pilih:</span>
-    <span class="text-sm font-black text-cyan-500 bg-white border border-cyan-300 px-3 py-1 rounded-md shadow-3xs">{{ nomorKursi }}</span>
+    <div *ngIf="nomorKursi" class="bg-cyan-50/50 border border-cyan-100 rounded-xl p-3 flex items-center justify-between animate-fadeIn">
+      <span class="text-xs font-bold text-gray-500">Kursi yang Anda pilih:</span>
+      <span class="text-sm font-black text-cyan-500 bg-white border border-cyan-300 px-3 py-1 rounded-md shadow-3xs">{{ nomorKursi }}</span>
+    </div>
   </div>
-</div>
 
   <div *ngIf="currentStep === (hasSeats ? 3 : 2)" class="p-5 space-y-4">
     <h3 class="text-xs font-black text-gray-400 uppercase tracking-wider ml-1">Data Diri Pemesan</h3>
@@ -126,14 +128,9 @@
       <div class="flex flex-col">
         <span class="text-xs font-black text-red-800">Profil Belum Lengkap!</span>
         <span class="text-[11px] text-red-600 leading-normal mt-0.5">
-          Data diri kamu masih belum lengkap. Silakan lengkapi profil kamu di menu akun atau <a routerLink="/my-profile">klik di sini.</a>
+          Data diri kamu masih belum lengkap. <a routerLink="/account/edit-profile" class="underline font-bold text-red-700">Klik di sini untuk melengkapi profil kamu.</a>
         </span>
       </div>
-    </div>
-    <div *ngIf="isProfileInvalid()" class="p-4 bg-red-50 border border-red-200 rounded-2xl flex items-start space-x-3">
-        <span class="text-[11px] text-red-600 leading-normal mt-0.5">
-        <a routerLink="/account/edit-profile">Klik di sini untuk melengkapi profile.</a>    
-        </span>
     </div>
 
     <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-xs space-y-4">
@@ -189,7 +186,6 @@
     </div>
 
     <div *ngIf="!isProfileInvalid()" class="space-y-4">
-      
       <div class="bg-slate-800 text-white p-4 rounded-2xl shadow-sm space-y-1.5">
         <h4 class="text-xs font-black text-cyan-400 uppercase tracking-wider">Rekening Pembayaran Tujuan:</h4>
         <p class="text-sm font-bold">Bank BRI</p>
@@ -221,7 +217,6 @@
         </div>
         <p class="text-gray-500 italic text-[10px]">Upload bukti pembayaran maksimal 3 MB, dengan format jpeg, jpg dan png.</p>
       </div>
-
     </div>
 
     <div *ngIf="isProfileInvalid()" class="p-4 bg-red-50 border border-red-200 rounded-2xl flex items-start space-x-3">
@@ -233,7 +228,6 @@
         </span>
       </div>
     </div>
-
   </div>
 </ion-content>
 
@@ -241,9 +235,9 @@
   <div class="px-5 py-4 flex bg-[#ecfeff]">
 
     <button (click)="previousStep()"
-    *ngIf="currentStep >= 2"
-    class="w-14 h-14 mr-2 items-center justify-center flex bg-cyan-200 text-cyan-500 font-extrabold py-3.5 rounded-xl active:scale-95 transition-transform shadow-md text-sm tracking-wide">
-    <ion-icon name="arrow-back" class="text-xl"></ion-icon>
+      *ngIf="currentStep >= 2"
+      class="w-14 h-14 mr-2 items-center justify-center flex bg-cyan-200 text-cyan-500 font-extrabold py-3.5 rounded-xl active:scale-95 transition-transform shadow-md text-sm tracking-wide">
+      <ion-icon name="arrow-back" class="text-xl"></ion-icon>
     </button>
     
     <button (click)="nextStep()" 

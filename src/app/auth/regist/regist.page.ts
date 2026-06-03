@@ -13,6 +13,9 @@ import { Api } from '../../services/api';
 export class RegistPage implements OnInit {
   registerForm!: FormGroup;
 
+  showpassword: boolean = false;
+  showpassword_confirmation: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private api: Api,

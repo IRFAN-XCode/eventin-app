@@ -95,7 +95,8 @@ export class EventsPage implements OnInit {
     const toast = await this.toastCtrl.create({
       message,
       duration: 2000,
-      position: 'top'
+      position: 'top',
+      color: color
     });
     await toast.present();
   }

@@ -23,20 +23,48 @@
       <div class="mb-5 pl-2" *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid">
         <small class="text-red-500 font-semibold text-xs">Format email tidak valid atau kosong.</small>
       </div>
-    
-      <div class="relative mb-4">
-        <ion-input formControlName="password" label="Password" type="password" label-placement="floating"
-          fill="outline" placeholder="Masukkan Password">
+
+      <div class="relative mb-3 flex items-center">
+        <ion-input 
+          formControlName="password"
+          label="Password" 
+          [type]="showpassword ? 'text' : 'password'" 
+          label-placement="floating" 
+          fill="outline"
+          placeholder="Masukkan Password" 
+          color="cyan" 
+          required
+          class="w-full">
         </ion-input>
+        <button 
+          type="button" 
+          (click)="showpassword = !showpassword" 
+          class="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-transparent text-gray-500 text-xl p-0 m-0 outline-none active:opacity-70 cursor-pointer">
+          <ion-icon [name]="showpassword ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+        </button>
       </div>
-      <div class="mb-5 pl-2" *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid">
+      <div class="mb-2 pl-2" *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid">
         <small class="text-red-500 font-semibold text-xs">Password minimal wajib 6 karakter.</small>
       </div>
-    
-      <div class="relative mb-4">
-        <ion-input formControlName="password_confirmation" label="Konfirmasi Password" type="password"
-          label-placement="floating" fill="outline" placeholder="Konfirmasi Password">
+
+      <div class="relative mb-3 flex items-center">
+        <ion-input 
+          formControlName="password_confirmation"
+          label="Konfirmasi Password" 
+          [type]="showpassword_confirmation ? 'text' : 'password'" 
+          label-placement="floating" 
+          fill="outline"
+          placeholder="Masukkan Konfirmasi Password" 
+          color="cyan" 
+          required
+          class="w-full">
         </ion-input>
+        <button 
+          type="button" 
+          (click)="showpassword_confirmation = !showpassword_confirmation" 
+          class="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-transparent text-gray-500 text-xl p-0 m-0 outline-none active:opacity-70 cursor-pointer">
+          <ion-icon [name]="showpassword_confirmation ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+        </button>
       </div>
       <div class="mb-5 pl-2"
         *ngIf="registerForm.hasError('mismatch') && registerForm.get('password_confirmation')?.touched">

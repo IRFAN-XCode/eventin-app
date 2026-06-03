@@ -19,7 +19,7 @@ export class TransactionsPage implements OnInit {
 
   jenisTiket: string = '';
   nomorKursi: string = '';
-  daftarKursi: string[] = [];
+  daftarKursi: any[] = [];
   kursiTerbeli: string[] = [];
 
   currentStep: number = 1;
@@ -38,7 +38,7 @@ export class TransactionsPage implements OnInit {
   selectedFile: File | null = null;
 
   searchQuery: string = '';
-  seatsFiltered: string[] = [];
+  seatsFiltered: any[] = [];
 
   constructor(
     private api: Api,
@@ -57,7 +57,6 @@ export class TransactionsPage implements OnInit {
       this.loadUserProfile();
     }
   }
-
 
   loadUserProfile() {
     this.api.getProfileUser().subscribe({
@@ -81,49 +80,49 @@ export class TransactionsPage implements OnInit {
 
   loadEventDetail() {
     this.isLoading = true;
-    this.idEvent = this.route.snapshot.paramMap.get('id');
-
     this.api.getEventDetail(this.idEvent).subscribe({
       next: (res: any) => {
         this.isLoading = false;
         if (res.success) {
           this.eventDetail = res.data;
-          if (res.data.transactions && res.data.transactions.length > 0) {
-            this.kursiTerbeli = res.data.transactions.map((trx: any) => trx.nomor_kursi);
-          } else {
-            this.kursiTerbeli = [];
-          }
           
           this.hasSeats = Number(this.eventDetail.seats) === 1 || this.eventDetail.seats === true;
           this.finalStep = this.hasSeats ? 4 : 3;
 
-          this.generateSeats();
+          if (this.hasSeats) {
+            this.loadSeatsData();
+          }
+        }
+      },
+      error: () => {
+        this.isLoading = false;
+        this.presentToast('Gagal memuat detail event.', 'danger');
+      }
+    });
+  }
+
+  loadSeatsData() {
+    this.api.getEventSeats(this.idEvent).subscribe({
+      next: (res: any) => {
+        if (res.success) {
+          this.daftarKursi = res.data; 
+          this.filterKursi();
         }
       }
     });
   }
 
-  generateSeats() {
-    this.nomorKursi = '';
-    this.daftarKursi = [];
-
-    const totalKapasitas = this.jenisTiket === 'vip' ? this.eventDetail.kapasitas_vip : this.eventDetail.kapasitas_reg;
-    const kodeKursi = this.jenisTiket === 'vip' ? 'VIP-' : 'REG-';
-
-    for (let i = 1; i <= totalKapasitas; i++) {
-      this.daftarKursi.push(kodeKursi + i);
-    }
-
-    this.filterKursi();
-  }
-
   filterKursi() {
+    let bursaKursi = this.daftarKursi.filter((kursi: any) => kursi.tipe_kursi === this.jenisTiket);
+
     if (!this.searchQuery.trim()) {
-      this.seatsFiltered = [...this.daftarKursi];
+      this.seatsFiltered = [...bursaKursi];
     } else {
       const keyword = this.searchQuery.trim().toLowerCase();
-      this.seatsFiltered = this.daftarKursi.filter(kursi => kursi.toLowerCase().includes(keyword))
-    };
+      this.seatsFiltered = bursaKursi.filter((kursi: any) => 
+        kursi.nomor_kursi.toLowerCase().includes(keyword)
+      );
+    }
   }
 
   clearSearch() {
@@ -131,25 +130,18 @@ export class TransactionsPage implements OnInit {
     this.filterKursi();
   }
 
-  kursiDisabled(kursi: string): boolean {
-    if (!this.kursiTerbeli || this.kursiTerbeli.length === 0) {
-      return false;
-    }
-
-    return this.kursiTerbeli.some(kt =>kt && kt.toString().trim().toLowerCase() === kursi.trim().toLowerCase());
+  kursiDisabled(kursiObj: any): boolean {
+    return kursiObj.status === 'booked';
   }
 
   setKategoriTiket(kategori: string) {
     this.jenisTiket = kategori;
-    this.onCategoryChange();
+    this.nomorKursi = '';
+    this.filterKursi();
   }
 
-  onCategoryChange() {
-    this.generateSeats();
-  }
-
-  pilihKursi(kursi: string) {
-    this.nomorKursi = kursi;
+  pilihKursi(kursiObj: any) {
+    this.nomorKursi = kursiObj.nomor_kursi;
   }
 
   nextStep() {
@@ -158,25 +150,38 @@ export class TransactionsPage implements OnInit {
         this.presentToast('Pilih Kategori tiket terlebih dahulu.', 'warning');
         return;
       }
-      this.currentStep = this.hasSeats ? 2 : 2;
-    } else if (this.currentStep === 2 && this.hasSeats) {
-      if (!this.nomorKursi) {
-        this.presentToast('Silahkan pilih nomor kursi terlebih dahulu', 'warning');
-        return;
+      this.currentStep = 2;
+    } 
+    
+    else if (this.currentStep === 2) {
+      if (this.hasSeats) {
+        if (!this.nomorKursi) {
+          this.presentToast('Silahkan pilih nomor kursi terlebih dahulu', 'warning');
+          return;
+        }
+        this.currentStep = 3;
+      } else {
+        if (this.isProfileInvalid()) {
+          this.presentToast('Harap lengkapi data profil Anda terlebih dahulu!', 'danger');
+          return;
+        }
+        this.currentStep = 3;
       }
-      this.currentStep = 3;
-    } else {
+    } 
+    
+    else if (this.currentStep === 3 && this.hasSeats) {
       if (this.isProfileInvalid()) {
         this.presentToast('Harap lengkapi data profil Anda terlebih dahulu!', 'danger');
         return;
       }
-      this.currentStep = this.finalStep;
+      this.currentStep = 4;
     }
   }
 
   previousStep() {
-    this.currentStep -= 1;
-    return;
+    if (this.currentStep > 1) {
+      this.currentStep -= 1;
+    }
   }
 
   onFileSelected(event: any) {
@@ -235,5 +240,4 @@ export class TransactionsPage implements OnInit {
     });
     await toast.present();
   }
-
 }

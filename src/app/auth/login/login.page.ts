@@ -15,6 +15,8 @@ export class LoginPage implements OnInit {
 
   returnUrl: string = '/home';
 
+  showPassword: boolean = false;
+
   constructor(
     private api: Api,
     private fb: FormBuilder,
@@ -61,8 +63,7 @@ export class LoginPage implements OnInit {
           if (res.user.role === 'user') {
             this.router.navigate(['/home']);
           } else if (res.user.role === 'organizer') {
-            const urlDashboard = 'https://financialcare.my.id';
-            window.location.href = urlDashboard;
+            this.presentToast('Role Anda tidak sesuai.', 'warning');
           }
         }
       },
@@ -82,7 +83,7 @@ export class LoginPage implements OnInit {
     });
   }
 
-  async presentToast(message: string, color: 'success' | 'danger') {
+  async presentToast(message: string, color: string) {
     const toast = await this.toastCtrl.create({
       message: message,
       duration: 3000,
