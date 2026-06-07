@@ -17,6 +17,9 @@ export class RegistOrganizerPage implements OnInit {
   selectedImage: File | null = null;
   selectedPdf: File | null = null;
 
+  showPassword: boolean = false;
+  showConfirmPassword: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -27,22 +30,19 @@ export class RegistOrganizerPage implements OnInit {
 
   ngOnInit() {
     this.registerForm = this.fb.group({
-      // Step 1: Personal
       nama: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       nomor_handphone: ['', Validators.required],
-      
-      // Step 2: Event
       nama_eo: ['', Validators.required],
+
       nama_event: ['', Validators.required],
       kategori_event: ['', Validators.required],
       deskripsi: ['', Validators.required],
       lokasi: ['', Validators.required],
       waktu: ['', Validators.required],
       tgl_mulai: ['', Validators.required],
-      tgl_berakhir: [''], // ✅ Dihidupkan kembali (tidak di-comment) agar tidak bikin macet step 2
+      tgl_berakhir: [''], 
       
-      // Step 3: Tiket
       type_event: ['', Validators.required],
       opsi_tiket: ['', Validators.required],
       seats: [false], 
@@ -51,12 +51,19 @@ export class RegistOrganizerPage implements OnInit {
       kapasitas_reg: [''],
       kapasitas_vip: [''],
 
-      // Step 4: Akun
       password: ['', [Validators.required, Validators.minLength(6)]],
       password_confirmation: ['', Validators.required]
     }, { 
-      validators: this.dynamicPriceValidator 
+      validators: this.dynamicPriceAndBankValidator
     });
+  }
+
+  togglePasswordVisibility(target: 'main' | 'confirm') {
+    if (target === 'main') {
+      this.showPassword = !this.showPassword;
+    } else if (target === 'confirm') {
+      this.showConfirmPassword = !this.showConfirmPassword;
+    }
   }
 
   showReguler(): boolean {
@@ -69,11 +76,13 @@ export class RegistOrganizerPage implements OnInit {
     return opsi === 'vip' || opsi === 'both';
   }
 
-  dynamicPriceValidator(control: AbstractControl): ValidationErrors | null {
+  dynamicPriceAndBankValidator(control: AbstractControl): ValidationErrors | null {
     const opsi = control.get('opsi_tiket')?.value;
     const typeEvent = control.get('type_event')?.value;
     
-    if (!opsi || typeEvent === 'unpaid') return null; // Jika gratis, abaikan validasi harga wajib isi
+    if (!opsi) return null;
+
+    if (typeEvent === 'unpaid') return null;
 
     const regValue = control.get('harga_reg')?.value;
     const vipValue = control.get('harga_vip')?.value;
@@ -110,7 +119,7 @@ export class RegistOrganizerPage implements OnInit {
 
   nextStep() {
     if (this.currentStep === 1) {
-      const fields = ['nama', 'email', 'nomor_handphone']; // ✅ Menghapus 'alamat' karena di HTML tidak ada input alamat
+      const fields = ['nama', 'email', 'nomor_handphone', 'nama_eo'];
       if (!this.isStepValid(fields)) {
         this.showToast('Mohon lengkapi semua Data Personal dengan benar.', 'warning');
         return;
@@ -118,7 +127,7 @@ export class RegistOrganizerPage implements OnInit {
     } 
     
     else if (this.currentStep === 2) {
-      const fields = ['nama_eo', 'nama_event', 'kategori_event', 'deskripsi', 'lokasi', 'waktu', 'tgl_mulai', 'tgl_berakhir'];
+      const fields = ['nama_event', 'kategori_event', 'deskripsi', 'lokasi', 'waktu', 'tgl_mulai', 'tgl_berakhir'];
       if (!this.isStepValid(fields)) {
         this.showToast('Mohon lengkapi semua Informasi Event.', 'warning');
         return;
@@ -150,8 +159,7 @@ export class RegistOrganizerPage implements OnInit {
       }
 
       if (this.registerForm.errors?.['priceRequiredError']) {
-        const errorMsg = this.registerForm.errors['priceRequiredError'];
-        this.showToast(errorMsg, 'warning');
+        this.showToast(this.registerForm.errors['priceRequiredError'], 'warning');
         return;
       }
 

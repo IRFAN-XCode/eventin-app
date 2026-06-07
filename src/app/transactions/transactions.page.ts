@@ -140,6 +140,30 @@ export class TransactionsPage implements OnInit {
     this.filterKursi();
   }
 
+  showReguler(): boolean {
+    if (!this.eventDetail) return false;
+    
+    const kapasitas = this.eventDetail.kapasitas_reg;
+    
+    if (kapasitas === null || kapasitas === undefined || kapasitas === '' || Number(kapasitas) === 0) {
+      return false;
+    }
+    
+    return true;
+  }
+
+  showVip(): boolean {
+    if (!this.eventDetail) return false;
+    
+    const kapasitas = this.eventDetail.kapasitas_vip;
+    
+    if (kapasitas === null || kapasitas === undefined || kapasitas === '' || Number(kapasitas) === 0) {
+      return false;
+    }
+    
+    return true;
+  }
+
   pilihKursi(kursiObj: any) {
     this.nomorKursi = kursiObj.nomor_kursi;
   }
@@ -191,14 +215,13 @@ export class TransactionsPage implements OnInit {
   }
 
   async submitPembayaranManual() {
-    if (!this.selectedFile || !this.bankPengirim || !this.atasNama) {
-      this.presentToast('Harap melengkapi semua isian data form dan foto bukti bayar!', 'warning');
-      return;
-    }
+    const hargaTiketAktif = this.jenisTiket === 'vip' ? this.eventDetail.harga_vip : this.eventDetail.harga_reg;
 
-    if (this.isProfileInvalid()) {
-      this.presentToast('Gagal memproses. Data profil Anda terdeteksi belum lengkap!', 'danger');
-      return;
+    if (hargaTiketAktif > 0) {
+      if (!this.selectedFile || !this.bankPengirim || !this.atasNama) {
+        this.presentToast('Harap melengkapi semua isian data form dan foto bukti bayar!', 'warning');
+        return;
+      }
     }
 
     const loading = await this.loadingCtrl.create({
@@ -212,7 +235,9 @@ export class TransactionsPage implements OnInit {
     formDataPayload.append('nomor_kursi', this.hasSeats ? this.nomorKursi : '');
     formDataPayload.append('bank_pengirim', this.bankPengirim);
     formDataPayload.append('atas_nama', this.atasNama);
-    formDataPayload.append('bukti_pembayaran', this.selectedFile, this.selectedFile.name);
+    if (hargaTiketAktif > 0 && this.selectedFile) {
+      formDataPayload.append('bukti_pembayaran', this.selectedFile, this.selectedFile.name);
+    }
 
     const token = localStorage.getItem('token');
 
@@ -239,5 +264,26 @@ export class TransactionsPage implements OnInit {
       color
     });
     await toast.present();
+  }
+
+  salinRekening() {
+    if (this.eventDetail && this.eventDetail.nomor_rekening) {
+      const nomorRekeningTarget = this.eventDetail.nomor_rekening.toString().trim();
+      
+      navigator.clipboard.writeText(nomorRekeningTarget).then(() => {
+        this.presentToast('Nomor rekening penyelenggara berhasil disalin!', 'success');
+      }).catch((err) => {
+        console.error('Gagal menyalin: ', err);
+        this.presentToast('Gagal menyalin nomor rekening otomatis.', 'danger');
+      });
+    }
+  }
+
+  getHargaAktif(): number {
+    if (!this.eventDetail) return 0;
+    
+    const harga = this.jenisTiket === 'vip' ? this.eventDetail.harga_vip : this.eventDetail.harga_reg;
+    
+    return harga ? Number(harga) : 0;
   }
 }

@@ -19,14 +19,6 @@ ion-toolbar {
 ion-content {
     --background: #e2feff;
 
-        .container {
-            background-color: #e2feff;
-            padding: 15px;
-            color: black;
-            border-radius: 10px;
-            width: 90%;
-            margin: 15px;
-
             h1 {
                 font-weight: bold;
                 margin-top: 10px;
@@ -48,4 +40,3 @@ ion-content {
                 text-align: justify;
             }
         }
-}

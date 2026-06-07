@@ -160,6 +160,40 @@ export class Api {
     return this.http.get(`${environment.apiUrl}/detail-ticket/${kodeTransaksi}`, { headers });
   }
 
+  getMyReward() {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `${token}`
+    });
+    return this.http.get(`${environment.apiUrl}/reward`, { headers });
+  }
+
+  getNotifications() {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `${token}`
+    });
+    return this.http.get(`${environment.apiUrl}/notification`, { headers });
+  }
+
+  getUnreadNotificationCount() {
+    const token = this.getToken();
+    const headers = new HttpHeaders({ 'Authorization': `${token}` });
+    return this.http.get(`${environment.apiUrl}/notifications/unread-count`, { headers });
+  }
+
+  readNotifById(id: any): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders({ 'Authorization': `${token}`});
+    return this.http.post(`${environment.apiUrl}/notifications/${id}`, {}, { headers });
+  }
+
+  markAllNotificationsAsRead() {
+    const token = this.getToken();
+    const headers = new HttpHeaders({ 'Authorization': `${token}` });
+    return this.http.post(`${environment.apiUrl}/notifications/mark-all-read`, {}, { headers });
+  }
+
   getTiketDownload(kodeTransaksi: string) {
     const token = localStorage.getItem('token');
     return `${environment.apiUrl}/transactions/${kodeTransaksi}/download_pdf?=${token}`;
@@ -175,6 +209,21 @@ export class Api {
 
   resetPassword(data: any) {
     return this.http.post(`${environment.apiUrl}/reset-password`, data);
+  }
+
+  getCertificate() {
+    const token = this.getToken();
+    const headers = new HttpHeaders({ 'Authorization' : `${token}`});
+    return this.http.get(`${environment.apiUrl}/my-certificates`, { headers });
+  }
+
+  downloadCertificate(kodeTransaksi: string) {
+    const token = this.getToken();
+    return `${environment.apiUrl}/download-certificate/${kodeTransaksi}?token=${token}`;
+  }
+
+  verifyCertificate(certId: string) {
+    return this.http.get(`${environment.apiUrl}/verify-certificate/${certId}`);
   }
 
 }

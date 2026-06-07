@@ -1,0 +1,37 @@
+<div class="bg-gradient-to-r from-cyan-400 to-[#16e2eb] pt-14 pb-6 px-4 rounded-b-[40px] shadow-lg shadow-cyan-200/50 flex items-center text-white relative z-10">
+  <ion-toolbar style="--background: transparent; --color: white; --border-width: 0;">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/account" icon="arrow-back" class="text-white"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title class="font-bold tracking-wide text-xl">Hadiah Event</ion-title>
+  </ion-toolbar>
+</div>
+
+<ion-content [fullscreen]="true">
+
+  <div class="m-5 p-3">
+    <div class="space-y-3">
+      <div *ngFor="let reward of rewardList" class="bg-white p-4 rounded-2xl border border-slate-100 shadow-xs flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <div class="w-12 h-12 rounded-xl text-xl flex items-center justify-center"
+              [ngClass]="{
+              'bg-green-400 text-green-800': reward.is_winner_raw === 1,
+              'bg-yellow-200 text-yellow-600' : reward.is_winner_raw === 0,
+              }">
+          <ion-icon name="ribbon-outline"></ion-icon></div>
+          <div class="flex flex-col">
+            <span class="text-sm font-bold text-slate-900">{{ reward.nama_event }}</span>
+            <span [ngClass]="{
+              'text-green-600 border border-amber-200': reward.is_winner_raw === 1,
+              'text-yellow-600 border border-slate-200': reward.is_winner_raw === 0,
+              }" class="text-[11px] font-black px-2 py-1 uppercase tracking-wider">
+            {{ reward.status_pemenang }}
+          </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

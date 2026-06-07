@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Api } from '../services/api';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-account',
@@ -31,11 +30,7 @@ export class AccountPage implements OnInit {
     }
   }
 
-  myCertificate() {
-    const urlCertificate = 'https://eventin.financialcare.my.id';
-    
-    window.location.href = urlCertificate;
-  }
+ 
 
   onLogout() {
     this.api.onLogout().subscribe({

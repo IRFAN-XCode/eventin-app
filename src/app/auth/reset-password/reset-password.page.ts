@@ -21,6 +21,8 @@ export class ResetPasswordPage implements OnInit {
   showPasswordBaru: boolean = false;
   showKonfirmasiPassword: boolean = false;
 
+  Message: string = '';
+
   constructor(
     private toastCtrl: ToastController,
     private router: Router,
@@ -30,8 +32,11 @@ export class ResetPasswordPage implements OnInit {
   ngOnInit() {}
 
   kirimOtp() {
-    if (!this.email) {
+    this.Message = '';
+
+    if (!this.email || !this.email.trim()) {
       this.presentToast('Masukkan email terlebih dahulu.', 'warning');
+      return;
     }
 
     this.isLoading = true;
@@ -39,14 +44,14 @@ export class ResetPasswordPage implements OnInit {
       next: (res: any) => {
         this.isLoading = false;
         if (res.success) {
-          this.presentToast(res.message, 'success');
+          this.presentToast('Berhasil Kirim OTP ke Email.', 'success');
           this.currentStep = 2;
-          console.log(this.currentStep);
         }
       },
       error: (err) => {
         this.isLoading = false;
         const message = err.error?.errors?.email?.[0] || err.error?.message || 'Terjadi kesalahan.';
+        this.Message = message;
         this.presentToast(message, 'danger');
       }
     });

@@ -14,16 +14,16 @@
 
       <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
 
-        <div class="relative mb-5 mt-2">
+        <div class="relative mb-2 mt-2">
           <ion-input formControlName="email" label="Email" type="email" label-placement="floating" fill="outline"
             placeholder="Masukkan Email">
           </ion-input>
         </div>
-        <div class="mb-5 pl-2" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
+        <div class="mb-3 pl-2" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
           <small class="text-red-500 font-semibold text-xs">Format email tidak valid.</small>
         </div>
 
-        <div class="relative mb-1 flex items-center">
+        <div class="relative mb-1 mt-6 flex items-center">
           <ion-input 
             formControlName="password" 
             label="Password" 

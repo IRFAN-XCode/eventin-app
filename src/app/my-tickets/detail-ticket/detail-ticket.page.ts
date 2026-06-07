@@ -17,6 +17,7 @@ export class DetailTicketPage implements OnInit {
 
   StringQrCode: string = '';
   viewEntered: boolean = false;
+  intervalQr: any;
 
   constructor(
     private api: Api,
@@ -41,6 +42,7 @@ export class DetailTicketPage implements OnInit {
   ionViewWillEnter() {
     this.viewEntered = false;
     this.StringQrCode = '';
+    this.stopQrInterval();
     
     if (this.kodeTransaksi) {
       this.loadTicketData();
@@ -51,12 +53,16 @@ export class DetailTicketPage implements OnInit {
     this.viewEntered = true;
     
     if (this.ticketDetail && this.ticketDetail.kode_transaksi) {
-      this.StringQrCode = this.ticketDetail.kode_transaksi;
+      this.StartQrInterval();
     }
   }
 
   ionViewWillLeave() {
-    this.StringQrCode = '';
+    this.stopQrInterval();
+  }
+
+  ngOnDestroy() {
+    this.stopQrInterval();
   }
 
   loadTicketData() {
@@ -70,7 +76,7 @@ export class DetailTicketPage implements OnInit {
           this.ticketDetail = res.data;
           
           if (this.viewEntered) {
-            this.StringQrCode = this.ticketDetail.kode_transaksi;
+            this.StartQrInterval();
           }
         }
       },
@@ -79,6 +85,31 @@ export class DetailTicketPage implements OnInit {
         this.presentToast('Gagal memuat detail tiket.', 'danger');
       }
     });
+  }
+
+  StartQrInterval() {
+    this.stopQrInterval();
+    this.generateSecurityQr();
+
+    this.intervalQr = setInterval(() => {
+      this.generateSecurityQr();
+    }, 60000);
+  }
+
+  generateSecurityQr() {
+    if (!this.ticketDetail || !this.ticketDetail.kode_transaksi) return;
+
+    const kode = this.ticketDetail.kode_transaksi;
+    const timestamp = Math.floor(Date.now() / 1000);
+    const rawPayload = `${kode}||${timestamp}`;
+    this.StringQrCode = btoa(rawPayload);
+  }
+
+  stopQrInterval() {
+    if (this.intervalQr) {
+      clearInterval(this.intervalQr);
+      this.intervalQr = null;
+    }
   }
 
   downloadTiket() {

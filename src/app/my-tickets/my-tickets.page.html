@@ -39,7 +39,7 @@
 
       <div class="mb-6" *ngFor="let tiket of filterTiket">
         
-        <p class="font-bold text-slate-400 text-xxs uppercase tracking-wider pl-1 mb-2">
+        <p class="font-bold text-slate-500 text-xs uppercase tracking-wider pl-1 mb-2">
           Pembelian: {{ tiket.created_at | date:'dd MMMM yyyy':'':'id' }}
         </p>
 
@@ -49,11 +49,11 @@
 
           <div class="p-4 flex flex-col space-y-3">
             <div class="flex justify-between items-center">
-              <span class="text-base font-mono text-slate-400 uppercase tracking-wider block" *ngIf="tiket.status_pembayaran === 'success'">
+              <span class="text-sm font-mono text-slate-400 uppercase tracking-wider block" *ngIf="tiket.status_pembayaran === 'success'">
                 ID: {{ tiket.kode_transaksi }}
               </span>
-              <span class="text-xxs font-mono text-slate-400 uppercase tracking-wider block" *ngIf="tiket.status_pembayaran !== 'success'">
-                Menunggu Pembayaran
+              <span class="text-sm font-mono text-slate-400 uppercase tracking-wider block" *ngIf="tiket.status_pembayaran !== 'success'">
+                Menunggu Validasi
               </span>
               <span [ngClass]="tiket.jenis_tiket?.toLowerCase() === 'vip' ? 'text-amber-600 bg-amber-50 border border-amber-100' : 'text-cyan-600 bg-cyan-50 border border-cyan-100'" class="text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded-md">
                 {{ tiket.jenis_tiket }}
@@ -88,9 +88,6 @@
                 class="bg-cyan-500 text-white text-xs font-bold px-4 py-2 rounded-xl active:scale-95 transition-all shadow-xs shadow-cyan-100 cursor-pointer flex items-center">
                 <ion-icon name="qr-code-outline" class="mr-1.5 text-sm"></ion-icon> Lihat Tiket
               </button>
-              <div *ngIf="tiket.status_pembayaran !== 'success'" class="text-xxs font-bold text-slate-400 flex items-center pl-1">
-                <ion-icon name="time-outline" class="mr-1 text-sm text-amber-500"></ion-icon> Selesaikan di App
-              </div>
             </div>
             
             <span [ngClass]="statusFilter === 'success' ? 'bg-emerald-50 text-emerald-600 border border-emerald-100' : 'bg-amber-50 text-amber-600 border border-amber-100'" class="text-[10px] font-black tracking-wider px-2.5 py-1 rounded-lg uppercase">

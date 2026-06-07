@@ -13,6 +13,7 @@ export class HomePage implements OnInit {
 
   ListEvent: any[] = [];
   isLoading = false;
+  unreadCount: number = 0;
 
   constructor(
     private api: Api,
@@ -24,6 +25,11 @@ export class HomePage implements OnInit {
 
   ionViewWillEnter() {
     this.loadEvent();
+
+    const token = this.api.getToken();
+    if (token) {
+      this.loadUnreadCount();
+    }
   }
 
   loadEvent() {
@@ -39,6 +45,17 @@ export class HomePage implements OnInit {
         this.isLoading = false;
         console.error('Gagal memuat daftar event:', err);
       }
+    });
+  }
+
+  loadUnreadCount() {
+    this.api.getUnreadNotificationCount().subscribe({
+      next: (res: any) => {
+        if (res.success) {
+          this.unreadCount = res.unread_count;
+        }
+      },
+      error: (err) => console.error(err)
     });
   }
 

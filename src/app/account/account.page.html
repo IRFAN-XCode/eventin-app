@@ -39,7 +39,7 @@
   <div class="px-6 mb-8">
     
     <div *ngIf="UserProfile" class="bg-white rounded-2xl p-2 shadow-sm border border-slate-100 mb-5">
-      <div class="px-4 py-2 text-lg font-bold text-slate-400 tracking-wider uppercase">Pengaturan Akun</div>
+      <div class="px-4 py-2 text-sm font-bold text-slate-400 tracking-wider uppercase">Pengaturan Akun</div>
       
       <div routerLink="/my-profile"
         class="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 active:bg-slate-100 transition-all cursor-pointer">
@@ -59,7 +59,16 @@
         <ion-icon name="chevron-forward-outline" class="text-slate-400 text-sm"></ion-icon>
       </div>
 
-      <div (click)="myCertificate()"
+      <div routerLink="/reward"
+        class="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 active:bg-slate-100 transition-all cursor-pointer">
+        <div class="flex items-center text-slate-700">
+          <div class="w-8 h-8 bg-purple-50 text-yellow-500 rounded-lg flex items-center justify-center mr-3 text-lg"><ion-icon name="gift-outline"></ion-icon></div>
+          <span class="font-semibold text-sm">Riwayat Lucky Draw</span>
+        </div>
+        <ion-icon name="chevron-forward-outline" class="text-slate-400 text-sm"></ion-icon>
+      </div>
+
+      <div routerLink="/my-certificate"
         class="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 active:bg-slate-100 transition-all cursor-pointer">
         <div class="flex items-center text-slate-700">
           <div class="w-8 h-8 bg-purple-50 text-purple-500 rounded-lg flex items-center justify-center mr-3 text-lg"><ion-icon name="ribbon-outline"></ion-icon></div>
@@ -71,7 +80,7 @@
       <div routerLink="/regist-organizer"
         class="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 active:bg-slate-100 transition-all cursor-pointer">
         <div class="flex items-center text-slate-700">
-          <div class="w-8 h-8 bg-emerald-50 text-emerald-500 rounded-lg flex items-center justify-center mr-3 text-lg"><ion-icon name="calendar-outline"></ion-icon></div>
+          <div class="w-8 h-8 bg-emerald-50 text-emerald-500 rounded-lg flex items-center justify-center mr-3 text-lg"><ion-icon name="business-outline"></ion-icon></div>
           <span class="font-semibold text-sm">Daftar Organizer</span>
         </div>
         <ion-icon name="chevron-forward-outline" class="text-slate-400 text-sm"></ion-icon>
@@ -79,7 +88,7 @@
     </div>
 
     <div class="bg-white rounded-2xl p-2 shadow-sm border border-slate-100 mb-5">
-      <div class="px-4 py-2 text-lg font-bold text-slate-400 tracking-wider uppercase">Informasi & Bantuan</div>
+      <div class="px-4 py-2 text-sm font-bold text-slate-400 tracking-wider uppercase">Informasi & Bantuan</div>
 
       <div routerLink="/toc"
         class="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 active:bg-slate-100 transition-all cursor-pointer">
@@ -121,6 +130,9 @@
     </div>
 
   </div>
+
+  <p class="mt-6 text-center text-xs text-gray-600">EventIn App v1.0.1</p>
+
 </ion-content>
 
 <app-tabs></app-tabs>

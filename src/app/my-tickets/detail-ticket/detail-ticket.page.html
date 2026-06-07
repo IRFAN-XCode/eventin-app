@@ -79,15 +79,19 @@
       </div>
       <div class="flex items-start space-x-2.5 text-xs text-gray-500 leading-normal">
         <ion-icon name="sunny-outline" class="text-cyan-400 text-base flex-shrink-0"></ion-icon>
-        <p class="m-0">Pastikan tingkat kecerahan (brightness) layar HP kamu dalam keadaan maksimal saat melakukan *scanning* tiket.</p>
+        <p class="m-0">Pastikan tingkat kecerahan (brightness) layar HP kamu dalam keadaan maksimal saat melakukan scanning tiket.</p>
+      </div>
+      <div class="flex items-start space-x-2.5 text-xs text-gray-500 leading-normal">
+        <ion-icon name="qr-code-outline" class="text-cyan-400 text-base flex-shrink-0"></ion-icon>
+        <p class="m-0">QR Code akan diperbarui setiap 1 menit.</p>
       </div>
     </div>
 
     <div class="text-center mt-6">
       <span class="text-xs font-bold uppercase tracking-wider text-gray-400">
         Status Kehadiran: 
-        <strong [ngClass]="ticketDetail.status_kehadiran === 'hadir' ? 'text-green-500' : 'text-amber-500'">
-          {{ ticketDetail.status_kehadiran === 'hadir' ? 'SUDAH HADIR' : 'BELUM HADIR' }}
+        <strong [ngClass]="ticketDetail.status_kehadiran === 'checked_in' ? 'text-green-500' : 'text-amber-500'">
+          {{ ticketDetail.status_kehadiran === 'checked_in' ? 'SUDAH HADIR' : 'BELUM HADIR' }}
         </strong>
       </span>
     </div>

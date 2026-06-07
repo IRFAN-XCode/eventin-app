@@ -1,13 +1,77 @@
-<div class="bg-[#16e2eb] pt-12 pb-2 px-2 rounded-b-[30px] shadow-sm flex items-center text-white relative z-10">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home" icon="arrow-back"></ion-back-button>
-    </ion-buttons>
 
-    <ion-title>Notifikasi</ion-title>
-  </ion-toolbar>
+<div class="bg-cyan-50 z-10">
+  <div class="bg-[#16e2eb] pt-10 pb-2 px-2 rounded-b-[30px] shadow-sm flex items-center text-white relative z-10">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/home" icon="arrow-back"></ion-back-button>
+      </ion-buttons>
+
+      <ion-title>Notifikasi</ion-title>
+    </ion-toolbar>
+  </div>
+
+  <div class="flex justify-between items-center h-12 p-4 bg-cyan-50 border-b border-cyan-100">
+    <button type="button" (click)="readAll()" *ngIf="NotificationsLog.length > 0" class="text-xs font-black bg-white/20 hover:bg-white/30 text-cyan-400 px-3 py-1.5 rounded-xl transition-all active:scale-95 cursor-pointer z-20">
+        Baca Semua
+    </button>
+  </div>
 </div>
 
 <ion-content [fullscreen]="true">
+
+  <div *ngIf="isLoading" class="p-4 space-y-4">
+    <div *ngFor="let item of [1,2,3]" class="bg-white p-4 rounded-2xl border border-slate-100 animate-pulse flex items-start space-x-3">
+      <div class="w-10 h-10 bg-slate-200 rounded-xl"></div>
+      <div class="flex-1 space-y-2 py-1">
+        <div class="h-3 bg-slate-200 rounded w-1/4"></div>
+        <div class="h-3 bg-slate-200 rounded w-3/4"></div>
+        <div class="h-2 bg-slate-200 rounded w-1/2"></div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading" class="p-4 space-y-3">
+    
+    <div *ngFor="let notif of NotificationsLog" (click)="readNotif(notif.id)"
+      [ngClass]="{
+        'bg-cyan-50/60 border-cyan-200 shadow-sm shadow-cyan-100/50': !notif.read_at,
+        'bg-white border-slate-100': notif.read_at
+      }"
+      class="p-4 rounded-2xl border flex items-start space-x-3 transition-all relative active:bg-slate-50">
+      
+      <span *ngIf="!notif.read_at" class="absolute top-4 right-4 w-2 h-2 bg-cyan-500 rounded-full animate-pulse"></span>
+
+      <div [ngClass]="{
+        'bg-emerald-50 text-cyan-600': notif.data.tipe === 'gratis' || notif.data.tipe === 'approved',
+        'bg-amber-50 text-amber-500': notif.data.tipe === 'pending'
+      }" class="w-14 bg-cyan-100 h-14 rounded-xl flex items-center justify-center text-3xl flex-shrink-0">
+        <ion-icon [name]="notif.data.tipe === 'approved' ? 'checkmark-circle-outline' : (notif.data.tipe === 'pending' ? 'time-outline' : 'ticket-outline')"></ion-icon>
+      </div>
+
+      <div class="flex flex-col flex-1">
+        <div class="flex items-center justify-between pr-4">
+          <span class="text-xs font-black text-slate-800 tracking-wide">{{ notif.data.nama_event }}</span>
+        </div>
+        
+        <p class="text-[10px] text-slate-600 font-medium leading-relaxed mt-1">
+          {{ notif.data.pesan }}
+        </p>
+
+        <span class="text-[10px] text-slate-400 font-medium">{{ notif.created_at | date:'dd MMM, HH:mm' }}</span>
+      </div>
+
+    </div>
+
+    <div *ngIf="NotificationsLog.length === 0" class="text-center py-20 flex flex-col items-center justify-center space-y-3">
+      <div class="w-16 h-16 bg-cyan-50 text-cyan-400 rounded-full flex items-center justify-center text-3xl">
+        <ion-icon name="notifications-off-outline"></ion-icon>
+      </div>
+      <div class="flex flex-col space-y-1">
+        <span class="text-sm font-black text-slate-700">Belum Ada Pemberitahuan</span>
+        <span class="text-xs text-slate-400 max-w-[200px] mx-auto leading-normal">Semua info riwayat status tiketmu akan muncul di halaman ini.</span>
+      </div>
+    </div>
+
+  </div>
 
 </ion-content>

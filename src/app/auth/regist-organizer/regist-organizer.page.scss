@@ -21,11 +21,17 @@ ion-content {
 
     ion-input {
         --border-color: #16e2eb;
-        --background: #ecfeff;
-        --color: #0f172a;
-        --placeholder-color: #707070;
+        --background: #fcfcfc;
+        --color: #0f172a !important;
+        --placeholder-color: #707070 !important;
         --highlight-color-focused: #168beb;
         --highlight-color-invalid: #ff1717;
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator,
+    input[type="time"]::-webkit-calendar-picker-indicator {
+        filter: invert(0) !important;
+        opacity: 0.6;
     }
 
     .custom-select {
@@ -40,6 +46,4 @@ ion-content {
         color: #168beb;
         opacity: 1;
     }
-
-
 }

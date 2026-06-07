@@ -1,0 +1,181 @@
+<div class="bg-cyan-50 z-10">
+  <div class="bg-gradient-to-r from-cyan-400 to-[#16e2eb] pt-14 pb-6 px-4 rounded-b-[40px] shadow-lg shadow-cyan-200/50 flex items-center text-white relative z-10">
+    <ion-toolbar style="--background: transparent; --color: white; --border-width: 0;">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/account" icon="arrow-back" class="text-white"></ion-back-button>
+      </ion-buttons>
+
+      <ion-title class="font-bold tracking-wide text-xl">Sertifikat Saya</ion-title>
+    </ion-toolbar>
+  </div>
+
+  <div class="flex justify-between items-center h-12 p-4 mt-4 bg-cyan-50 border-b border-cyan-100">
+    <ion-segment [(ngModel)]="currentSegment" mode="md" class="mt-2 bg-white/20 rounded-xl p-0.5" style="--background: transparent;">
+      <ion-segment-button value="list" class="text-cyan-700 min-h-[36px]" style="--color-checked: #06b6d4; --background-checked: cyan; --border-radius: 10px;">
+        <span class="text-xs font-bold tracking-wide">Sertifikat Saya</span>
+      </ion-segment-button>
+      <ion-segment-button value="verify" class="text-cyan-700 min-h-[36px]" style="--color-checked: #06b6d4; --background-checked: cyan; --border-radius: 10px;">
+        <span class="text-xs font-bold tracking-wide">Validasi Dokumen</span>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+</div>
+
+<ion-content [fullscreen]="true" style="--background: #ecfeff">
+
+  <div *ngIf="currentSegment === 'list'" class="animate-fade-in">
+    
+    <div class="p-4 mt-3" *ngIf="!isLoading && certificates.length > 0">
+      <div class="bg-cyan-50 border border-cyan-100 p-3 rounded-2xl text-center">
+        <p class="text-xs text-cyan-700 font-medium">Kamu memiliki <span class="font-black">{{ totalCount }}</span> sertifikat dari event yang telah diikuti 🎉</p>
+      </div>
+    </div>
+
+    <div *ngIf="isLoading" class="p-4 space-y-3">
+      <div *ngFor="let item of [1,2]" class="bg-white p-4 rounded-2xl border border-slate-100 animate-pulse flex justify-between items-center">
+        <div class="space-y-2 flex-1">
+          <div class="h-3 bg-slate-200 rounded w-1/2"></div>
+          <div class="h-3 bg-slate-200 rounded w-1/3"></div>
+        </div>
+        <div class="w-10 h-10 bg-slate-200 rounded-xl"></div>
+      </div>
+    </div>
+
+    <div *ngIf="!isLoading" class="px-4 pb-10 space-y-3">
+      
+      <div *ngFor="let cert of certificates" 
+        class="bg-yellow-500 p-4 mt-3 rounded-xl border border-yellow-700 shadow-xs flex items-center justify-between active:bg-slate-50 transition-all">
+        
+        <div class="flex flex-col space-y-1 flex-1 pr-3" (click)="lihatSertifikatStatis(cert)">
+          <span class="text-sm font-black text-slate-800 tracking-wide leading-tight">{{ cert.nama_event }}</span>
+          <span class="text-xs text-slate-400 font-medium">Penerima: {{ cert.nama_sertifikat }}</span>
+          <span class="text-[9px] font-mono text-slate-400 mt-1">ID: {{ cert.kode_transaksi }}</span>
+        </div>
+
+        <button (click)="downloadCertificate(cert.download_url, cert.nama_event)" class="w-10 h-10 bg-cyan-500 text-white rounded-xl flex items-center justify-center text-lg active:scale-95 transition-transform shadow-sm shadow-cyan-200">
+          <ion-icon name="download-outline"></ion-icon>
+        </button>
+      </div>
+
+      <div *ngIf="certificates.length === 0" class="text-center py-20 flex flex-col items-center justify-center space-y-3">
+        <div class="w-16 h-16 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center text-3xl">
+          <ion-icon name="ribbon-outline"></ion-icon>
+        </div>
+        <div class="flex flex-col space-y-1">
+          <span class="text-sm font-black text-slate-700">Belum Ada Sertifikat</span>
+          <span class="text-xs text-slate-400 max-w-[200px] mx-auto leading-normal">Sertifikat akan muncul di sini setelah kamu menghadiri dan melakukan scan QR masuk di lokasi event.</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div *ngIf="isModalOpen && selectedCert" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs animate-fade-in">
+      <div class="w-full max-w-lg bg-amber-50 rounded-2xl p-6 border-4 border-double border-amber-800 shadow-2xl relative text-center text-amber-950 max-h-[90vh] overflow-y-auto">
+        
+        <button (click)="tutupModal()" class="absolute top-3 right-3 w-8 h-8 bg-amber-900/10 hover:bg-amber-900/20 text-amber-900 rounded-full flex items-center justify-center text-lg transition-all">
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+
+        <div class="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-amber-800"></div>
+        <div class="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-amber-800"></div>
+        <div class="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-amber-800"></div>
+        <div class="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-amber-800"></div>
+
+        <span class="text-[9px] uppercase font-black tracking-widest text-amber-800/60 block mt-2">Sertifikat Digital Resmi EventIn</span>
+        
+        <h1 class="text-xl font-serif font-black tracking-wide text-amber-900 mt-3 mb-1">PIAGAM PENGHARGAAN</h1>
+        <div class="w-16 h-0.5 bg-amber-800 mx-auto mb-4"></div>
+        
+        <p class="text-[11px] italic text-amber-800 font-medium">Diberikan secara sah kepada:</p>
+        
+        <h2 class="text-lg font-serif font-extrabold text-slate-900 tracking-wide my-2 border-b border-dashed border-amber-900/30 pb-1 max-w-xs mx-auto">
+          {{ selectedCert.nama_sertifikat }}
+        </h2>
+        
+        <p class="text-xs text-amber-900/80 max-w-sm mx-auto leading-relaxed font-medium px-2">
+          Atas partisipasi aktif dan kehadirannya sebagai peserta pada kegiatan <span class="font-bold text-amber-950">"{{ selectedCert.nama_event }}"</span> yang diselenggarakan melalui platform ekosistem manajemen acara <span class="font-bold text-cyan-600">EventIn</span>.
+        </p>
+
+        <div class="mt-6 flex justify-between items-end px-4 border-t border-amber-900/10 pt-4">
+          <div class="text-left flex flex-col text-[9px] text-amber-900/60 font-mono">
+            <ion-icon name="checkmark-done-outline" class="text-emerald-600 font-bold text-xl"></ion-icon>
+            <span class="text-emerald-600 font-bold mt-1">VERIFIED BY SYSTEM</span>
+          </div>
+          
+          <div class="text-center flex flex-col">
+            <div class="w-12 h-12 bg-emerald-600/10 border-2 border-dashed border-emerald-600 text-emerald-600 rounded-full flex flex-col items-center justify-center text-[7px] font-black uppercase tracking-tighter mx-auto rotate-12 shadow-xs">
+              <ion-icon name="shield-checkmark" class="text-sm mb-0.5"></ion-icon>
+              <span>ORIGINAL</span>
+            </div>
+            <span class="text-[8px] font-bold text-amber-800 mt-1.5">Panitia EventIn</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <div *ngIf="currentSegment === 'verify'" class="p-4 space-y-4 animate-fade-in">
+    
+    <div class="bg-white p-5 rounded-3xl border border-slate-100 shadow-sm">
+      <h3 class="text-sm font-black text-slate-800 uppercase tracking-wide mb-1">Verifikasi Keaslian</h3>
+      <p class="text-[11px] text-slate-400 mb-4">Periksa keaslian tanda kelulusan sertifikat EventIn di sini.</p>
+      
+      <div class="flex space-x-2">
+        <input [(ngModel)]="certIdInput" placeholder="Masukkan ID Sertifikat (CERT-EVT-...)" class="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs flex-1 font-mono text-slate-700 focus:outline-none focus:border-cyan-400" />
+        <button (click)="checkValidity()" class="bg-cyan-500 text-white font-medium text-sm px-4 py-2.5 rounded-lg active:scale-95 transition-all shadow-sm shadow-cyan-100">
+          Cek
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="isVerifyingLoading" class="text-center py-6 text-slate-400 text-xs animate-pulse">
+      <ion-spinner name="crescent" class="text-cyan-500 mb-1"></ion-spinner>
+      <p>Mencocokkan dengan pangkalan data...</p>
+    </div>
+
+    <div *ngIf="certData && !isVerifyingLoading" class="bg-white rounded-3xl border-2 border-emerald-400 shadow-xl shadow-emerald-50 p-5 space-y-4 relative overflow-hidden">
+      <div class="absolute -top-3 -right-3 w-16 h-16 bg-emerald-500/10 rounded-full flex items-center justify-center text-emerald-500 text-2xl">
+        <ion-icon name="ribbon-outline"></ion-icon>
+      </div>
+
+      <div class="flex items-center space-x-1.5 text-emerald-600 font-black text-xs uppercase tracking-wide">
+        <ion-icon name="checkmark-done-circle" class="text-base"></ion-icon>
+        <span>{{ certData.status_valid || 'ASLI & VALID' }}</span>
+      </div>
+
+      <div class="border-t border-dashed border-slate-100 pt-3 space-y-2">
+        <div>
+          <span class="text-[9px] uppercase font-bold text-slate-400 tracking-wider">Nama Penerima</span>
+          <p class="text-xs font-black text-slate-800 mt-0.5">{{ certData.nama_peserta }}</p>
+        </div>
+        <div>
+          <span class="text-[9px] uppercase font-bold text-slate-400 tracking-wider">Nama Event</span>
+          <p class="text-xs font-bold text-slate-700 mt-0.5">{{ certData.nama_event }}</p>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <span class="text-[9px] uppercase font-bold text-slate-400 tracking-wider">Kategori</span>
+            <p class="text-xs font-semibold text-slate-600 mt-0.5">{{ certData.kategori }}</p>
+          </div>
+          <div>
+            <span class="text-[9px] uppercase font-bold text-slate-400 tracking-wider">Tanggal</span>
+            <p class="text-xs font-semibold text-slate-600 mt-0.5">{{ certData.tgl_event }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="errorMessage && !isVerifyingLoading" class="bg-white rounded-3xl border border-red-100 p-5 text-center space-y-2">
+      <div class="w-10 h-10 bg-red-50 text-red-500 rounded-full flex items-center justify-center text-xl mx-auto">
+        <ion-icon name="alert-circle-outline"></ion-icon>
+      </div>
+      <h4 class="text-xs font-black text-slate-800 uppercase tracking-wide">Sertifikat Tidak Sah</h4>
+      <p class="text-xs text-slate-400 leading-normal px-4">{{ errorMessage }}</p>
+    </div>
+
+  </div>
+
+</ion-content>

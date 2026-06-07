@@ -54,7 +54,6 @@ const routes: Routes = [
   {
     path: 'notifications',
     loadChildren: () => import('./notifications/notifications.module').then(m => m.NotificationsPageModule),
-    canActivate: [AuthGuard]
   },
   {
     path: 'event-detail/:id',
@@ -90,6 +89,14 @@ const routes: Routes = [
   {
     path: 'faq',
     loadChildren: () => import('./account/faq/faq.module').then( m => m.FaqPageModule)
+  },
+  {
+    path: 'reward',
+    loadChildren: () => import('./account/reward/reward.module').then( m => m.RewardPageModule)
+  },
+  {
+    path: 'my-certificate',
+    loadChildren: () => import('./account/my-certificate/my-certificate.module').then( m => m.MyCertificatePageModule)
   },
 ];
 
