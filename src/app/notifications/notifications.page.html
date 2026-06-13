@@ -14,6 +14,10 @@
     <button type="button" (click)="readAll()" *ngIf="NotificationsLog.length > 0" class="text-xs font-black bg-white/20 hover:bg-white/30 text-cyan-400 px-3 py-1.5 rounded-xl transition-all active:scale-95 cursor-pointer z-20">
         Baca Semua
     </button>
+
+    <button type="button" (click)="deleteNotifications()" *ngIf="NotificationsLog.length > 0" class="text-xs font-black bg-white/20 hover:bg-white/30 text-red-600 px-3 py-1.5 rounded-xl transition-all active:scale-95 cursor-pointer z-20">
+        Hapus Semua
+    </button>
   </div>
 </div>
 

@@ -66,14 +66,14 @@
           <ion-icon [name]="showpassword_confirmation ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
         </button>
       </div>
-      <div class="mb-5 pl-2"
+      <div class="mb-2 pl-2"
         *ngIf="registerForm.hasError('mismatch') && registerForm.get('password_confirmation')?.touched">
         <small class="text-red-500 font-semibold text-xs">Konfirmasi password tidak cocok.</small>
       </div>
     
     
       <button type="submit" [disabled]="registerForm.invalid"
-        class="w-full bg-cyan-400 text-white font-bold py-3.5 rounded-lg active:scale-95 transition-transform shadow-md disabled:opacity-50 disabled:scale-100">
+        class="w-full bg-cyan-400 text-white font-bold py-3.5 mt-4 rounded-lg active:scale-95 transition-transform shadow-md disabled:opacity-50 disabled:scale-100">
         Daftar
       </button>
     

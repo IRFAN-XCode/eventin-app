@@ -50,14 +50,14 @@ export class ResetPasswordPage implements OnInit {
       },
       error: (err) => {
         this.isLoading = false;
-        const message = err.error?.errors?.email?.[0] || err.error?.message || 'Terjadi kesalahan.';
+        const message = err.error?.errors?.email?.[0] || err.error?.message || 'Terjadi kesalahan. Coba lagi nanti.';
         this.Message = message;
-        this.presentToast(message, 'danger');
       }
     });
   }
 
   verifikasiOtp() {
+    this.Message = '';
     if (!this.otpCode) {
       this.presentToast('Masukkan 6 digit Kode OTP.', 'warning');
       return;
@@ -75,19 +75,21 @@ export class ResetPasswordPage implements OnInit {
       error: (err) => {
         this.isLoading = false;
         const message = err.error?.message || 'Kode OTP tidak valid.';
-        this.presentToast(message, 'danger');
+        this.Message = message;
       }
     });
   }
 
   gantiPassword() {
+    this.Message = '';
+
     if (this.passwordBaru.length < 6) {
-      this.presentToast('Password minimal 6 karakter.', 'warning');
+      this.Message = 'Password Minimal 6 karakter.';
       return;
     }
 
-    if  (this.passwordBaru !== this.konfirmasiPassword) {
-      this.presentToast('Konfirmasi password tidak cocok.', 'warning');
+    if (this.passwordBaru !== this.konfirmasiPassword) {
+      this.Message = 'Konfirmasi Password tidak cocok.';
       return;
     }
 
@@ -121,5 +123,6 @@ export class ResetPasswordPage implements OnInit {
       duration: 2000, color,
       position: 'top'
     });
+    await toast.present();
   }
 }

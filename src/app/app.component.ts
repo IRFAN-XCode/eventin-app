@@ -19,8 +19,12 @@ export class AppComponent {
       const token = localStorage.getItem('token');
       const FirstTime = localStorage.getItem('FirstTime');
       
-      if (token || FirstTime === 'false') {
-        this.router.navigateByUrl('/home', { replaceUrl: true });
+      if (FirstTime === 'false') {
+        if (token) {
+          this.router.navigateByUrl('/home', { replaceUrl: true });
+          return;
+        }
+        this.router.navigateByUrl('/login', { replaceUrl: true });
       } else {
         this.autoInitializeApp(); 
       }
@@ -36,9 +40,13 @@ export class AppComponent {
       this.platform.backButton.subscribeWithPriority(10, () => {
         const currentPath = this.router.url.split('?')[0].split('#')[0];
 
-        if (currentPath === '/splash' || currentPath === '/welcome' || currentPath === '/home' || currentPath === '/') {
-          CapacitorApp.exitApp();
-          return;
+        if (currentPath === '/regist') {
+          this.router.navigateByUrl('/login', { replaceUrl: true });
+        } else {
+          if (currentPath === '/login' || currentPath === '/welcome' || currentPath === '/home' || currentPath === '/') {
+            CapacitorApp.exitApp();
+            return;
+          }
         }
 
         this.router.navigateByUrl('/home', { replaceUrl: true });

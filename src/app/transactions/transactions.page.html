@@ -1,5 +1,6 @@
 <div class="bg-cyan-50 z-10">
-  <div class="bg-[#16e2eb] pt-10 pb-2 px-2 rounded-b-[30px] shadow-sm flex items-center text-white relative z-10">
+  <div class="bg-gradient-to-r from-cyan-400 to-[#16e2eb] pt-10 pb-2 px-2 rounded-b-[30px] shadow-sm flex items-center text-white relative z-10"
+    *ngIf="currentStep === 1">
     <ion-toolbar class="--background-transparent">
       <ion-buttons slot="start">
         <ion-back-button [defaultHref]="'/event-detail/' + idEvent" icon="arrow-back"></ion-back-button>
@@ -7,6 +8,10 @@
       <ion-title>Pemesanan Tiket</ion-title>
     </ion-toolbar>
   </div>
+
+    <div *ngIf="currentStep >= 2" class="bg-gradient-to-r from-cyan-400 to-[#16e2eb] pt-12 pb-6 px-6 rounded-b-[30px] shadow-lg shadow-cyan-200/50 text-center flex flex-col items-center text-white relative z-50">
+      <ion-title class="font-extrabold tracking-wide text-xl">Pemesanan Tiket</ion-title>
+    </div>
 
   <div class="flex justify-between items-center h-12 p-4 bg-cyan-50 border-b border-cyan-100">
     <div [ngClass]="currentStep >= 1 ? 'text-[#16e2eb]' : 'text-gray-400'" class="font-black text-[10px] transition-colors">1. TIKET</div>
@@ -191,22 +196,22 @@
       
       <div class="bg-slate-800 text-white p-4 rounded-2xl shadow-sm space-y-1.5 animate-fadeIn">
         <h4 class="text-xs font-black text-cyan-400 uppercase tracking-wider">Rekening Pembayaran Tujuan:</h4>
-        <p class="text-sm font-bold">{{ eventDetail.nama_bank || 'Bank Transfer' }}</p>
+        <p class="text-sm font-bold">{{ eventDetail.organizer?.nama_bank || 'Bank Transfer' }}</p>
         
         <div class="flex items-center justify-between w-full">
           <p class="text-lg font-black tracking-wide text-white m-0 select-all">
-            {{ eventDetail.no_rekening || '0000-0000-0000' }}
+            {{ eventDetail.organizer?.no_rekening || '0000-0000-0000' }}
           </p>
           
           <button type="button" 
-            *ngIf="eventDetail.no_rekening"
+            *ngIf="eventDetail.organizer?.no_rekening"
             (click)="salinRekening()" 
             class="text-cyan-400 hover:text-cyan-300 p-2 flex items-center justify-center transition-transform active:scale-90 bg-slate-700/50 hover:bg-slate-700 rounded-lg cursor-pointer">
             <ion-icon name="copy-outline" class="text-base"></ion-icon>
           </button>
         </div>
         
-        <p class="text-xs text-gray-400">a.n. {{ eventDetail.atas_nama_rekening || 'Organizer' }}</p>
+        <p class="text-xs text-gray-400">a.n. {{ eventDetail.organizer?.atas_nama_rekening || 'Organizer' }}</p>
       </div>
 
       <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-xs space-y-4">

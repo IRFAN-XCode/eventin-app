@@ -62,6 +62,18 @@ export class NotificationsPage implements OnInit {
     });
   }
 
+  deleteNotifications() {
+    this.api.deleteAllNotif().subscribe({
+      next: (res: any) => {
+        if (res.success) {
+          this.presentToast('Notifikasi Berhasil dihapus.', 'success');
+          this.loadNotifications();
+        }
+      },
+      error: (err: any) => this.presentToast('Gagal Menghapus Notifikasi.', 'danger')
+    });
+  }
+
   readAll() {
     if (this.NotificationsLog.length === 0) return;
     

@@ -67,6 +67,7 @@ export class MyProfilePage implements OnInit {
     {
       text: 'Hapus',
       role: 'confirm',
+      cssClass: 'tombol-lanjut',
       handler: () => {
         this.deleteAccount();
       },
@@ -84,7 +85,8 @@ export class MyProfilePage implements OnInit {
         await loading.dismiss();
         if (res.success) {
           this.presentToast(res.message || 'Akun berhasil dihapus', 'success');
-          localStorage.clear();
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
           this.router.navigate(['/login']);
         }
       },
@@ -99,7 +101,8 @@ export class MyProfilePage implements OnInit {
         this.presentToast(errorMsg, 'danger');
 
         if (err.status === 401) {
-          localStorage.clear();
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
           this.router.navigate(['/login']);
         }
       }

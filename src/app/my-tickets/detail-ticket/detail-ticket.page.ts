@@ -112,6 +112,27 @@ export class DetailTicketPage implements OnInit {
     }
   }
 
+  handleRefresh(event: any) {  
+    const token = this.api.getToken();
+
+    this.api.getDetailTicket(this.kodeTransaksi, token).subscribe({
+      next: (res: any) => {
+        if (res.success) {
+          this.ticketDetail = res.data;
+          
+          if (this.viewEntered) {
+            this.StartQrInterval();
+          }
+        }
+        event.target.complete(); 
+      },
+      error: (err: any) => {
+        event.target.complete(); 
+        this.presentToast('Gagal menyegarkan data tiket.', 'danger');
+      }
+    });
+  }
+
   downloadTiket() {
     if (!this.kodeTransaksi) return;
     const downloadPDF = this.api.getTiketDownload(this.kodeTransaksi);

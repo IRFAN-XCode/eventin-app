@@ -9,6 +9,15 @@
 
 <ion-content [fullscreen]="true">
 
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content 
+      pullingIcon="chevron-down-circle-outline" 
+      pullingText="Tarik untuk memperbarui tiket..." 
+      refreshingSpinner="crescent" 
+      refreshingText="Memperbarui data tiket...">
+    </ion-refresher-content>
+  </ion-refresher>
+
   <div *ngIf="isLoading" class="flex flex-col justify-center items-center h-64 space-y-2">
     <ion-spinner color="viewport" name="crescent"></ion-spinner>
     <p class="text-xs text-gray-400 font-bold">Menyiapkan barcode tiket...</p>

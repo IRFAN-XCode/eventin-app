@@ -30,18 +30,18 @@ export class AccountPage implements OnInit {
     }
   }
 
- 
-
   onLogout() {
     this.api.onLogout().subscribe({
       next: (res: any) => {
         this.presentToast(res.message || 'Logout berhasil', 'success');
-        localStorage.clear();
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
         this.router.navigate(['/login']);
       },
       error: (err: any) => {
         console.error('Backend logout error', err);
-        localStorage.clear();
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
         this.presentToast('Sesi berakhir, keluar dari aplikasi..', 'danger');
         this.router.navigate(['/login']);
       }

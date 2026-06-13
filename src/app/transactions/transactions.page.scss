@@ -2,7 +2,7 @@ ion-toolbar {
     display: flex;
     justify-content: left;
     align-items: center;
-    --background: #16e2eb;
+    --background: linear-gradient(90deg, #22d3ee, #16e2eb);
 
     ion-back-button {
         color: #ecfeff;

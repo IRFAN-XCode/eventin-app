@@ -194,6 +194,12 @@ export class Api {
     return this.http.post(`${environment.apiUrl}/notifications/mark-all-read`, {}, { headers });
   }
 
+  deleteAllNotif() {
+    const token = this.getToken();
+    const headers = new HttpHeaders({ 'Authorization': `${token}` });
+    return this.http.delete(`${environment.apiUrl}/notifications/delete-notifications`, { headers });
+  }
+
   getTiketDownload(kodeTransaksi: string) {
     const token = localStorage.getItem('token');
     return `${environment.apiUrl}/transactions/${kodeTransaksi}/download_pdf?=${token}`;
@@ -211,21 +217,11 @@ export class Api {
     return this.http.post(`${environment.apiUrl}/reset-password`, data);
   }
 
-  getCertificate() {
+  getMyCertificates() {
     const token = this.getToken();
     const headers = new HttpHeaders({ 'Authorization' : `${token}`});
     return this.http.get(`${environment.apiUrl}/my-certificates`, { headers });
   }
-
-  downloadCertificate(kodeTransaksi: string) {
-    const token = this.getToken();
-    return `${environment.apiUrl}/download-certificate/${kodeTransaksi}?token=${token}`;
-  }
-
-  verifyCertificate(certId: string) {
-    return this.http.get(`${environment.apiUrl}/verify-certificate/${certId}`);
-  }
-
 }
 
 
